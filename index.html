@@ -123,6 +123,49 @@
             transform: translateX(5px);
         }
 
+        .project-item {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .project-item:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        #projects ul li {
+            position: relative;
+            padding-right: 3rem;
+        }
+
+        #projects ul li::after {
+            content: '→';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+        }
+
+        #projects ul li:hover::after {
+            transform: translateY(-50%) translateX(5px);
+        }
+
+        .project-item strong {
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+
+        .project-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
         section a {
             color: #667eea;
             text-decoration: none;
@@ -210,11 +253,26 @@
         </section>
         <section id="projects">
             <h2>项目</h2>
-            <p>这里是我参与的一些项目的介绍。</p>
+            <p>这里是我参与的一些项目的介绍。点击项目查看详情。</p>
             <ul>
-                <li>项目1：描述项目1的内容。</li>
-                <li>项目2：描述项目2的内容。</li>
-                <li>项目3：描述项目3的内容。</li>
+                <li>
+                    <a href="project1.html" class="project-item">
+                        <strong>项目1</strong>
+                        <p style="margin-top: 0.5rem; margin-bottom: 0;">描述项目1的内容。</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="project2.html" class="project-item">
+                        <strong>项目2</strong>
+                        <p style="margin-top: 0.5rem; margin-bottom: 0;">描述项目2的内容。</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="project3.html" class="project-item">
+                        <strong>项目3</strong>
+                        <p style="margin-top: 0.5rem; margin-bottom: 0;">描述项目3的内容。</p>
+                    </a>
+                </li>
             </ul>
         </section>
         <section id="contact">
