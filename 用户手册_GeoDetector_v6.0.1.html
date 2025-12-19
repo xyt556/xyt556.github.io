@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>用户手册_GeoDetector_v6.0.1.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E5%9C%B0%E7%90%86%E6%8E%A2%E6%B5%8B%E5%99%A8%E4%B8%93%E4%B8%9A%E7%89%88-v601-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C">地理探测器专业版 v6.0.1 用户手册</h1>
+<h2 id="%E7%9B%AE%E5%BD%95">目录</h2>
+<ol>
+<li><a href="#1-%E8%BD%AF%E4%BB%B6%E7%AE%80%E4%BB%8B">软件简介</a></li>
+<li><a href="#2-%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82">系统要求</a></li>
+<li><a href="#3-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8">安装与启动</a></li>
+<li><a href="#4-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">快速开始</a></li>
+<li><a href="#5-%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D">界面介绍</a></li>
+<li><a href="#6-%E5%8A%9F%E8%83%BD%E8%AF%A6%E8%A7%A3">功能详解</a></li>
+<li><a href="#7-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97">操作指南</a></li>
+<li><a href="#8-%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AF%B4%E6%98%8E">快捷键说明</a></li>
+<li><a href="#9-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a></li>
+<li><a href="#10-%E9%99%84%E5%BD%95">附录</a></li>
+</ol>
+<hr>
+<h2 id="1-%E8%BD%AF%E4%BB%B6%E7%AE%80%E4%BB%8B">1. 软件简介</h2>
+<h3 id="11-%E8%BD%AF%E4%BB%B6%E6%A6%82%E8%BF%B0">1.1 软件概述</h3>
+<p><strong>Geographical Detector Pro v6.0.1（地理探测器专业版）</strong> 是一款功能强大的地理探测器分析工具，基于地理探测器理论，用于分析地理要素的空间分异性及其驱动因子。软件提供了因子探测器、交互探测器、风险探测器和生态探测器四大核心功能模块，并集成了数据预处理、相关性分析、智能离散化优化等高级功能。</p>
+<h3 id="12-%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7">1.2 主要特性</h3>
+<ul>
+<li>✅ <strong>四大探测器模块</strong>：因子探测器、交互探测器、风险探测器、生态探测器</li>
+<li>✅ <strong>多数据源支持</strong>：Excel/CSV表格数据、栅格数据（GeoTIFF等）</li>
+<li>✅ <strong>智能离散化</strong>：支持分位数、等间距、标准差、Jenks自然断点等多种方法，并提供自动优化功能</li>
+<li>✅ <strong>数据预处理</strong>：异常值检测与处理、缺失值填充、数据标准化</li>
+<li>✅ <strong>相关性分析</strong>：相关性矩阵、VIF（方差膨胀因子）分析</li>
+<li>✅ <strong>Bootstrap置信区间</strong>：提供统计置信区间计算</li>
+<li>✅ <strong>项目管理系统</strong>：支持项目保存、加载和最近项目快速访问</li>
+<li>✅ <strong>结果导出</strong>：Excel结果导出、HTML报告生成、图表保存</li>
+<li>✅ <strong>SCI写作助手</strong>：自动生成符合学术论文格式的结果描述文本</li>
+<li>✅ <strong>主题切换</strong>：支持多种界面主题（需ttkbootstrap支持）</li>
+<li>✅ <strong>性能优化</strong>：Numba加速计算，大幅提升分析速度</li>
+</ul>
+<h3 id="13-%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF">1.3 版本信息</h3>
+<ul>
+<li><strong>版本号</strong>：v6.0.1</li>
+<li><strong>发布日期</strong>：2025-12</li>
+<li><strong>开发团队</strong>：@3S&amp;ML Laboratory</li>
+</ul>
+<hr>
+<h2 id="2-%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82">2. 系统要求</h2>
+<h3 id="21-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">2.1 操作系统</h3>
+<ul>
+<li>Windows 7/8/10/11（推荐 Windows 10 或更高版本）</li>
+<li>Linux（Ubuntu 18.04+）</li>
+<li>macOS 10.13+</li>
+</ul>
+<h3 id="22-python%E7%8E%AF%E5%A2%83%E6%BA%90%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C">2.2 Python环境（源代码运行）</h3>
+<ul>
+<li>Python 3.7 或更高版本</li>
+<li>推荐使用 Python 3.8-3.11</li>
+</ul>
+<h3 id="23-%E4%BE%9D%E8%B5%96%E5%BA%93">2.3 依赖库</h3>
+<p>软件需要以下Python库（已包含在requirements.txt中）：</p>
+<p><strong>必需库：</strong></p>
+<ul>
+<li><code>numpy</code> - 数值计算</li>
+<li><code>pandas</code> - 数据处理</li>
+<li><code>scipy</code> - 科学计算</li>
+<li><code>matplotlib</code> - 数据可视化</li>
+<li><code>tkinter</code> - GUI界面（Python自带）</li>
+</ul>
+<p><strong>可选库（增强功能）：</strong></p>
+<ul>
+<li><code>ttkbootstrap</code> - 现代化界面主题</li>
+<li><code>numba</code> - 计算加速（推荐安装）</li>
+<li><code>rasterio</code> - 栅格数据处理（处理栅格数据时必需）</li>
+<li><code>seaborn</code> - 高级数据可视化</li>
+</ul>
+<h3 id="24-%E7%A1%AC%E4%BB%B6%E8%A6%81%E6%B1%82">2.4 硬件要求</h3>
+<ul>
+<li><strong>内存</strong>：建议 4GB 或以上（处理大型栅格数据时建议 8GB+）</li>
+<li><strong>硬盘空间</strong>：至少 500MB 可用空间</li>
+<li><strong>处理器</strong>：双核或以上（多核处理器可提升Numba加速效果）</li>
+</ul>
+<hr>
+<h2 id="3-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8">3. 安装与启动</h2>
+<h3 id="31-%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F">3.1 安装方式</h3>
+<h4 id="%E6%96%B9%E5%BC%8F%E4%B8%80%E4%BD%BF%E7%94%A8%E6%89%93%E5%8C%85%E7%9A%84exe%E6%96%87%E4%BB%B6%E6%8E%A8%E8%8D%90">方式一：使用打包的EXE文件（推荐）</h4>
+<ol>
+<li>下载软件安装包或EXE可执行文件</li>
+<li>双击运行EXE文件</li>
+<li>首次运行需要授权（联系开发者获取授权码）</li>
+</ol>
+<h4 id="%E6%96%B9%E5%BC%8F%E4%BA%8C%E4%BB%8E%E6%BA%90%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C">方式二：从源代码运行</h4>
+<ol>
+<li>
+<p><strong>克隆或下载源代码</strong></p>
+<pre class="hljs"><code><div>git <span class="hljs-built_in">clone</span> [repository_url]
+<span class="hljs-built_in">cd</span> Geo_Detector_v2
+</div></code></pre>
+</li>
+<li>
+<p><strong>安装依赖库</strong></p>
+<pre class="hljs"><code><div>pip install -r requirements.txt
+</div></code></pre>
+</li>
+<li>
+<p><strong>运行程序</strong></p>
+<pre class="hljs"><code><div>python geo_detector_gui_v6.0.1.py
+</div></code></pre>
+</li>
+</ol>
+<h3 id="32-%E9%A6%96%E6%AC%A1%E5%90%AF%E5%8A%A8">3.2 首次启动</h3>
+<ol>
+<li>启动软件后，会显示启动信息和控制台输出</li>
+<li>检查依赖库加载状态：
+<ul>
+<li>✓ 表示已成功加载</li>
+<li>⚠ 表示未安装（功能受限但不影响基本使用）</li>
+</ul>
+</li>
+<li>软件界面会自动最大化或显示为默认大小（1400x900）</li>
+</ol>
+<h3 id="33-%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E">3.3 授权说明</h3>
+<p>软件采用授权机制，首次运行需要：</p>
+<ol>
+<li>获取机器码（软件会自动显示）</li>
+<li>将机器码发送给开发者</li>
+<li>获取授权文件（license.dat）</li>
+<li>将授权文件放置在软件目录下</li>
+</ol>
+<hr>
+<h2 id="4-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">4. 快速开始</h2>
+<h3 id="41-%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%E6%95%B0%E6%8D%AE%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C">4.1 使用示例数据快速体验</h3>
+<ol>
+<li>
+<p><strong>选择数据源类型</strong></p>
+<ul>
+<li>在左侧控制面板的&quot;📁 Data Loading&quot;区域</li>
+<li>选择&quot;Excel/CSV&quot;或&quot;Raster&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>加载示例数据</strong></p>
+<ul>
+<li>Excel模式：点击&quot;🎲 Sample&quot;按钮生成示例数据</li>
+<li>栅格模式：点击&quot;🎲 Sample&quot;按钮生成示例栅格</li>
+</ul>
+</li>
+<li>
+<p><strong>选择变量</strong></p>
+<ul>
+<li>Excel模式：从下拉菜单选择Y变量，勾选X变量</li>
+<li>栅格模式：Y变量已自动加载，点击&quot;➕&quot;添加X变量</li>
+</ul>
+</li>
+<li>
+<p><strong>运行分析</strong></p>
+<ul>
+<li>点击&quot;▶ Run Analysis&quot;按钮</li>
+<li>等待分析完成（进度条显示进度）</li>
+</ul>
+</li>
+<li>
+<p><strong>查看结果</strong></p>
+<ul>
+<li>在右侧标签页查看各类分析结果</li>
+<li>点击&quot;📊 Export&quot;导出结果</li>
+</ul>
+</li>
+</ol>
+<h3 id="42-%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E6%95%B0%E6%8D%AE">4.2 使用自己的数据</h3>
+<h4 id="excelcsv%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%A6%81%E6%B1%82">Excel/CSV数据格式要求：</h4>
+<ul>
+<li><strong>文件格式</strong>：.xlsx、.xls 或 .csv</li>
+<li><strong>数据结构</strong>：
+<ul>
+<li>第一行为列名（变量名）</li>
+<li>第一列为样本ID（可选）</li>
+<li>Y变量：因变量（数值型）</li>
+<li>X变量：自变量（数值型或分类型）</li>
+</ul>
+</li>
+<li><strong>数据要求</strong>：
+<ul>
+<li>无缺失值或已处理缺失值</li>
+<li>数值型变量应为连续数值</li>
+<li>分类型变量应为整数或字符串</li>
+</ul>
+</li>
+</ul>
+<h4 id="%E6%A0%85%E6%A0%BC%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%A6%81%E6%B1%82">栅格数据格式要求：</h4>
+<ul>
+<li><strong>文件格式</strong>：GeoTIFF（.tif、.tiff）或其他rasterio支持的格式</li>
+<li><strong>坐标系统</strong>：建议所有栅格使用相同的坐标系统（CRS）</li>
+<li><strong>空间分辨率</strong>：建议所有栅格具有相同的空间分辨率</li>
+<li><strong>数据要求</strong>：
+<ul>
+<li>Y变量栅格：单波段栅格</li>
+<li>X变量栅格：单波段栅格（每个因子一个文件）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="5-%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D">5. 界面介绍</h2>
+<h3 id="51-%E4%B8%BB%E7%95%8C%E9%9D%A2%E5%B8%83%E5%B1%80">5.1 主界面布局</h3>
+<p>软件界面分为两个主要区域：</p>
+<h4 id="%E5%B7%A6%E4%BE%A7%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF%E5%AE%BD%E5%BA%A6%E7%BA%A6280px">左侧控制面板（宽度约280px）</h4>
+<p>包含以下功能区域：</p>
+<ol>
+<li>
+<p><strong>📁 Data Loading（数据加载）</strong></p>
+<ul>
+<li>数据源类型选择（Raster/Excel/CSV）</li>
+<li>数据文件加载</li>
+<li>变量选择</li>
+</ul>
+</li>
+<li>
+<p><strong>⚙️ Parameters（参数设置）</strong></p>
+<ul>
+<li>离散化方法配置</li>
+<li>分析选项选择</li>
+</ul>
+</li>
+<li>
+<p><strong>🚀 Analysis（分析控制）</strong></p>
+<ul>
+<li>运行分析按钮</li>
+<li>进度显示</li>
+<li>结果导出按钮</li>
+</ul>
+</li>
+<li>
+<p><strong>🔧 Tools（工具）</strong></p>
+<ul>
+<li>数据预览</li>
+<li>数据预处理</li>
+<li>相关性分析</li>
+</ul>
+</li>
+<li>
+<p><strong>📊 Status（状态日志）</strong></p>
+<ul>
+<li>实时日志输出</li>
+<li>分析状态信息</li>
+</ul>
+</li>
+</ol>
+<h4 id="%E5%8F%B3%E4%BE%A7%E6%98%BE%E7%A4%BA%E9%9D%A2%E6%9D%BF%E4%B8%BB%E6%98%BE%E7%A4%BA%E5%8C%BA">右侧显示面板（主显示区）</h4>
+<p>采用标签页（Notebook）设计，包含：</p>
+<ol>
+<li>
+<p><strong>📈 Summary（摘要）</strong></p>
+<ul>
+<li>分析结果摘要卡片</li>
+<li>可视化图表</li>
+<li>统计报告</li>
+</ul>
+</li>
+<li>
+<p><strong>🔍 Factor（因子探测器）</strong></p>
+<ul>
+<li>q值柱状图</li>
+<li>因子结果表格</li>
+</ul>
+</li>
+<li>
+<p><strong>🔗 Interaction（交互探测器）</strong></p>
+<ul>
+<li>交互类型分布图</li>
+<li>交互结果表格</li>
+</ul>
+</li>
+<li>
+<p><strong>⚠️ Risk（风险探测器）</strong></p>
+<ul>
+<li>风险差异分析</li>
+<li>成对比较结果</li>
+</ul>
+</li>
+<li>
+<p><strong>🌿 Ecological（生态探测器）</strong></p>
+<ul>
+<li>因子差异比较</li>
+<li>F统计量结果</li>
+</ul>
+</li>
+<li>
+<p><strong>📊 Discretization（离散化）</strong></p>
+<ul>
+<li>离散化配置信息</li>
+<li>离散化效果预览</li>
+</ul>
+</li>
+<li>
+<p><strong>📉 Visualization（可视化）</strong></p>
+<ul>
+<li>各类可视化图表</li>
+</ul>
+</li>
+<li>
+<p><strong>📄 Report（报告）</strong></p>
+<ul>
+<li>完整分析报告</li>
+</ul>
+</li>
+</ol>
+<h3 id="52-%E8%8F%9C%E5%8D%95%E6%A0%8F">5.2 菜单栏</h3>
+<h4 id="file%E6%96%87%E4%BB%B6%E8%8F%9C%E5%8D%95">File（文件）菜单</h4>
+<ul>
+<li><strong>New Project</strong> (Ctrl+N) - 新建项目</li>
+<li><strong>Open Project...</strong> (Ctrl+O) - 打开项目</li>
+<li><strong>Save Project</strong> (Ctrl+S) - 保存项目</li>
+<li><strong>Save Project As...</strong> - 另存为项目</li>
+<li><strong>Recent Projects</strong> - 最近项目列表</li>
+<li><strong>Export Results...</strong> (Ctrl+E) - 导出结果</li>
+<li><strong>Export HTML Report...</strong> - 导出HTML报告</li>
+<li><strong>📝 Generate SCI Results...</strong> - 生成SCI结果文本</li>
+<li><strong>Exit</strong> (Ctrl+Q) - 退出程序</li>
+</ul>
+<h4 id="data%E6%95%B0%E6%8D%AE%E8%8F%9C%E5%8D%95">Data（数据）菜单</h4>
+<ul>
+<li><strong>Load Excel/CSV...</strong> - 加载Excel/CSV文件</li>
+<li><strong>Load Raster Y...</strong> - 加载栅格Y变量</li>
+<li><strong>Load Raster X...</strong> - 加载栅格X变量</li>
+<li><strong>Generate Sample Data</strong> - 生成示例数据</li>
+<li><strong>Data Preview...</strong> - 数据预览</li>
+<li><strong>Data Preprocessing...</strong> - 数据预处理</li>
+<li><strong>Correlation Analysis...</strong> - 相关性分析</li>
+</ul>
+<h4 id="analysis%E5%88%86%E6%9E%90%E8%8F%9C%E5%8D%95">Analysis（分析）菜单</h4>
+<ul>
+<li><strong>Run Analysis</strong> (Ctrl+R) - 运行分析</li>
+<li><strong>Discretization Config...</strong> - 离散化配置</li>
+<li><strong>Sensitivity Analysis...</strong> - 敏感性分析</li>
+<li><strong>Bootstrap CI...</strong> - Bootstrap置信区间分析</li>
+</ul>
+<h4 id="view%E8%A7%86%E5%9B%BE%E8%8F%9C%E5%8D%95">View（视图）菜单</h4>
+<ul>
+<li><strong>Theme</strong> - 主题切换（需ttkbootstrap支持）</li>
+<li><strong>Clear Results</strong> - 清除结果</li>
+<li><strong>Clear Log</strong> - 清除日志</li>
+</ul>
+<h4 id="help%E5%B8%AE%E5%8A%A9%E8%8F%9C%E5%8D%95">Help（帮助）菜单</h4>
+<ul>
+<li><strong>User Guide</strong> (F1) - 用户指南</li>
+<li><strong>Keyboard Shortcuts</strong> - 快捷键说明</li>
+<li><strong>About</strong> - 关于软件</li>
+</ul>
+<hr>
+<h2 id="6-%E5%8A%9F%E8%83%BD%E8%AF%A6%E8%A7%A3">6. 功能详解</h2>
+<h3 id="61-%E5%9B%A0%E5%AD%90%E6%8E%A2%E6%B5%8B%E5%99%A8factor-detector">6.1 因子探测器（Factor Detector）</h3>
+<p><strong>功能说明：</strong>
+因子探测器用于测量各因子对因变量空间分异的解释能力，通过q值（q-statistic）量化因子影响力。</p>
+<p><strong>q值含义：</strong></p>
+<ul>
+<li>q值范围：[0, 1]</li>
+<li>q值越大，因子对因变量的解释能力越强</li>
+<li>q值 = 1 - SSW/SST
+<ul>
+<li>SSW：层内方差和</li>
+<li>SST：总方差</li>
+</ul>
+</li>
+</ul>
+<p><strong>结果解读：</strong></p>
+<ul>
+<li><strong>q值</strong>：因子解释力（0-1）</li>
+<li><strong>p值</strong>：统计显著性（&lt;0.05为显著）</li>
+<li><strong>Layers</strong>：离散化后的层数</li>
+<li><strong>CI_lower/CI_upper</strong>：Bootstrap置信区间（如果启用）</li>
+</ul>
+<p><strong>使用方法：</strong></p>
+<ol>
+<li>加载数据并选择变量</li>
+<li>配置离散化参数（见6.5节）</li>
+<li>勾选&quot;Factor Detection&quot;选项</li>
+<li>点击&quot;Run Analysis&quot;</li>
+</ol>
+<h3 id="62-%E4%BA%A4%E4%BA%92%E6%8E%A2%E6%B5%8B%E5%99%A8interaction-detector">6.2 交互探测器（Interaction Detector）</h3>
+<p><strong>功能说明：</strong>
+交互探测器用于检测两个因子交互作用对因变量的影响，判断交互类型。</p>
+<p><strong>交互类型：</strong></p>
+<ol>
+<li>
+<p><strong>非线性增强（Nonlinear Enhancement）</strong></p>
+<ul>
+<li>q(X1∩X2) &gt; q(X1) + q(X2)</li>
+<li>两个因子协同作用，交互效应超过独立效应之和</li>
+</ul>
+</li>
+<li>
+<p><strong>双因子增强（Bi-factor Enhancement）</strong></p>
+<ul>
+<li>q(X1∩X2) &gt; max(q(X1), q(X2))</li>
+<li>交互效应大于任一单独因子</li>
+</ul>
+</li>
+<li>
+<p><strong>单因子非线性减弱（Single-factor Nonlinear Weakening）</strong></p>
+<ul>
+<li>min(q(X1), q(X2)) &lt; q(X1∩X2) &lt; max(q(X1), q(X2))</li>
+<li>交互效应介于两个因子之间</li>
+</ul>
+</li>
+<li>
+<p><strong>独立（Independent）</strong></p>
+<ul>
+<li>q(X1∩X2) = q(X1) + q(X2)</li>
+<li>两个因子独立作用</li>
+</ul>
+</li>
+<li>
+<p><strong>单因子减弱（Single-factor Weakening）</strong></p>
+<ul>
+<li>q(X1∩X2) &lt; min(q(X1), q(X2))</li>
+<li>交互效应小于任一单独因子</li>
+</ul>
+</li>
+</ol>
+<p><strong>结果解读：</strong></p>
+<ul>
+<li><strong>Factor1/Factor2</strong>：交互的两个因子</li>
+<li><strong>q1/q2</strong>：各因子的独立q值</li>
+<li><strong>q_interact</strong>：交互q值</li>
+<li><strong>Type</strong>：交互类型</li>
+<li><strong>Mechanism</strong>：作用机制描述</li>
+</ul>
+<h3 id="63-%E9%A3%8E%E9%99%A9%E6%8E%A2%E6%B5%8B%E5%99%A8risk-detector">6.3 风险探测器（Risk Detector）</h3>
+<p><strong>功能说明：</strong>
+风险探测器用于识别不同因子层（strata）之间因变量均值的显著差异，检测高风险区域。</p>
+<p><strong>统计方法：</strong></p>
+<ul>
+<li>使用独立样本t检验比较不同层之间的均值差异</li>
+<li>显著性水平：默认0.05</li>
+</ul>
+<p><strong>结果解读：</strong></p>
+<ul>
+<li><strong>Factor</strong>：因子名称</li>
+<li><strong>Layer1/Layer2</strong>：比较的两个层</li>
+<li><strong>Mean1/Mean2</strong>：各层的均值</li>
+<li><strong>p_value</strong>：t检验p值</li>
+<li><strong>Significant</strong>：是否显著（Yes/No）</li>
+</ul>
+<p><strong>应用场景：</strong></p>
+<ul>
+<li>识别高风险区域</li>
+<li>比较不同因子水平下的因变量差异</li>
+<li>为政策制定提供依据</li>
+</ul>
+<h3 id="64-%E7%94%9F%E6%80%81%E6%8E%A2%E6%B5%8B%E5%99%A8ecological-detector">6.4 生态探测器（Ecological Detector）</h3>
+<p><strong>功能说明：</strong>
+生态探测器用于比较不同因子对因变量影响的差异，判断因子作用机制是否相同。</p>
+<p><strong>统计方法：</strong></p>
+<ul>
+<li>使用F统计量检验两个因子的q值是否存在显著差异</li>
+<li>原假设：两个因子的作用机制相同</li>
+</ul>
+<p><strong>结果解读：</strong></p>
+<ul>
+<li><strong>factor_1/factor_2</strong>：比较的两个因子</li>
+<li><strong>F_statistic</strong>：F统计量</li>
+<li><strong>p_value</strong>：p值</li>
+<li><strong>Significant</strong>：是否显著不同</li>
+</ul>
+<p><strong>应用场景：</strong></p>
+<ul>
+<li>比较不同驱动因子的作用强度</li>
+<li>识别主要驱动因子</li>
+<li>因子重要性排序</li>
+</ul>
+<h3 id="65-%E7%A6%BB%E6%95%A3%E5%8C%96%E9%85%8D%E7%BD%AE">6.5 离散化配置</h3>
+<p><strong>功能说明：</strong>
+地理探测器要求自变量为分类变量，连续变量需要进行离散化处理。软件提供多种离散化方法和智能优化功能。</p>
+<h4 id="%E7%A6%BB%E6%95%A3%E5%8C%96%E6%96%B9%E6%B3%95">离散化方法：</h4>
+<ol>
+<li>
+<p><strong>分位数法（Quantile）</strong></p>
+<ul>
+<li>将数据按分位数等分为n组</li>
+<li>优点：每组样本数相等</li>
+<li>适用：数据分布均匀</li>
+</ul>
+</li>
+<li>
+<p><strong>等间距法（Equal Interval）</strong></p>
+<ul>
+<li>将数据值域等分为n个区间</li>
+<li>优点：区间宽度相等，易于解释</li>
+<li>适用：数据分布均匀</li>
+</ul>
+</li>
+<li>
+<p><strong>标准差法（Standard Deviation）</strong></p>
+<ul>
+<li>以均值为中心，按标准差划分</li>
+<li>优点：考虑数据分布特征</li>
+<li>适用：数据近似正态分布</li>
+</ul>
+</li>
+<li>
+<p><strong>Jenks自然断点法（Natural Breaks）</strong></p>
+<ul>
+<li>优化组内方差最小化</li>
+<li>优点：最大化组间差异</li>
+<li>适用：数据有明显聚类特征</li>
+</ul>
+</li>
+</ol>
+<h4 id="%E7%A6%BB%E6%95%A3%E5%8C%96%E9%85%8D%E7%BD%AE%E5%AF%B9%E8%AF%9D%E6%A1%86">离散化配置对话框：</h4>
+<p><strong>打开方式：</strong></p>
+<ul>
+<li>点击参数设置区的&quot;🔧 Config&quot;按钮</li>
+<li>或通过菜单：Analysis → Discretization Config...</li>
+</ul>
+<p><strong>功能：</strong></p>
+<ol>
+<li>
+<p><strong>批量设置</strong></p>
+<ul>
+<li>选择方法和分组数</li>
+<li>点击&quot;Apply to All&quot;应用到所有变量</li>
+<li>点击&quot;Apply to Selected&quot;应用到选中变量</li>
+</ul>
+</li>
+<li>
+<p><strong>独立配置</strong></p>
+<ul>
+<li>双击表格行编辑单个变量</li>
+<li>为每个变量设置不同的方法和分组数</li>
+</ul>
+</li>
+<li>
+<p><strong>智能优化</strong></p>
+<ul>
+<li>点击&quot;Optimize All&quot;自动优化所有变量</li>
+<li>点击&quot;Optimize Selected&quot;优化选中变量</li>
+<li>系统会自动测试多种方法和分组数，选择最优配置</li>
+</ul>
+</li>
+<li>
+<p><strong>配置保存/加载</strong></p>
+<ul>
+<li>点击&quot;💾 Save Config&quot;保存配置为JSON文件</li>
+<li>点击&quot;📂 Load Config&quot;加载已保存的配置</li>
+</ul>
+</li>
+</ol>
+<p><strong>优化指标：</strong></p>
+<ul>
+<li>q值：因子解释力（越大越好）</li>
+<li>GVF（Goodness of Variance Fit）：方差拟合优度（越大越好）</li>
+<li>综合评分：综合考虑q值和GVF</li>
+</ul>
+<h3 id="66-%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86">6.6 数据预处理</h3>
+<p><strong>功能说明：</strong>
+提供数据清洗和预处理功能，提高数据质量。</p>
+<p><strong>打开方式：</strong></p>
+<ul>
+<li>点击工具区的&quot;🔧 Preprocessing&quot;按钮</li>
+<li>或通过菜单：Data → Data Preprocessing...</li>
+</ul>
+<p><strong>功能模块：</strong></p>
+<ol>
+<li>
+<p><strong>异常值检测与处理</strong></p>
+<ul>
+<li><strong>检测方法</strong>：
+<ul>
+<li>IQR法（四分位距）</li>
+<li>Z-score法（Z分数）</li>
+<li>MAD法（中位数绝对偏差）</li>
+</ul>
+</li>
+<li><strong>处理方法</strong>：
+<ul>
+<li>Remove（删除）</li>
+<li>Winsorize（缩尾处理）</li>
+<li>Clip（截断）</li>
+<li>Median（中位数替换）</li>
+<li>Mean（均值替换）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>缺失值处理</strong></p>
+<ul>
+<li><strong>方法</strong>：
+<ul>
+<li>Mean（均值填充）</li>
+<li>Median（中位数填充）</li>
+<li>Mode（众数填充）</li>
+<li>Interpolate（插值）</li>
+<li>Value（指定值填充）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>数据标准化</strong></p>
+<ul>
+<li><strong>方法</strong>：
+<ul>
+<li>MinMax（最小-最大标准化）</li>
+<li>Z-score（Z分数标准化）</li>
+<li>Robust（鲁棒标准化）</li>
+<li>Log（对数变换）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>使用步骤：</strong></p>
+<ol>
+<li>选择要处理的变量（左侧列表）</li>
+<li>查看变量统计信息</li>
+<li>选择处理方法并设置参数</li>
+<li>点击&quot;Detect&quot;或&quot;Apply&quot;执行处理</li>
+<li>点击&quot;Apply Changes&quot;应用所有更改</li>
+</ol>
+<h3 id="67-%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90">6.7 相关性分析</h3>
+<p><strong>功能说明：</strong>
+分析变量间的相关性和多重共线性，辅助变量选择。</p>
+<p><strong>打开方式：</strong></p>
+<ul>
+<li>点击工具区的&quot;📊 Correlation&quot;按钮</li>
+<li>或通过菜单：Data → Correlation Analysis...</li>
+</ul>
+<p><strong>功能：</strong></p>
+<ol>
+<li>
+<p><strong>相关性矩阵</strong></p>
+<ul>
+<li><strong>方法</strong>：Pearson、Spearman、Kendall</li>
+<li><strong>输出</strong>：相关性热力图、相关系数矩阵、p值矩阵</li>
+<li><strong>解读</strong>：
+<ul>
+<li>|r| &gt; 0.7：强相关</li>
+<li>0.3 &lt; |r| &lt; 0.7：中等相关</li>
+<li>|r| &lt; 0.3：弱相关</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>VIF分析（方差膨胀因子）</strong></p>
+<ul>
+<li><strong>VIF值解读</strong>：
+<ul>
+<li>VIF &lt; 5：无多重共线性</li>
+<li>5 ≤ VIF &lt; 10：中等多重共线性</li>
+<li>VIF ≥ 10：严重多重共线性</li>
+</ul>
+</li>
+<li><strong>建议</strong>：VIF ≥ 10的变量考虑删除或进行主成分分析</li>
+</ul>
+</li>
+<li>
+<p><strong>完整报告</strong></p>
+<ul>
+<li>生成包含相关性矩阵、VIF分析和建议的完整报告</li>
+<li>可导出为文本文件</li>
+</ul>
+</li>
+</ol>
+<h3 id="68-bootstrap%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4">6.8 Bootstrap置信区间</h3>
+<p><strong>功能说明：</strong>
+通过Bootstrap重采样方法计算q值的置信区间，评估结果稳定性。</p>
+<p><strong>使用方法：</strong></p>
+<ol>
+<li>在参数设置中勾选&quot;Bootstrap CI (slower)&quot;</li>
+<li>或通过菜单：Analysis → Bootstrap CI...</li>
+<li>设置重采样次数（默认1000次）</li>
+<li>运行分析</li>
+</ol>
+<p><strong>结果解读：</strong></p>
+<ul>
+<li><strong>CI_lower</strong>：置信区间下限</li>
+<li><strong>CI_upper</strong>：置信区间上限</li>
+<li><strong>置信水平</strong>：默认95%</li>
+</ul>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>Bootstrap计算耗时较长，建议样本量较大时使用</li>
+<li>重采样次数越多，结果越稳定，但计算时间越长</li>
+</ul>
+<h3 id="69-%E6%95%8F%E6%84%9F%E6%80%A7%E5%88%86%E6%9E%90">6.9 敏感性分析</h3>
+<p><strong>功能说明：</strong>
+分析不同样本量下结果的稳定性，评估结果的稳健性。</p>
+<p><strong>使用方法：</strong></p>
+<ol>
+<li>通过菜单：Analysis → Sensitivity Analysis...</li>
+<li>设置样本量比例范围（默认0.5-1.0）</li>
+<li>设置迭代次数（默认10次）</li>
+<li>运行分析</li>
+</ol>
+<p><strong>结果解读：</strong></p>
+<ul>
+<li>显示不同样本量下的q值变化</li>
+<li>评估结果稳定性</li>
+<li>识别关键样本量阈值</li>
+</ul>
+<h3 id="610-sci%E5%86%99%E4%BD%9C%E5%8A%A9%E6%89%8B">6.10 SCI写作助手</h3>
+<p><strong>功能说明：</strong>
+自动生成符合学术论文格式的结果描述文本，可直接用于SCI论文的Results部分。</p>
+<p><strong>使用方法：</strong></p>
+<ol>
+<li>完成分析后，点击&quot;📝 Generate SCI Results&quot;按钮</li>
+<li>或通过菜单：File → 📝 Generate SCI Results...</li>
+<li>设置因变量名称和显著性水平</li>
+<li>点击&quot;🚀 Generate SCI Text&quot;生成文本</li>
+<li>复制或保存生成的文本</li>
+</ol>
+<p><strong>生成内容：</strong></p>
+<ul>
+<li>Factor Detector结果描述</li>
+<li>Interaction Detector结果描述</li>
+<li>Risk Detector结果描述</li>
+<li>Ecological Detector结果描述</li>
+<li>关键发现总结</li>
+</ul>
+<p><strong>文本特点：</strong></p>
+<ul>
+<li>符合学术写作规范</li>
+<li>包含统计显著性说明</li>
+<li>提供机制解释</li>
+<li>可直接用于论文撰写</li>
+</ul>
+<hr>
+<h2 id="7-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97">7. 操作指南</h2>
+<h3 id="71-%E5%AE%8C%E6%95%B4%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B">7.1 完整分析流程</h3>
+<h4 id="%E6%AD%A5%E9%AA%A41%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE">步骤1：准备数据</h4>
+<ol>
+<li>整理Excel数据或准备栅格文件</li>
+<li>确保数据格式符合要求（见4.2节）</li>
+<li>检查数据质量（缺失值、异常值等）</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A42%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE">步骤2：加载数据</h4>
+<ol>
+<li>选择数据源类型（Excel/CSV或Raster）</li>
+<li>加载数据文件</li>
+<li>选择Y变量和X变量</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A43%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E5%8F%AF%E9%80%89">步骤3：数据预处理（可选）</h4>
+<ol>
+<li>打开数据预处理对话框</li>
+<li>检查数据统计信息</li>
+<li>处理异常值和缺失值</li>
+<li>必要时进行数据标准化</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A44%E9%85%8D%E7%BD%AE%E7%A6%BB%E6%95%A3%E5%8C%96">步骤4：配置离散化</h4>
+<ol>
+<li>打开离散化配置对话框</li>
+<li>为每个X变量选择离散化方法</li>
+<li>或使用智能优化功能自动配置</li>
+<li>保存配置（可选）</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A45%E8%AE%BE%E7%BD%AE%E5%88%86%E6%9E%90%E5%8F%82%E6%95%B0">步骤5：设置分析参数</h4>
+<ol>
+<li>选择要运行的分析类型</li>
+<li>设置分组数（如果使用快速设置）</li>
+<li>选择是否计算Bootstrap置信区间</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A46%E8%BF%90%E8%A1%8C%E5%88%86%E6%9E%90">步骤6：运行分析</h4>
+<ol>
+<li>点击&quot;▶ Run Analysis&quot;按钮</li>
+<li>等待分析完成（查看进度条）</li>
+<li>查看状态日志了解分析进度</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A47%E6%9F%A5%E7%9C%8B%E7%BB%93%E6%9E%9C">步骤7：查看结果</h4>
+<ol>
+<li>在右侧标签页查看各类结果</li>
+<li>查看摘要页面了解整体情况</li>
+<li>查看详细结果表格和图表</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A48%E5%AF%BC%E5%87%BA%E7%BB%93%E6%9E%9C">步骤8：导出结果</h4>
+<ol>
+<li>点击&quot;📊 Export&quot;导出Excel结果</li>
+<li>点击&quot;💾 Charts&quot;保存图表</li>
+<li>或通过菜单导出HTML报告</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A49%E7%94%9F%E6%88%90sci%E6%96%87%E6%9C%AC%E5%8F%AF%E9%80%89">步骤9：生成SCI文本（可选）</h4>
+<ol>
+<li>打开SCI写作助手</li>
+<li>设置参数并生成文本</li>
+<li>复制或保存文本用于论文撰写</li>
+</ol>
+<h3 id="72-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86">7.2 项目管理</h3>
+<h4 id="%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE">新建项目</h4>
+<ul>
+<li>菜单：File → New Project (Ctrl+N)</li>
+<li>清除当前数据和结果，开始新项目</li>
+</ul>
+<h4 id="%E4%BF%9D%E5%AD%98%E9%A1%B9%E7%9B%AE">保存项目</h4>
+<ul>
+<li>菜单：File → Save Project (Ctrl+S)</li>
+<li>或：File → Save Project As...</li>
+<li>项目文件格式：.gdproj</li>
+<li>保存内容：数据、配置、结果</li>
+</ul>
+<h4 id="%E6%89%93%E5%BC%80%E9%A1%B9%E7%9B%AE">打开项目</h4>
+<ul>
+<li>菜单：File → Open Project... (Ctrl+O)</li>
+<li>或从&quot;Recent Projects&quot;选择最近项目</li>
+<li>自动加载数据、配置和结果</li>
+</ul>
+<h3 id="73-%E7%BB%93%E6%9E%9C%E5%AF%BC%E5%87%BA">7.3 结果导出</h3>
+<h4 id="%E5%AF%BC%E5%87%BAexcel%E7%BB%93%E6%9E%9C">导出Excel结果</h4>
+<ol>
+<li>点击&quot;📊 Export&quot;按钮</li>
+<li>选择保存位置和文件名</li>
+<li>选择要导出的内容：
+<ul>
+<li>Factor Detector结果</li>
+<li>Interaction Detector结果</li>
+<li>Risk Detector结果</li>
+<li>Ecological Detector结果</li>
+<li>离散化信息</li>
+</ul>
+</li>
+</ol>
+<h4 id="%E5%AF%BC%E5%87%BA%E5%9B%BE%E8%A1%A8">导出图表</h4>
+<ol>
+<li>点击&quot;💾 Charts&quot;按钮</li>
+<li>选择保存位置</li>
+<li>或在各标签页点击&quot;💾 Save Figure&quot;按钮</li>
+<li>支持格式：PNG、PDF、SVG</li>
+</ol>
+<h4 id="%E5%AF%BC%E5%87%BAhtml%E6%8A%A5%E5%91%8A">导出HTML报告</h4>
+<ol>
+<li>菜单：File → Export HTML Report...</li>
+<li>选择保存位置</li>
+<li>生成包含所有结果的HTML报告</li>
+<li>可在浏览器中打开查看</li>
+</ol>
+<h3 id="74-%E6%A0%85%E6%A0%BC%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86">7.4 栅格数据处理</h3>
+<h4 id="%E5%8A%A0%E8%BD%BDy%E5%8F%98%E9%87%8F%E6%A0%85%E6%A0%BC">加载Y变量栅格</h4>
+<ol>
+<li>选择&quot;Raster&quot;数据源类型</li>
+<li>点击&quot;📂 Load Y&quot;按钮</li>
+<li>选择Y变量栅格文件</li>
+<li>软件会自动读取栅格信息和坐标系统</li>
+</ol>
+<h4 id="%E5%8A%A0%E8%BD%BDx%E5%8F%98%E9%87%8F%E6%A0%85%E6%A0%BC">加载X变量栅格</h4>
+<ol>
+<li>点击&quot;➕&quot;加载单个X变量</li>
+<li>或点击&quot;➕➕&quot;批量加载多个X变量</li>
+<li>软件会自动对齐栅格（如果坐标系统或分辨率不同）</li>
+</ol>
+<h4 id="%E6%A0%85%E6%A0%BC%E5%AF%B9%E9%BD%90%E8%AF%B4%E6%98%8E">栅格对齐说明</h4>
+<ul>
+<li>如果X变量栅格与Y变量栅格的空间分辨率或坐标系统不同，软件会自动重投影和对齐</li>
+<li>使用rasterio库时，会进行精确的地理重投影</li>
+<li>使用scipy时，会进行简单的缩放对齐</li>
+</ul>
+<h4 id="%E6%A0%85%E6%A0%BC%E6%95%B0%E6%8D%AE%E8%A6%81%E6%B1%82">栅格数据要求</h4>
+<ul>
+<li>所有栅格应为单波段</li>
+<li>建议使用相同的坐标系统（CRS）</li>
+<li>建议使用相同的空间分辨率</li>
+<li>支持GeoTIFF格式（.tif、.tiff）</li>
+</ul>
+<hr>
+<h2 id="8-%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AF%B4%E6%98%8E">8. 快捷键说明</h2>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ctrl+N</strong></td>
+<td>新建项目</td>
+</tr>
+<tr>
+<td><strong>Ctrl+O</strong></td>
+<td>打开项目</td>
+</tr>
+<tr>
+<td><strong>Ctrl+S</strong></td>
+<td>保存项目</td>
+</tr>
+<tr>
+<td><strong>Ctrl+E</strong></td>
+<td>导出结果</td>
+</tr>
+<tr>
+<td><strong>Ctrl+R</strong></td>
+<td>运行分析</td>
+</tr>
+<tr>
+<td><strong>Ctrl+Q</strong></td>
+<td>退出程序</td>
+</tr>
+<tr>
+<td><strong>F1</strong></td>
+<td>显示帮助</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="9-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">9. 常见问题</h2>
+<h3 id="91-%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98">9.1 数据相关问题</h3>
+<p><strong>Q: Excel文件加载失败怎么办？</strong>
+A:</p>
+<ul>
+<li>检查文件格式是否为.xlsx、.xls或.csv</li>
+<li>确保文件未被其他程序占用</li>
+<li>检查文件编码（CSV文件建议使用UTF-8编码）</li>
+<li>查看控制台错误信息</li>
+</ul>
+<p><strong>Q: 栅格数据加载后显示尺寸不匹配？</strong>
+A:</p>
+<ul>
+<li>检查栅格的坐标系统是否一致</li>
+<li>检查栅格的空间分辨率是否相同</li>
+<li>软件会自动对齐，但建议预处理时统一坐标系统和分辨率</li>
+</ul>
+<p><strong>Q: 数据中有缺失值怎么办？</strong>
+A:</p>
+<ul>
+<li>使用数据预处理功能处理缺失值</li>
+<li>或使用Excel等工具预先处理</li>
+<li>建议在分析前处理所有缺失值</li>
+</ul>
+<h3 id="92-%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98">9.2 分析相关问题</h3>
+<p><strong>Q: 分析运行很慢怎么办？</strong>
+A:</p>
+<ul>
+<li>检查是否安装了Numba库（可大幅提升速度）</li>
+<li>减少样本量或变量数量</li>
+<li>关闭Bootstrap置信区间计算（如果不需要）</li>
+<li>检查计算机内存是否充足</li>
+</ul>
+<p><strong>Q: q值都是0或很小怎么办？</strong>
+A:</p>
+<ul>
+<li>检查离散化方法是否合适</li>
+<li>尝试使用智能优化功能</li>
+<li>检查数据质量（是否存在异常值）</li>
+<li>考虑变量选择是否合理</li>
+</ul>
+<p><strong>Q: 交互探测器结果中交互类型都是&quot;独立&quot;？</strong>
+A:</p>
+<ul>
+<li>这可能是正常现象，说明因子间确实独立</li>
+<li>检查离散化配置是否合理</li>
+<li>尝试不同的离散化方法</li>
+<li>检查数据是否存在交互关系</li>
+</ul>
+<h3 id="93-%E5%8A%9F%E8%83%BD%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98">9.3 功能相关问题</h3>
+<p><strong>Q: 如何选择合适的离散化方法？</strong>
+A:</p>
+<ul>
+<li>使用智能优化功能自动选择</li>
+<li>根据数据分布特征选择：
+<ul>
+<li>数据均匀分布：分位数法或等间距法</li>
+<li>数据正态分布：标准差法</li>
+<li>数据有明显聚类：Jenks自然断点法</li>
+</ul>
+</li>
+<li>比较不同方法的结果，选择q值最大的方法</li>
+</ul>
+<p><strong>Q: Bootstrap置信区间计算失败？</strong>
+A:</p>
+<ul>
+<li>检查样本量是否足够（建议&gt;100）</li>
+<li>减少重采样次数</li>
+<li>检查内存是否充足</li>
+</ul>
+<p><strong>Q: SCI文本生成失败？</strong>
+A:</p>
+<ul>
+<li>确保已完成分析并生成结果</li>
+<li>检查结果数据是否完整</li>
+<li>查看控制台错误信息</li>
+</ul>
+<h3 id="94-%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98">9.4 软件使用问题</h3>
+<p><strong>Q: 软件启动失败？</strong>
+A:</p>
+<ul>
+<li>检查Python版本是否符合要求</li>
+<li>检查依赖库是否安装完整</li>
+<li>查看控制台错误信息</li>
+<li>检查授权文件是否正确</li>
+</ul>
+<p><strong>Q: 界面显示异常？</strong>
+A:</p>
+<ul>
+<li>尝试切换主题（如果支持ttkbootstrap）</li>
+<li>检查屏幕分辨率设置</li>
+<li>重启软件</li>
+</ul>
+<p><strong>Q: 项目文件无法打开？</strong>
+A:</p>
+<ul>
+<li>检查文件是否损坏</li>
+<li>检查文件版本是否匹配</li>
+<li>尝试使用备份文件</li>
+</ul>
+<hr>
+<h2 id="10-%E9%99%84%E5%BD%95">10. 附录</h2>
+<h3 id="101-%E6%9C%AF%E8%AF%AD%E8%A1%A8">10.1 术语表</h3>
+<ul>
+<li><strong>q值（q-statistic）</strong>：地理探测器核心指标，衡量因子对因变量空间分异的解释能力，范围0-1</li>
+<li><strong>离散化（Discretization）</strong>：将连续变量转换为分类变量的过程</li>
+<li><strong>层（Stratum/Layer）</strong>：离散化后的分类组别</li>
+<li><strong>GVF（Goodness of Variance Fit）</strong>：方差拟合优度，衡量离散化质量</li>
+<li><strong>Bootstrap</strong>：统计重采样方法，用于估计统计量的置信区间</li>
+<li><strong>VIF（Variance Inflation Factor）</strong>：方差膨胀因子，衡量多重共线性</li>
+<li><strong>CRS（Coordinate Reference System）</strong>：坐标参考系统</li>
+</ul>
+<h3 id="102-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">10.2 参考文献</h3>
+<p>地理探测器理论和方法请参考相关学术文献，软件实现基于以下理论：</p>
+<ol>
+<li>
+<p>Wang, J. F., et al. (2010). Geographical detectors-based health risk assessment and its application in the neural tube defects study of the Heshun Region, China. International Journal of Geographical Information Science, 24(1), 107-127.</p>
+</li>
+<li>
+<p>Wang, J. F., &amp; Xu, C. D. (2017). Geodetector: principle and prospective. Acta Geographica Sinica, 72(1), 116-134.</p>
+</li>
+</ol>
+<h3 id="103-%E6%8A%80%E6%9C%AF%E6%94%AF%E6%8C%81">10.3 技术支持</h3>
+<p>如遇到问题或需要技术支持，请联系：</p>
+<ul>
+<li>开发团队：@3S&amp;ML Laboratory</li>
+<li>版本：v6.0.1</li>
+</ul>
+<h3 id="104-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97">10.4 更新日志</h3>
+<h4 id="v601-2025-12">v6.0.1 (2025-12)</h4>
+<ul>
+<li>✨ 新增数据预处理功能</li>
+<li>✨ 新增相关性分析功能</li>
+<li>✨ 新增Bootstrap置信区间</li>
+<li>✨ 新增项目管理系统</li>
+<li>✨ 新增HTML报告导出</li>
+<li>✨ 新增SCI写作助手</li>
+<li>✨ 新增主题切换功能</li>
+<li>⚡ 性能优化（Numba加速）</li>
+<li>🐛 修复已知bug</li>
+</ul>
+<h3 id="105-%E8%AE%B8%E5%8F%AF%E8%AF%81">10.5 许可证</h3>
+<p>本软件受版权保护，未经授权不得复制、分发或修改。</p>
+<hr>
+<h2 id="%E7%BB%93%E8%AF%AD">结语</h2>
+<p>感谢使用 <strong>Geographical Detector Pro v6.0.1</strong>！</p>
+<p>本手册涵盖了软件的主要功能和使用方法。如果您在使用过程中遇到问题，请参考本手册的&quot;常见问题&quot;部分，或联系技术支持。</p>
+<p>祝您使用愉快，科研顺利！</p>
+<hr>
+<p><strong>文档版本</strong>：v6.0.1<br>
+<strong>最后更新</strong>：2025-12<br>
+<strong>适用软件版本</strong>：v6.0.1</p>
+
+</body>
+</html>
