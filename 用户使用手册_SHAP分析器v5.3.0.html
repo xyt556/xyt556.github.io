@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>用户使用手册_SHAP分析器v5.3.0.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%8E%AF-shap%E5%88%86%E6%9E%90%E5%99%A8-v530-%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C">🎯 SHAP分析器 v5.3.0 用户使用手册</h1>
+<blockquote>
+<p><strong>专业的机器学习模型解释工具 - 让模型&quot;黑盒&quot;变透明</strong></p>
+</blockquote>
+<hr>
+<h2 id="%F0%9F%93%8B-%E7%9B%AE%E5%BD%95">📋 目录</h2>
+<ol>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E7%AE%80%E4%BB%8B">软件简介</a></li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82">系统要求</a></li>
+<li><a href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">快速开始</a></li>
+<li><a href="#%E8%AF%A6%E7%BB%86%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E">详细功能说明</a></li>
+<li><a href="#%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%E6%8C%87%E5%8D%97">操作流程指南</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94">常见问题解答</a></li>
+<li><a href="#%E9%99%84%E5%BD%95">附录</a></li>
+</ol>
+<hr>
+<h2 id="%F0%9F%93%96-%E8%BD%AF%E4%BB%B6%E7%AE%80%E4%BB%8B">📖 软件简介</h2>
+<h3 id="%E4%BB%80%E4%B9%88%E6%98%AFshap%E5%88%86%E6%9E%90%E5%99%A8">什么是SHAP分析器？</h3>
+<p>SHAP分析器 v5.3.0 是一款基于SHAP（SHapley Additive exPlanations）理论的机器学习模型解释工具。它通过图形化界面，帮助用户：</p>
+<ul>
+<li>🔓 <strong>打开模型&quot;黑盒&quot;</strong>：清晰展示每个特征对预测结果的贡献</li>
+<li>📊 <strong>生成专业报告</strong>：一键导出包含图表、统计信息的完整分析报告</li>
+<li>🎨 <strong>可视化分析</strong>：多种精美的可视化图表，直观展示模型行为</li>
+<li>🚀 <strong>零代码操作</strong>：图形化界面，无需编程基础即可使用</li>
+</ul>
+<h3 id="%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7">核心特性</h3>
+<ul>
+<li>✅ <strong>30+种算法支持</strong>：涵盖树模型、线性模型、SVM、KNN、神经网络等</li>
+<li>✅ <strong>自动问题识别</strong>：自动识别分类或回归问题</li>
+<li>✅ <strong>智能Explainer选择</strong>：根据模型类型自动选择最优的SHAP解释器</li>
+<li>✅ <strong>多分类支持</strong>：完整支持多分类问题的SHAP分析</li>
+<li>✅ <strong>批量模型训练</strong>：同时训练多个模型并自动对比</li>
+<li>✅ <strong>丰富的可视化</strong>：6种SHAP图表类型，满足不同分析需求</li>
+<li>✅ <strong>便捷的导出功能</strong>：支持模型、图表、报告、数据的多格式导出</li>
+<li>✅ <strong>统计信息显示</strong>：依赖图支持统计信息可视化（v5.3.0新增）</li>
+<li>✅ <strong>多格式图表保存</strong>：支持PNG/SVG/PDF/EPS/TIFF等多种格式（v5.3.0新增）</li>
+<li>✅ <strong>自定义模型参数</strong>：支持为每个算法设置自定义参数（v5.3.0新增）</li>
+</ul>
+<h3 id="v530-%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BA%AE%E7%82%B9">v5.3.0 新功能亮点</h3>
+<ul>
+<li>🆕 <strong>依赖图统计信息显示</strong>：在依赖图中显示特征统计、SHAP统计、相关性等信息</li>
+<li>🆕 <strong>评估图表多格式保存</strong>：支持PNG/SVG/PDF/EPS/TIFF格式，满足不同场景需求</li>
+<li>🆕 <strong>高级保存选项</strong>：支持DPI设置、透明背景、自动裁剪等精细控制</li>
+<li>🆕 <strong>自定义模型参数</strong>：为30+种算法提供示例参数，快速设置推荐配置</li>
+<li>🆕 <strong>SHAP样本选择优化</strong>：支持从全部样本中选择，而不仅限于测试集</li>
+<li>🆕 <strong>界面布局优化</strong>：优化窗口比例，图表显示区域更大</li>
+<li>🆕 <strong>类别切换自动刷新</strong>：多分类问题中切换类别时自动更新图表</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%92%BB-%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82">💻 系统要求</h2>
+<h3 id="%E6%9C%80%E4%BD%8E%E9%85%8D%E7%BD%AE">最低配置</h3>
+<ul>
+<li><strong>操作系统</strong>：Windows 10/11（64位）</li>
+<li><strong>内存</strong>：4GB RAM（建议8GB以上）</li>
+<li><strong>存储空间</strong>：500MB以上可用空间</li>
+<li><strong>显示器</strong>：分辨率1280×720以上</li>
+</ul>
+<h3 id="%E6%8E%A8%E8%8D%90%E9%85%8D%E7%BD%AE">推荐配置</h3>
+<ul>
+<li><strong>操作系统</strong>：Windows 11（64位）</li>
+<li><strong>内存</strong>：16GB RAM</li>
+<li><strong>存储空间</strong>：2GB以上可用空间</li>
+<li><strong>显示器</strong>：分辨率1920×1080或更高</li>
+</ul>
+<h3 id="%E5%8F%AF%E9%80%89%E4%BE%9D%E8%B5%96">可选依赖</h3>
+<p>以下依赖为可选，安装后可启用对应功能：</p>
+<ul>
+<li><strong>XGBoost</strong>：用于XGBoost算法（<code>pip install xgboost</code>）</li>
+<li><strong>LightGBM</strong>：用于LightGBM算法（<code>pip install lightgbm</code>）</li>
+<li><strong>CatBoost</strong>：用于CatBoost算法（<code>pip install catboost</code>）</li>
+<li><strong>scikit-optimize</strong>：用于贝叶斯参数优化（<code>pip install scikit-optimize</code>）</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%9A%80-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">🚀 快速开始</h2>
+<h3 id="%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F">第一步：启动程序</h3>
+<ol>
+<li>双击运行程序（<code>.exe</code>文件）或运行Python脚本</li>
+<li>程序启动后会自动显示主界面</li>
+<li>首次运行需要进行授权验证（如有）</li>
+</ol>
+<h3 id="%E7%AC%AC%E4%BA%8C%E6%AD%A5%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE">第二步：加载数据</h3>
+<ol>
+<li>点击左侧面板的 <strong>&quot;📂 选择数据文件 (CSV/Excel)&quot;</strong> 按钮</li>
+<li>在文件选择对话框中选择您的数据文件</li>
+<li>支持格式：<code>.csv</code>、<code>.xlsx</code>、<code>.xls</code></li>
+<li>加载成功后，界面会显示数据基本信息（行数×列数）</li>
+</ol>
+<h3 id="%E7%AC%AC%E4%B8%89%E6%AD%A5%E9%80%89%E6%8B%A9%E7%9B%AE%E6%A0%87%E5%8F%98%E9%87%8F">第三步：选择目标变量</h3>
+<ol>
+<li>在 <strong>&quot;🎯 步骤2: 选择目标列&quot;</strong> 区域</li>
+<li>从下拉菜单中选择要预测的目标变量（列）</li>
+<li>程序会自动识别问题类型（分类或回归）</li>
+</ol>
+<h3 id="%E7%AC%AC%E5%9B%9B%E6%AD%A5%E9%80%89%E6%8B%A9%E7%89%B9%E5%BE%81%E5%88%97">第四步：选择特征列</h3>
+<ol>
+<li>在 <strong>&quot;✅ 步骤3: 选择特征列&quot;</strong> 区域</li>
+<li>勾选要用于训练的特征列</li>
+<li>可以使用 <strong>&quot;✓ 全选&quot;</strong> 或 <strong>&quot;✗ 全不选&quot;</strong> 快速操作</li>
+<li>目标变量会自动从特征列中排除</li>
+</ol>
+<h3 id="%E7%AC%AC%E4%BA%94%E6%AD%A5%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E5%8F%AF%E9%80%89">第五步：数据预处理（可选）</h3>
+<ol>
+<li><strong>设置训练集比例</strong>：默认70%，可通过滑块调整（50%-90%）</li>
+<li><strong>特征缩放</strong>：根据需要选择标准化、归一化等方法</li>
+<li><strong>特征选择</strong>：如果特征过多，可以使用特征选择方法</li>
+<li>点击 <strong>&quot;🔧 数据预处理&quot;</strong> 按钮执行预处理</li>
+</ol>
+<h3 id="%E7%AC%AC%E4%BA%94%E6%AD%A5%E6%96%B0%E5%A2%9E%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E5%8F%AF%E9%80%89%E2%AD%90-v530%E6%96%B0%E5%8A%9F%E8%83%BD">第五步（新增）：自定义模型参数（可选）⭐ v5.3.0新功能</h3>
+<ol>
+<li>在 <strong>&quot;步骤5.5: 自定义模型参数（可选）&quot;</strong> 区域</li>
+<li>选择要设置参数的算法</li>
+<li>点击 <strong>&quot;📋 加载示例&quot;</strong> 按钮，快速加载该算法的示例参数</li>
+<li>根据需要修改JSON格式的参数</li>
+<li>点击 <strong>&quot;💾 保存参数&quot;</strong> 保存设置</li>
+<li>这些参数会在训练模型时自动应用</li>
+</ol>
+<p><strong>提示</strong>：</p>
+<ul>
+<li>支持30+种主流算法的示例参数</li>
+<li>参数格式为JSON，必须符合JSON语法</li>
+<li>自定义参数会覆盖默认参数，但不影响参数优化</li>
+</ul>
+<h3 id="%E7%AC%AC%E5%85%AD%E6%AD%A5%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B">第六步：训练模型</h3>
+<ol>
+<li>在 <strong>&quot;🤖 步骤4: 选择算法&quot;</strong> 区域勾选要训练的算法</li>
+<li>可以选择单个算法或批量选择多个算法</li>
+<li>点击 <strong>&quot;🚀 训练选中模型&quot;</strong> 或 <strong>&quot;🏆 训练所有模型&quot;</strong></li>
+<li>等待训练完成，查看模型性能对比</li>
+</ol>
+<h3 id="%E7%AC%AC%E4%B8%83%E6%AD%A5%E7%94%9F%E6%88%90shap%E5%88%86%E6%9E%90">第七步：生成SHAP分析</h3>
+<ol>
+<li>在 <strong>&quot;📊 SHAP分析&quot;</strong> 区域选择已训练的模型</li>
+<li>设置SHAP样本比例（v5.3.0改进：从全部样本中选择，而不仅限于测试集）
+<ul>
+<li><strong>树模型</strong>：建议100%（计算速度快）</li>
+<li><strong>线性模型</strong>：建议50-100%（计算速度快）</li>
+<li><strong>其他模型</strong>：建议10-50%（平衡速度和准确性）</li>
+</ul>
+</li>
+<li>点击 <strong>&quot;⚡ 计算SHAP值&quot;</strong> 按钮</li>
+<li>等待计算完成（时间取决于样本数量和模型类型）</li>
+</ol>
+<h3 id="%E7%AC%AC%E5%85%AB%E6%AD%A5%E6%9F%A5%E7%9C%8B%E5%8F%AF%E8%A7%86%E5%8C%96%E7%BB%93%E6%9E%9C">第八步：查看可视化结果</h3>
+<ol>
+<li>在 <strong>&quot;📈 SHAP可视化&quot;</strong> 区域选择图表类型</li>
+<li>点击对应的按钮生成图表：
+<ul>
+<li><strong>汇总图</strong>：查看所有特征的重要性</li>
+<li><strong>依赖图</strong>：查看单个特征的影响（v5.3.0新增统计信息显示）</li>
+<li><strong>交互图</strong>：查看特征间的交互作用</li>
+<li><strong>瀑布图</strong>：查看单个样本的预测过程</li>
+<li><strong>力图</strong>：查看特征对预测的推动力</li>
+<li><strong>条形图</strong>：查看特征重要性排序</li>
+</ul>
+</li>
+</ol>
+<h3 id="%E7%AC%AC%E4%B9%9D%E6%AD%A5%E5%AF%BC%E5%87%BA%E7%BB%93%E6%9E%9C">第九步：导出结果</h3>
+<ol>
+<li><strong>SHAP图表导出</strong>：点击图表上方的 <strong>&quot;💾 保存图表&quot;</strong> 按钮，选择格式</li>
+<li><strong>评估图表导出</strong>：点击 <strong>&quot;📊 保存图表 ▼&quot;</strong> 下拉菜单，选择格式或高级选项（v5.3.0新增）</li>
+<li>或使用 <strong>&quot;📄 导出报告&quot;</strong> 导出完整分析报告</li>
+</ol>
+<hr>
+<h2 id="%F0%9F%93%9A-%E8%AF%A6%E7%BB%86%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E">📚 详细功能说明</h2>
+<h3 id="1-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97">1. 数据加载模块</h3>
+<h4 id="11-%E6%94%AF%E6%8C%81%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F">1.1 支持的数据格式</h4>
+<ul>
+<li><strong>CSV文件</strong>（<code>.csv</code>）：逗号分隔值文件</li>
+<li><strong>Excel文件</strong>（<code>.xlsx</code>、<code>.xls</code>）：Microsoft Excel文件</li>
+</ul>
+<h4 id="12-%E6%95%B0%E6%8D%AE%E8%A6%81%E6%B1%82">1.2 数据要求</h4>
+<ul>
+<li><strong>数据格式</strong>：第一行为列名（表头）</li>
+<li><strong>数据类型</strong>：支持数值型和分类型数据</li>
+<li><strong>缺失值</strong>：程序会自动处理缺失值</li>
+<li><strong>编码格式</strong>：CSV文件建议使用UTF-8编码</li>
+</ul>
+<h4 id="13-%E6%95%B0%E6%8D%AE%E9%A2%84%E8%A7%88">1.3 数据预览</h4>
+<p>加载数据后，右侧面板会显示：</p>
+<ul>
+<li>数据表格预览（前20行）</li>
+<li>数据基本信息（行数、列数）</li>
+<li>列名列表</li>
+</ul>
+<hr>
+<h3 id="2-%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E6%A8%A1%E5%9D%97">2. 数据预处理模块</h3>
+<h4 id="21-%E8%AE%AD%E7%BB%83%E9%9B%86%E6%AF%94%E4%BE%8B%E8%AE%BE%E7%BD%AE">2.1 训练集比例设置</h4>
+<ul>
+<li><strong>默认值</strong>：70%（训练集70%，测试集30%）</li>
+<li><strong>可调范围</strong>：50%-90%</li>
+<li><strong>推荐值</strong>：
+<ul>
+<li>小数据集（&lt;1000样本）：70-80%</li>
+<li>中等数据集（1000-10000样本）：70%</li>
+<li>大数据集（&gt;10000样本）：80-90%</li>
+</ul>
+</li>
+</ul>
+<h4 id="22-%E7%89%B9%E5%BE%81%E7%BC%A9%E6%94%BE">2.2 特征缩放</h4>
+<p>支持以下缩放方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标准化 (StandardScaler)</strong></td>
+<td>均值0，标准差1</td>
+<td>数据近似正态分布</td>
+</tr>
+<tr>
+<td><strong>归一化 (MinMaxScaler)</strong></td>
+<td>缩放到[0,1]区间</td>
+<td>数据有明确边界</td>
+</tr>
+<tr>
+<td><strong>Robust缩放</strong></td>
+<td>使用中位数和四分位数</td>
+<td>数据有异常值</td>
+</tr>
+<tr>
+<td><strong>不缩放</strong></td>
+<td>保持原始数据</td>
+<td>树模型通常不需要</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>树模型（随机森林、XGBoost等）通常不需要特征缩放</li>
+<li>线性模型、SVM、KNN等通常需要特征缩放</li>
+</ul>
+<h4 id="23-%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9">2.3 特征选择</h4>
+<p>支持以下特征选择方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RFE</strong></td>
+<td>递归特征消除</td>
+<td>需要指定特征数量</td>
+</tr>
+<tr>
+<td><strong>RFECV</strong></td>
+<td>RFE + 交叉验证</td>
+<td>自动确定最优特征数</td>
+</tr>
+<tr>
+<td><strong>SelectKBest</strong></td>
+<td>基于统计检验</td>
+<td>快速筛选重要特征</td>
+</tr>
+<tr>
+<td><strong>SelectPercentile</strong></td>
+<td>选择前K%特征</td>
+<td>按比例选择特征</td>
+</tr>
+<tr>
+<td><strong>SelectFromModel</strong></td>
+<td>基于模型重要性</td>
+<td>使用模型内置重要性</td>
+</tr>
+<tr>
+<td><strong>VarianceThreshold</strong></td>
+<td>方差阈值</td>
+<td>去除低方差特征</td>
+</tr>
+</tbody>
+</table>
+<h4 id="24-%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%A3%80%E6%9F%A5">2.4 数据质量检查</h4>
+<p>程序会自动检查以下问题：</p>
+<ul>
+<li>✅ <strong>样本数量</strong>：样本过少会给出警告</li>
+<li>✅ <strong>特征数量</strong>：特征过多会给出建议</li>
+<li>✅ <strong>高相关性</strong>：检测高度相关的特征对</li>
+<li>✅ <strong>缺失值</strong>：统计缺失值比例</li>
+<li>✅ <strong>数据分布</strong>：检查数据分布情况</li>
+</ul>
+<hr>
+<h3 id="3-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9D%97">3. 模型训练模块</h3>
+<h4 id="31-%E6%94%AF%E6%8C%81%E7%9A%84%E7%AE%97%E6%B3%95">3.1 支持的算法</h4>
+<h5 id="%F0%9F%8C%B2-%E6%A0%91%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%8D%90%E7%94%A8%E4%BA%8Eshap%E5%88%86%E6%9E%90">🌲 树模型（推荐用于SHAP分析）</h5>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>说明</th>
+<th>SHAP速度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RandomForest</strong></td>
+<td>随机森林</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>XGBoost</strong></td>
+<td>极端梯度提升</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>LightGBM</strong></td>
+<td>轻量级梯度提升</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>CatBoost</strong></td>
+<td>类别提升</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>GradientBoosting</strong></td>
+<td>梯度提升</td>
+<td>⚡⚡ 快</td>
+</tr>
+<tr>
+<td><strong>HistGradientBoosting</strong></td>
+<td>直方图梯度提升</td>
+<td>⚡⚡ 快</td>
+</tr>
+<tr>
+<td><strong>AdaBoost</strong></td>
+<td>自适应提升</td>
+<td>⚡⚡ 快</td>
+</tr>
+<tr>
+<td><strong>ExtraTrees</strong></td>
+<td>极端随机树</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>DecisionTree</strong></td>
+<td>决策树</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>Bagging</strong></td>
+<td>装袋法</td>
+<td>⚡⚡ 快</td>
+</tr>
+</tbody>
+</table>
+<h5 id="%F0%9F%93%8F-%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B">📏 线性模型</h5>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>说明</th>
+<th>SHAP速度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LogisticReg/LinearReg</strong></td>
+<td>逻辑/线性回归</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>Ridge</strong></td>
+<td>岭回归</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>RidgeCV</strong></td>
+<td>岭回归（交叉验证）</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>Lasso</strong></td>
+<td>Lasso回归</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>LassoCV</strong></td>
+<td>Lasso回归（交叉验证）</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>ElasticNet</strong></td>
+<td>弹性网络</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>ElasticNetCV</strong></td>
+<td>弹性网络（交叉验证）</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>SGD</strong></td>
+<td>随机梯度下降</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>PassiveAggressive</strong></td>
+<td>被动攻击算法</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>Perceptron</strong></td>
+<td>感知机</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>Huber</strong></td>
+<td>Huber回归</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>RANSAC</strong></td>
+<td>RANSAC回归</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+<tr>
+<td><strong>TheilSen</strong></td>
+<td>Theil-Sen回归</td>
+<td>⚡⚡⚡ 极快</td>
+</tr>
+</tbody>
+</table>
+<h5 id="%F0%9F%A7%A0-%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95">🧠 其他算法</h5>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>说明</th>
+<th>SHAP速度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SVM</strong></td>
+<td>支持向量机</td>
+<td>⚡ 较慢</td>
+</tr>
+<tr>
+<td><strong>KNN</strong></td>
+<td>K近邻</td>
+<td>⚡ 较慢</td>
+</tr>
+<tr>
+<td><strong>MLP</strong></td>
+<td>多层感知机</td>
+<td>⚡ 较慢</td>
+</tr>
+<tr>
+<td><strong>NaiveBayes</strong></td>
+<td>朴素贝叶斯</td>
+<td>⚡⚡ 快</td>
+</tr>
+<tr>
+<td><strong>LDA/QDA</strong></td>
+<td>线性/二次判别分析</td>
+<td>⚡⚡ 快</td>
+</tr>
+<tr>
+<td><strong>GaussianProcess</strong></td>
+<td>高斯过程</td>
+<td>⚡ 较慢</td>
+</tr>
+</tbody>
+</table>
+<h4 id="32-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0-%E2%AD%90-v530%E6%96%B0%E5%8A%9F%E8%83%BD">3.2 自定义模型参数 ⭐ v5.3.0新功能</h4>
+<p><strong>位置</strong>：步骤5.5，位于数据预处理之后、模型训练之前</p>
+<p><strong>功能特点</strong>：</p>
+<ul>
+<li>✅ <strong>支持30+种算法</strong>：为每种算法提供示例参数</li>
+<li>✅ <strong>一键加载示例</strong>：点击&quot;📋 加载示例&quot;快速加载推荐参数</li>
+<li>✅ <strong>JSON格式</strong>：使用标准JSON格式，易于编辑</li>
+<li>✅ <strong>参数管理</strong>：
+<ul>
+<li>💾 保存参数：保存当前算法的自定义参数</li>
+<li>🔄 加载已保存：加载之前保存的参数</li>
+<li>🗑️ 清除参数：清除当前算法的自定义参数</li>
+</ul>
+</li>
+</ul>
+<p><strong>支持的算法类别</strong>：</p>
+<ul>
+<li><strong>集成学习</strong>：XGBoost、RandomForest、LightGBM、CatBoost、GradientBoosting等</li>
+<li><strong>线性模型</strong>：Ridge、Lasso、ElasticNet及其CV版本、SGD等</li>
+<li><strong>树模型</strong>：DecisionTree</li>
+<li><strong>其他算法</strong>：SVM、KNN、贝叶斯分类器等</li>
+</ul>
+<p><strong>使用示例</strong>（XGBoost）：</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"n_estimators"</span>: <span class="hljs-number">100</span>,
+  <span class="hljs-attr">"max_depth"</span>: <span class="hljs-number">6</span>,
+  <span class="hljs-attr">"learning_rate"</span>: <span class="hljs-number">0.1</span>,
+  <span class="hljs-attr">"subsample"</span>: <span class="hljs-number">0.8</span>,
+  <span class="hljs-attr">"colsample_bytree"</span>: <span class="hljs-number">0.8</span>,
+  <span class="hljs-attr">"random_state"</span>: <span class="hljs-number">42</span>
+}
+</div></code></pre>
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li>参数必须使用有效的JSON格式</li>
+<li>数值参数直接写数字</li>
+<li>布尔参数写 <code>true</code>/<code>false</code></li>
+<li>字符串参数用引号括起来</li>
+<li>自定义参数会覆盖默认参数，但不影响参数优化</li>
+</ul>
+<h4 id="33-%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96">3.3 参数优化</h4>
+<p>支持三种参数优化方法：</p>
+<ol>
+<li>
+<p><strong>网格搜索 (GridSearchCV)</strong></p>
+<ul>
+<li>遍历所有参数组合</li>
+<li>最全面但最耗时</li>
+<li>适合参数空间较小的情况</li>
+</ul>
+</li>
+<li>
+<p><strong>随机搜索 (RandomizedSearchCV)</strong></p>
+<ul>
+<li>随机采样参数组合</li>
+<li>速度快，效果通常接近网格搜索</li>
+<li>适合参数空间较大的情况</li>
+</ul>
+</li>
+<li>
+<p><strong>贝叶斯优化 (BayesSearchCV)</strong></p>
+<ul>
+<li>智能搜索最优参数</li>
+<li>效率最高，效果最好</li>
+<li>需要安装<code>scikit-optimize</code></li>
+</ul>
+</li>
+</ol>
+<p><strong>注意</strong>：如果设置了自定义参数，参数优化会在自定义参数的基础上进行搜索。</p>
+<h4 id="34-%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81">3.4 交叉验证</h4>
+<ul>
+<li><strong>K折交叉验证</strong>：默认5折</li>
+<li><strong>分层K折</strong>：分类问题自动使用分层采样</li>
+<li><strong>评估指标</strong>：自动选择（分类：accuracy，回归：R²）</li>
+</ul>
+<h4 id="35-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87">3.5 模型评估指标</h4>
+<h5 id="%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1">分类任务</h5>
+<ul>
+<li><strong>准确率 (Accuracy)</strong>：正确预测的比例</li>
+<li><strong>精确率 (Precision)</strong>：预测为正例中真正为正例的比例</li>
+<li><strong>召回率 (Recall)</strong>：真正例中被正确预测的比例</li>
+<li><strong>F1分数 (F1-Score)</strong>：精确率和召回率的调和平均</li>
+<li><strong>AUC值</strong>：ROC曲线下面积</li>
+<li><strong>混淆矩阵</strong>：展示分类结果的详细情况</li>
+</ul>
+<h5 id="%E5%9B%9E%E5%BD%92%E4%BB%BB%E5%8A%A1">回归任务</h5>
+<ul>
+<li><strong>R²分数</strong>：决定系数，衡量模型拟合程度</li>
+<li><strong>MAE</strong>：平均绝对误差</li>
+<li><strong>MSE</strong>：均方误差</li>
+<li><strong>RMSE</strong>：均方根误差</li>
+<li><strong>学习曲线</strong>：展示训练过程</li>
+</ul>
+<hr>
+<h3 id="4-shap%E5%88%86%E6%9E%90%E6%A8%A1%E5%9D%97">4. SHAP分析模块</h3>
+<h4 id="41-shap%E5%80%BC%E8%AE%A1%E7%AE%97">4.1 SHAP值计算</h4>
+<h5 id="explainer%E9%80%89%E6%8B%A9">Explainer选择</h5>
+<p>程序会根据模型类型自动选择最优的Explainer：</p>
+<table>
+<thead>
+<tr>
+<th>Explainer</th>
+<th>适用模型</th>
+<th>速度</th>
+<th>准确性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TreeExplainer</strong></td>
+<td>树模型</td>
+<td>⚡⚡⚡ 极快</td>
+<td>⭐⭐⭐⭐⭐ 最高</td>
+</tr>
+<tr>
+<td><strong>LinearExplainer</strong></td>
+<td>线性模型</td>
+<td>⚡⚡⚡ 极快</td>
+<td>⭐⭐⭐⭐⭐ 最高</td>
+</tr>
+<tr>
+<td><strong>KernelExplainer</strong></td>
+<td>所有模型</td>
+<td>⚡ 较慢</td>
+<td>⭐⭐⭐⭐ 高</td>
+</tr>
+</tbody>
+</table>
+<h5 id="%E6%A0%B7%E6%9C%AC%E6%AF%94%E4%BE%8B%E8%AE%BE%E7%BD%AE-%E2%AD%90-v530%E6%94%B9%E8%BF%9B">样本比例设置 ⭐ v5.3.0改进</h5>
+<p><strong>v5.2.2版本</strong>：仅支持从测试集中选择样本</p>
+<p><strong>v5.3.0版本</strong>：支持从全部数据（训练集+测试集）中选择样本</p>
+<p><strong>优势</strong>：</p>
+<ul>
+<li>✅ 可以使用更多样本进行SHAP分析，提高分析结果的稳定性</li>
+<li>✅ 对于小数据集，可以使用全部数据进行更全面的分析</li>
+<li>✅ 用户可以根据需要灵活选择样本范围</li>
+</ul>
+<p><strong>推荐设置</strong>：</p>
+<ul>
+<li><strong>树模型</strong>：建议100%（计算速度快）</li>
+<li><strong>线性模型</strong>：建议50-100%（计算速度快）</li>
+<li><strong>其他模型</strong>：建议10-50%（平衡速度和准确性）</li>
+</ul>
+<p><strong>注意</strong>：样本数量越多，SHAP值越准确，但计算时间越长。</p>
+<h4 id="42-shap%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A1%A8">4.2 SHAP可视化图表</h4>
+<h5 id="%F0%9F%93%8A-%E6%B1%87%E6%80%BB%E5%9B%BE-summary-plot">📊 汇总图 (Summary Plot)</h5>
+<p><strong>功能</strong>：</p>
+<ul>
+<li>展示所有特征的重要性</li>
+<li>颜色编码显示特征值大小</li>
+<li>直观看出哪些特征影响最大</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>快速了解特征重要性</li>
+<li>发现关键特征</li>
+<li>特征筛选</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>计算SHAP值后，点击 <strong>&quot;📊 汇总图&quot;</strong> 按钮</li>
+<li>图表会显示所有特征的SHAP值分布</li>
+<li>特征按重要性从上到下排序</li>
+</ol>
+<h5 id="%F0%9F%93%89-%E4%BE%9D%E8%B5%96%E5%9B%BE-dependence-plot-%E2%AD%90-v530%E5%A2%9E%E5%BC%BA">📉 依赖图 (Dependence Plot) ⭐ v5.3.0增强</h5>
+<p><strong>功能</strong>：</p>
+<ul>
+<li>展示单个特征对预测的影响</li>
+<li>支持拟合线和95%置信区间</li>
+<li>发现特征的非线性关系</li>
+<li><strong>🆕 统计信息显示</strong>：显示特征统计、SHAP统计、相关性等信息</li>
+</ul>
+<p><strong>统计信息内容</strong>（v5.3.0新增）：</p>
+<ul>
+<li>✅ <strong>特征统计</strong>：均值、标准差、中位数</li>
+<li>✅ <strong>SHAP统计</strong>：SHAP值的均值</li>
+<li>✅ <strong>相关性</strong>：特征值与SHAP值的相关系数</li>
+<li>✅ <strong>样本数量</strong>：参与计算的样本数</li>
+<li>✅ <strong>置信区间</strong>：95%置信区间范围（如果启用）</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>深入分析单个特征</li>
+<li>发现特征的非线性效应</li>
+<li>特征工程优化</li>
+<li>为论文和报告提供统计支撑</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>点击 <strong>&quot;📉 依赖图&quot;</strong> 按钮</li>
+<li>从下拉菜单选择要分析的特征</li>
+<li>可以设置：
+<ul>
+<li>点大小（默认50）</li>
+<li>拟合线粗细（默认3.0）</li>
+<li><strong>🆕 是否显示统计信息</strong>（默认启用）</li>
+<li>是否显示置信区间</li>
+</ul>
+</li>
+<li>使用 <strong>&quot;◀ 上一个&quot;</strong> 和 <strong>&quot;下一个 ▶&quot;</strong> 浏览不同特征</li>
+<li>点击 <strong>&quot;💾 保存当前图&quot;</strong> 或 <strong>&quot;💾 保存所有图&quot;</strong> 导出</li>
+</ol>
+<p><strong>统计信息解读</strong>：</p>
+<ul>
+<li><strong>相关性（Correlation）</strong>：接近±1表示强相关，接近0表示弱相关</li>
+<li><strong>SHAP均值</strong>：绝对值越大，该特征对模型输出的影响越大</li>
+<li><strong>特征均值±标准差</strong>：了解特征的分布范围</li>
+</ul>
+<h5 id="%F0%9F%94%84-%E4%BA%A4%E4%BA%92%E4%BE%9D%E8%B5%96%E5%9B%BE-interaction-plot">🔄 交互依赖图 (Interaction Plot)</h5>
+<p><strong>功能</strong>：</p>
+<ul>
+<li>分析两个特征之间的交互作用</li>
+<li>颜色编码显示交互特征的影响</li>
+<li>支持拟合线和置信区间</li>
+<li>发现隐藏的特征组合效应</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>发现特征间的交互作用</li>
+<li>特征组合优化</li>
+<li>深入理解模型行为</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>点击 <strong>&quot;🔄 交互图&quot;</strong> 按钮</li>
+<li>从下拉菜单选择主特征和交互特征</li>
+<li>可以设置：
+<ul>
+<li>点大小（默认30）</li>
+<li>拟合线粗细（默认2.0）</li>
+<li>是否显示趋势线</li>
+<li>是否显示置信区间</li>
+</ul>
+</li>
+<li>图表会显示两个特征的交互效应</li>
+</ol>
+<h5 id="%F0%9F%93%8B-%E7%80%91%E5%B8%83%E5%9B%BE-waterfall-plot">📋 瀑布图 (Waterfall Plot)</h5>
+<p><strong>功能</strong>：</p>
+<ul>
+<li>展示单个样本的预测过程</li>
+<li>从基准值到最终预测的完整路径</li>
+<li>适合向非技术人员解释</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>解释单个预测结果</li>
+<li>向业务人员展示</li>
+<li>模型可解释性报告</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>点击 <strong>&quot;📋 瀑布图&quot;</strong> 按钮</li>
+<li>选择要分析的样本索引（默认第0个样本）</li>
+<li>图表会显示该样本的预测分解过程</li>
+</ol>
+<h5 id="%F0%9F%94%A5-%E5%8A%9B%E5%9B%BE-force-plot">🔥 力图 (Force Plot)</h5>
+<p><strong>功能</strong>：</p>
+<ul>
+<li>直观展示特征对预测的&quot;推动&quot;作用</li>
+<li>红色表示正向影响，蓝色表示负向影响</li>
+<li>交互式可视化</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>快速理解单个预测</li>
+<li>特征影响可视化</li>
+<li>模型解释演示</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>点击 <strong>&quot;🔥 力图&quot;</strong> 按钮</li>
+<li>选择要分析的样本索引</li>
+<li>图表会显示特征对预测的推动力</li>
+</ol>
+<h5 id="%F0%9F%93%8A-%E6%9D%A1%E5%BD%A2%E5%9B%BE-bar-plot">📊 条形图 (Bar Plot)</h5>
+<p><strong>功能</strong>：</p>
+<ul>
+<li>特征重要性排序</li>
+<li>简洁明了，适合报告展示</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>特征重要性报告</li>
+<li>模型解释文档</li>
+<li>快速对比特征重要性</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>点击 <strong>&quot;📊 条形图&quot;</strong> 按钮</li>
+<li>图表会显示特征重要性排序</li>
+</ol>
+<h4 id="43-%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86-%E2%AD%90-v530%E6%94%B9%E8%BF%9B">4.3 多分类问题处理 ⭐ v5.3.0改进</h4>
+<p>对于多分类问题，程序会自动处理：</p>
+<ol>
+<li><strong>类别选择</strong>：可以在下拉菜单中选择要分析的类别</li>
+<li><strong>🆕 类别切换自动刷新</strong>：切换类别时，SHAP图表会自动更新（v5.3.0新增）</li>
+<li><strong>类别名称</strong>：自动识别并使用类别名称</li>
+</ol>
+<p><strong>使用体验</strong>：</p>
+<ul>
+<li>切换类别时无需手动刷新图表</li>
+<li>快速对比不同类别的特征重要性</li>
+<li>分析各类别的特征影响差异</li>
+</ul>
+<hr>
+<h3 id="5-%E7%BB%93%E6%9E%9C%E5%AF%BC%E5%87%BA%E6%A8%A1%E5%9D%97">5. 结果导出模块</h3>
+<h4 id="51-%E6%A8%A1%E5%9E%8B%E5%AF%BC%E5%87%BA">5.1 模型导出</h4>
+<p><strong>导出内容</strong>：</p>
+<ul>
+<li>训练好的模型文件（<code>.pkl</code>格式）</li>
+<li>模型参数配置（JSON格式）</li>
+<li>特征重要性（Excel格式）</li>
+<li>模型性能指标（Excel格式）</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>训练模型后，点击 <strong>&quot;💾 导出模型参数&quot;</strong> 按钮</li>
+<li>选择保存位置</li>
+<li>程序会创建文件夹，包含所有相关文件</li>
+</ol>
+<h4 id="52-%E8%AF%84%E4%BC%B0%E6%8A%A5%E5%91%8A%E5%AF%BC%E5%87%BA-%E2%AD%90-v530%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7">5.2 评估报告导出 ⭐ v5.3.0全面升级</h4>
+<p><strong>导出格式</strong>（v5.3.0新增）：</p>
+<ul>
+<li><strong>PNG</strong>：300 DPI高质量位图，适合网页/PPT演示（推荐）</li>
+<li><strong>SVG</strong>：矢量图，无损缩放，适合论文插图、可编辑图形</li>
+<li><strong>PDF</strong>：矢量图，适合打印和学术论文</li>
+<li><strong>EPS</strong>：LaTeX标准格式，适合LaTeX论文排版</li>
+<li><strong>TIFF</strong>：高质量位图，适合出版印刷</li>
+</ul>
+<p><strong>快速保存</strong>：</p>
+<ol>
+<li>在评估界面，点击 <strong>&quot;📊 保存图表 ▼&quot;</strong> 下拉菜单</li>
+<li>选择所需格式，一键保存</li>
+</ol>
+<p><strong>高级保存选项</strong>（v5.3.0新增）：</p>
+<ol>
+<li>点击 <strong>&quot;📊 保存图表 ▼&quot;</strong> → <strong>&quot;🎨 高级选项...&quot;</strong></li>
+<li>在弹出的对话框中设置：
+<ul>
+<li><strong>文件格式</strong>：PNG / SVG / PDF / EPS / TIFF</li>
+<li><strong>分辨率（DPI）</strong>：150 / 300（推荐）/ 600（仅PNG/TIFF有效）</li>
+<li><strong>透明背景</strong>：支持PNG/TIFF格式</li>
+<li><strong>自动裁剪边距</strong>：去除多余空白（推荐）</li>
+</ul>
+</li>
+<li>点击 <strong>&quot;💾 保存&quot;</strong> 完成导出</li>
+</ol>
+<p><strong>格式选择建议</strong>：</p>
+<ul>
+<li><strong>日常使用</strong>：PNG格式，300 DPI，自动裁剪</li>
+<li><strong>论文投稿</strong>：SVG或EPS格式，300 DPI</li>
+<li><strong>高质量打印</strong>：TIFF格式，600 DPI</li>
+<li><strong>图形编辑</strong>：SVG格式，可导入Illustrator等软件</li>
+</ul>
+<p><strong>包含内容</strong>：</p>
+<ul>
+<li>模型性能指标</li>
+<li>评估图表（混淆矩阵、ROC曲线等）</li>
+<li>交叉验证结果（如有）</li>
+<li>模型参数信息</li>
+</ul>
+<h4 id="53-shap%E5%9B%BE%E8%A1%A8%E5%AF%BC%E5%87%BA">5.3 SHAP图表导出</h4>
+<p><strong>支持格式</strong>：</p>
+<ul>
+<li>PNG（位图，适合演示）</li>
+<li>PDF（矢量图，适合打印）</li>
+<li>SVG（矢量图，适合网页）</li>
+<li>EPS（矢量图，适合论文）</li>
+</ul>
+<p><strong>导出选项</strong>：</p>
+<ul>
+<li>单个图表导出</li>
+<li>批量导出（依赖图支持）</li>
+<li>自定义分辨率（高级选项）</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>生成SHAP图表后，点击图表上方的 <strong>&quot;💾 保存图表&quot;</strong> 按钮</li>
+<li>选择保存格式</li>
+<li>选择保存位置和文件名</li>
+<li>点击保存</li>
+</ol>
+<h4 id="54-shap%E5%80%BC%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA">5.4 SHAP值数据导出</h4>
+<p><strong>导出格式</strong>：</p>
+<ul>
+<li>Excel格式（<code>.xlsx</code>）</li>
+<li>CSV格式（<code>.csv</code>）</li>
+</ul>
+<p><strong>包含内容</strong>：</p>
+<ul>
+<li>每个样本的SHAP值</li>
+<li>特征名称</li>
+<li>原始特征值</li>
+<li>预测值</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>计算SHAP值后，点击 <strong>&quot;📊 导出SHAP值&quot;</strong> 按钮</li>
+<li>选择导出格式（Excel或CSV）</li>
+<li>选择保存位置</li>
+<li>点击保存</li>
+</ol>
+<h4 id="55-%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C%E5%AF%BC%E5%87%BA">5.5 预测结果导出</h4>
+<p><strong>导出格式</strong>：</p>
+<ul>
+<li>Excel格式（<code>.xlsx</code>）</li>
+</ul>
+<p><strong>包含内容</strong>：</p>
+<ul>
+<li>原始数据</li>
+<li>预测结果</li>
+<li>预测概率（分类问题）</li>
+<li>多个模型的预测结果（如选择多个模型）</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>完成预测后，点击 <strong>&quot;💾 保存所有预测结果&quot;</strong> 按钮</li>
+<li>选择保存位置</li>
+<li>点击保存</li>
+</ol>
+<h4 id="56-%E8%BE%93%E5%87%BA%E8%B7%AF%E5%BE%84%E8%AE%BE%E7%BD%AE">5.6 输出路径设置</h4>
+<p>程序支持自定义输出路径：</p>
+<ol>
+<li>点击 <strong>&quot;📂 浏览选择&quot;</strong> 选择自定义路径</li>
+<li>点击 <strong>&quot;🔄 重置默认&quot;</strong> 恢复默认路径</li>
+<li>点击 <strong>&quot;📁 打开文件夹&quot;</strong> 快速打开输出文件夹</li>
+</ol>
+<p><strong>默认路径</strong>：程序所在目录的<code>shap_results</code>文件夹</p>
+<hr>
+<h3 id="6-%E9%A2%84%E6%B5%8B%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97">6. 预测功能模块</h3>
+<h4 id="61-%E6%96%B0%E6%95%B0%E6%8D%AE%E9%A2%84%E6%B5%8B">6.1 新数据预测</h4>
+<p><strong>功能</strong>：</p>
+<ul>
+<li>使用训练好的模型对新数据进行预测</li>
+<li>支持批量预测</li>
+<li>自动应用相同的预处理流程</li>
+</ul>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>训练模型后，切换到 <strong>&quot;🔮 预测&quot;</strong> 选项卡</li>
+<li>选择要使用的模型</li>
+<li>点击 <strong>&quot;📂 加载新数据&quot;</strong> 按钮</li>
+<li>选择要预测的数据文件</li>
+<li>程序会自动：
+<ul>
+<li>检查特征匹配</li>
+<li>应用相同的预处理</li>
+<li>进行预测</li>
+<li>显示预测结果</li>
+</ul>
+</li>
+</ol>
+<h4 id="62-%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA">6.2 预测结果展示</h4>
+<p><strong>显示内容</strong>：</p>
+<ul>
+<li>原始数据表格</li>
+<li>预测结果列</li>
+<li>预测概率（分类问题，如有）</li>
+<li>预测统计信息</li>
+</ul>
+<h4 id="63-%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C%E5%AF%BC%E5%87%BA">6.3 预测结果导出</h4>
+<ul>
+<li>导出为Excel格式</li>
+<li>包含原始数据和预测结果</li>
+<li>支持多个模型的预测结果对比</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%96-%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%E6%8C%87%E5%8D%97">📖 操作流程指南</h2>
+<h3 id="%E5%AE%8C%E6%95%B4%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">完整工作流程示例</h3>
+<h4 id="%E5%9C%BA%E6%99%AF1%E4%BA%8C%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98---%E5%AE%A2%E6%88%B7%E6%B5%81%E5%A4%B1%E9%A2%84%E6%B5%8B">场景1：二分类问题 - 客户流失预测</h4>
+<p><strong>步骤1：数据准备</strong></p>
+<ul>
+<li>准备包含客户特征和流失标签的数据</li>
+<li>确保数据格式正确（CSV或Excel）</li>
+</ul>
+<p><strong>步骤2：加载数据</strong></p>
+<ul>
+<li>点击 <strong>&quot;📂 选择数据文件&quot;</strong></li>
+<li>选择数据文件</li>
+<li>确认数据加载成功</li>
+</ul>
+<p><strong>步骤3：选择目标变量</strong></p>
+<ul>
+<li>在目标变量下拉菜单中选择&quot;流失&quot;列</li>
+<li>程序自动识别为二分类问题</li>
+</ul>
+<p><strong>步骤4：选择特征</strong></p>
+<ul>
+<li>勾选所有客户特征列（如年龄、消费金额、使用时长等）</li>
+<li>确保&quot;流失&quot;列未被选中</li>
+</ul>
+<p><strong>步骤5：数据预处理</strong></p>
+<ul>
+<li>设置训练集比例为70%</li>
+<li>选择特征缩放方法（如标准化）</li>
+<li>点击 <strong>&quot;🔧 数据预处理&quot;</strong></li>
+</ul>
+<p><strong>步骤5.5：自定义模型参数（可选）</strong> ⭐ v5.3.0新功能</p>
+<ul>
+<li>选择XGBoost算法</li>
+<li>点击 <strong>&quot;📋 加载示例&quot;</strong> 加载示例参数</li>
+<li>根据需要修改参数（如调整<code>n_estimators</code>为200）</li>
+<li>点击 <strong>&quot;💾 保存参数&quot;</strong></li>
+</ul>
+<p><strong>步骤6：训练模型</strong></p>
+<ul>
+<li>勾选多个算法（如RandomForest、XGBoost、LightGBM）</li>
+<li>点击 <strong>&quot;🏆 训练所有模型&quot;</strong></li>
+<li>等待训练完成，查看模型对比</li>
+</ul>
+<p><strong>步骤7：选择最佳模型</strong></p>
+<ul>
+<li>根据评估指标（如AUC值）选择最佳模型</li>
+<li>记录模型名称</li>
+</ul>
+<p><strong>步骤8：SHAP分析</strong></p>
+<ul>
+<li>选择最佳模型</li>
+<li>设置SHAP样本比例为100%（树模型，v5.3.0支持从全部样本选择）</li>
+<li>点击 <strong>&quot;⚡ 计算SHAP值&quot;</strong></li>
+<li>等待计算完成</li>
+</ul>
+<p><strong>步骤9：生成可视化</strong></p>
+<ul>
+<li>点击 <strong>&quot;📊 汇总图&quot;</strong> 查看特征重要性</li>
+<li>点击 <strong>&quot;📉 依赖图&quot;</strong> 深入分析关键特征
+<ul>
+<li>勾选 <strong>&quot;显示统计信息&quot;</strong> 查看统计信息（v5.3.0新功能）</li>
+</ul>
+</li>
+<li>点击 <strong>&quot;🔄 交互图&quot;</strong> 分析特征交互作用</li>
+</ul>
+<p><strong>步骤10：导出结果</strong></p>
+<ul>
+<li>导出SHAP图表（PDF格式）</li>
+<li>导出评估图表（使用高级选项，SVG格式，300 DPI）（v5.3.0新功能）</li>
+<li>导出SHAP值数据（Excel格式）</li>
+<li>导出评估报告（PDF格式）</li>
+</ul>
+<h4 id="%E5%9C%BA%E6%99%AF2%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98---%E9%B8%A2%E5%B0%BE%E8%8A%B1%E5%88%86%E7%B1%BB">场景2：多分类问题 - 鸢尾花分类</h4>
+<p><strong>步骤1-5</strong>：同场景1（选择鸢尾花种类作为目标变量）</p>
+<p><strong>步骤6：训练模型</strong></p>
+<ul>
+<li>选择多分类算法（如RandomForest、XGBoost）</li>
+<li>训练模型并评估</li>
+</ul>
+<p><strong>步骤7：SHAP分析</strong></p>
+<ul>
+<li>选择最佳模型</li>
+<li>设置SHAP样本比例</li>
+<li>计算SHAP值</li>
+</ul>
+<p><strong>步骤8：多类别分析</strong> ⭐ v5.3.0改进</p>
+<ul>
+<li>在类别选择下拉框中选择&quot;Setosa&quot;</li>
+<li>查看Setosa类别的SHAP图表</li>
+<li>切换到&quot;Versicolor&quot;，图表自动刷新（v5.3.0新功能）</li>
+<li>对比不同类别的特征重要性差异</li>
+</ul>
+<p><strong>步骤9：导出结果</strong></p>
+<ul>
+<li>为每个类别导出SHAP图表</li>
+<li>导出评估报告</li>
+</ul>
+<h4 id="%E5%9C%BA%E6%99%AF3%E5%9B%9E%E5%BD%92%E9%97%AE%E9%A2%98---%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B">场景3：回归问题 - 房价预测</h4>
+<p><strong>步骤1-4</strong>：同场景1（选择房价作为目标变量）</p>
+<p><strong>步骤5：数据预处理</strong></p>
+<ul>
+<li>设置训练集比例为80%（回归问题通常需要更多训练数据）</li>
+<li>选择特征缩放方法（如标准化）</li>
+<li>进行特征选择（如果特征过多）</li>
+</ul>
+<p><strong>步骤6：训练模型</strong></p>
+<ul>
+<li>选择回归算法（如RandomForest、XGBoost、GradientBoosting）</li>
+<li>训练模型并评估（关注R²、RMSE等指标）</li>
+</ul>
+<p><strong>步骤7-10</strong>：同场景1</p>
+<hr>
+<h2 id="%E2%9D%93-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94">❓ 常见问题解答</h2>
+<h3 id="q1-%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5%E6%80%8E%E4%B9%88%E5%8A%9E">Q1: 程序启动失败怎么办？</h3>
+<p><strong>A</strong>: 检查以下几点：</p>
+<ul>
+<li>确保操作系统为Windows 10/11（64位）</li>
+<li>检查是否有足够的系统权限</li>
+<li>查看错误提示信息，根据提示解决问题</li>
+<li>如果使用Python版本，确保已安装所有依赖包</li>
+</ul>
+<h3 id="q2-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%A4%B1%E8%B4%A5%E6%80%8E%E4%B9%88%E5%8A%9E">Q2: 数据加载失败怎么办？</h3>
+<p><strong>A</strong>: 可能的原因和解决方法：</p>
+<ul>
+<li><strong>编码问题</strong>：CSV文件建议使用UTF-8编码</li>
+<li><strong>格式问题</strong>：确保第一行为列名，数据格式正确</li>
+<li><strong>文件损坏</strong>：尝试用Excel打开文件检查</li>
+<li><strong>文件过大</strong>：如果文件过大，考虑先进行数据采样</li>
+</ul>
+<h3 id="q3-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%BE%88%E6%85%A2%E6%80%8E%E4%B9%88%E5%8A%9E">Q3: 模型训练很慢怎么办？</h3>
+<p><strong>A</strong>: 优化建议：</p>
+<ul>
+<li>减少特征数量（使用特征选择）</li>
+<li>减少训练样本数量（调整训练集比例）</li>
+<li>选择计算速度快的算法（如树模型）</li>
+<li>关闭参数优化（使用默认参数或自定义参数）</li>
+<li>减少交叉验证折数</li>
+</ul>
+<h3 id="q4-shap%E5%80%BC%E8%AE%A1%E7%AE%97%E5%BE%88%E6%85%A2%E6%80%8E%E4%B9%88%E5%8A%9E">Q4: SHAP值计算很慢怎么办？</h3>
+<p><strong>A</strong>: 优化建议：</p>
+<ul>
+<li><strong>树模型</strong>：使用TreeExplainer，可以100%样本</li>
+<li><strong>线性模型</strong>：使用LinearExplainer，可以50-100%样本</li>
+<li><strong>其他模型</strong>：减少样本比例（10-30%）</li>
+<li>使用更少的特征</li>
+<li>关闭交互值计算（如果不需要）</li>
+</ul>
+<h3 id="q5-%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%9C%80%E4%BD%B3%E7%9A%84shap%E6%A0%B7%E6%9C%AC%E6%AF%94%E4%BE%8B">Q5: 如何选择最佳的SHAP样本比例？</h3>
+<p><strong>A</strong>: 建议：</p>
+<ul>
+<li><strong>树模型</strong>（RandomForest、XGBoost等）：100%（v5.3.0支持从全部样本选择）</li>
+<li><strong>线性模型</strong>：50-100%</li>
+<li><strong>SVM、KNN等</strong>：10-50%</li>
+<li><strong>神经网络</strong>：10-30%</li>
+</ul>
+<p><strong>原则</strong>：在计算时间和准确性之间平衡，样本越多越准确但越慢。</p>
+<p><strong>v5.3.0改进</strong>：现在可以从全部数据中选择样本，而不仅限于测试集，对于小数据集可以使用全部数据进行更全面的分析。</p>
+<h3 id="q6-%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90">Q6: 多分类问题如何分析？</h3>
+<p><strong>A</strong>: 程序完全支持多分类：</p>
+<ul>
+<li>自动识别类别数量</li>
+<li>可以在下拉菜单中选择要分析的类别</li>
+<li><strong>v5.3.0改进</strong>：切换类别时，SHAP图表会自动刷新，无需手动操作</li>
+<li>SHAP值会为每个类别单独计算</li>
+</ul>
+<h3 id="q7-%E5%AF%BC%E5%87%BA%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%88%86%E8%BE%A8%E7%8E%87%E5%A4%9F%E9%AB%98%E5%90%97">Q7: 导出的图表分辨率够高吗？</h3>
+<p><strong>A</strong>: v5.3.0支持多种格式和分辨率：</p>
+<ul>
+<li><strong>PNG</strong>：位图格式，支持150/300/600 DPI，适合演示</li>
+<li><strong>PDF</strong>：矢量格式，无限放大不失真，适合打印</li>
+<li><strong>SVG</strong>：矢量格式，适合网页展示和编辑</li>
+<li><strong>EPS</strong>：矢量格式，适合学术论文</li>
+<li><strong>TIFF</strong>：高质量位图，支持600 DPI，适合出版</li>
+</ul>
+<p><strong>建议</strong>：</p>
+<ul>
+<li>报告使用PDF或SVG</li>
+<li>演示使用PNG（300 DPI）</li>
+<li>网页使用SVG</li>
+<li>论文使用EPS或SVG</li>
+<li>出版使用TIFF（600 DPI）</li>
+</ul>
+<h3 id="q8-%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E5%80%BC">Q8: 如何处理缺失值？</h3>
+<p><strong>A</strong>: 程序会自动处理：</p>
+<ul>
+<li>数值型特征：使用均值填充</li>
+<li>分类型特征：使用众数填充</li>
+<li>缺失值过多：会给出警告建议</li>
+</ul>
+<p><strong>建议</strong>：在加载数据前，尽量手动处理缺失值。</p>
+<h3 id="q9-%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E5%90%8E%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D">Q9: 特征选择后如何恢复？</h3>
+<p><strong>A</strong>: 如果应用了特征选择：</p>
+<ul>
+<li>可以重新进行数据预处理，不选择特征选择方法</li>
+<li>或者重新加载数据，重新开始</li>
+</ul>
+<p><strong>注意</strong>：特征选择是不可逆的，建议先备份原始数据。</p>
+<h3 id="q10-%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%97%B6%E5%88%86%E6%9E%90%E5%A4%9A%E4%B8%AA%E6%A8%A1%E5%9E%8B%E5%90%97">Q10: 可以同时分析多个模型吗？</h3>
+<p><strong>A</strong>: 可以：</p>
+<ul>
+<li>可以训练多个模型并对比性能</li>
+<li>但SHAP分析一次只能分析一个模型</li>
+<li>需要切换模型并重新计算SHAP值</li>
+</ul>
+<h3 id="q11-%E9%A2%84%E6%B5%8B%E6%96%B0%E6%95%B0%E6%8D%AE%E6%97%B6%E7%89%B9%E5%BE%81%E4%B8%8D%E5%8C%B9%E9%85%8D%E6%80%8E%E4%B9%88%E5%8A%9E">Q11: 预测新数据时特征不匹配怎么办？</h3>
+<p><strong>A</strong>: 确保：</p>
+<ul>
+<li>新数据包含训练时的所有特征</li>
+<li>特征名称完全一致（区分大小写）</li>
+<li>特征顺序可以不同（程序会自动匹配）</li>
+<li>如果缺少特征，需要先补充数据</li>
+</ul>
+<h3 id="q12-%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3shap%E5%80%BC">Q12: 如何理解SHAP值？</h3>
+<p><strong>A</strong>: SHAP值解释：</p>
+<ul>
+<li><strong>正值</strong>：该特征值使预测结果增加</li>
+<li><strong>负值</strong>：该特征值使预测结果减少</li>
+<li><strong>绝对值大小</strong>：表示影响程度</li>
+<li><strong>所有SHAP值之和</strong>：等于预测值与基准值的差</li>
+</ul>
+<h3 id="q13-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E2%AD%90-v530%E6%96%B0%E5%8A%9F%E8%83%BD">Q13: 自定义模型参数如何使用？⭐ v5.3.0新功能</h3>
+<p><strong>A</strong>: 使用步骤：</p>
+<ol>
+<li>在&quot;步骤5.5: 自定义模型参数&quot;区域选择算法</li>
+<li>点击&quot;📋 加载示例&quot;加载该算法的示例参数</li>
+<li>根据需要修改JSON格式的参数</li>
+<li>点击&quot;💾 保存参数&quot;保存</li>
+<li>训练模型时，自定义参数会自动应用</li>
+</ol>
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li>参数必须使用有效的JSON格式</li>
+<li>数值参数直接写数字，布尔参数写<code>true</code>/<code>false</code></li>
+<li>自定义参数会覆盖默认参数，但不影响参数优化</li>
+<li>如果启用参数优化，优化会在自定义参数的基础上进行</li>
+</ul>
+<h3 id="q14-%E4%BE%9D%E8%B5%96%E5%9B%BE%E7%9A%84%E7%BB%9F%E8%AE%A1%E4%BF%A1%E6%81%AF%E5%A6%82%E4%BD%95%E8%A7%A3%E8%AF%BB%E2%AD%90-v530%E6%96%B0%E5%8A%9F%E8%83%BD">Q14: 依赖图的统计信息如何解读？⭐ v5.3.0新功能</h3>
+<p><strong>A</strong>: 统计信息说明：</p>
+<ul>
+<li><strong>特征均值±标准差</strong>：了解特征的分布范围</li>
+<li><strong>中位数</strong>：特征的中间值，不受异常值影响</li>
+<li><strong>SHAP均值</strong>：该特征对模型输出的平均影响程度</li>
+<li><strong>相关性</strong>：特征值与SHAP值的相关系数
+<ul>
+<li>接近±1：强相关</li>
+<li>接近0：弱相关</li>
+</ul>
+</li>
+<li><strong>样本数</strong>：参与计算的样本数量</li>
+<li><strong>95%置信区间</strong>：如果启用置信区间，会显示置信区间范围</li>
+</ul>
+<h3 id="q15-%E8%AF%84%E4%BC%B0%E5%9B%BE%E8%A1%A8%E7%9A%84%E9%AB%98%E7%BA%A7%E4%BF%9D%E5%AD%98%E9%80%89%E9%A1%B9%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E2%AD%90-v530%E6%96%B0%E5%8A%9F%E8%83%BD">Q15: 评估图表的高级保存选项如何使用？⭐ v5.3.0新功能</h3>
+<p><strong>A</strong>: 使用步骤：</p>
+<ol>
+<li>训练模型并生成评估图表</li>
+<li>点击&quot;📊 保存图表 ▼&quot; → &quot;🎨 高级选项...&quot;</li>
+<li>在对话框中设置：
+<ul>
+<li>文件格式（PNG/SVG/PDF/EPS/TIFF）</li>
+<li>DPI分辨率（150/300/600，仅PNG/TIFF有效）</li>
+<li>透明背景（PNG/TIFF支持）</li>
+<li>自动裁剪边距（推荐）</li>
+</ul>
+</li>
+<li>点击&quot;💾 保存&quot;</li>
+</ol>
+<p><strong>格式选择建议</strong>：</p>
+<ul>
+<li>论文：SVG或EPS，300 DPI</li>
+<li>演示：PNG，300 DPI，透明背景</li>
+<li>打印：PDF或TIFF，300-600 DPI</li>
+</ul>
+<h3 id="q16-%E7%A8%8B%E5%BA%8F%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E5%BE%88%E5%A4%A7%E6%80%8E%E4%B9%88%E5%8A%9E">Q16: 程序占用内存很大怎么办？</h3>
+<p><strong>A</strong>: 优化建议：</p>
+<ul>
+<li>减少数据样本数量</li>
+<li>减少特征数量</li>
+<li>减少SHAP样本比例</li>
+<li>关闭不需要的可视化</li>
+<li>定期清理内存（关闭并重启程序）</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%8E-%E9%99%84%E5%BD%95">📎 附录</h2>
+<h3 id="a-%E6%94%AF%E6%8C%81%E7%9A%84%E7%AE%97%E6%B3%95%E5%AE%8C%E6%95%B4%E5%88%97%E8%A1%A8">A. 支持的算法完整列表</h3>
+<h4 id="%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95">分类算法</h4>
+<ol>
+<li>RandomForest（随机森林）</li>
+<li>XGBoost（极端梯度提升）</li>
+<li>LightGBM（轻量级梯度提升）</li>
+<li>CatBoost（类别提升）</li>
+<li>GradientBoosting（梯度提升）</li>
+<li>HistGradientBoosting（直方图梯度提升）</li>
+<li>AdaBoost（自适应提升）</li>
+<li>ExtraTrees（极端随机树）</li>
+<li>DecisionTree（决策树）</li>
+<li>Bagging（装袋法）</li>
+<li>LogisticRegression（逻辑回归）</li>
+<li>Ridge（岭回归）</li>
+<li>RidgeCV（岭回归-交叉验证）</li>
+<li>Lasso（Lasso回归）</li>
+<li>LassoCV（Lasso回归-交叉验证）</li>
+<li>ElasticNet（弹性网络）</li>
+<li>ElasticNetCV（弹性网络-交叉验证）</li>
+<li>SGDClassifier（随机梯度下降分类器）</li>
+<li>PassiveAggressiveClassifier（被动攻击分类器）</li>
+<li>Perceptron（感知机）</li>
+<li>SVM（支持向量机）</li>
+<li>KNN（K近邻）</li>
+<li>MLP（多层感知机）</li>
+<li>NaiveBayes（朴素贝叶斯）</li>
+<li>LDA（线性判别分析）</li>
+<li>QDA（二次判别分析）</li>
+<li>GaussianProcess（高斯过程）</li>
+</ol>
+<h4 id="%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95">回归算法</h4>
+<ol>
+<li>RandomForest（随机森林）</li>
+<li>XGBoost（极端梯度提升）</li>
+<li>LightGBM（轻量级梯度提升）</li>
+<li>CatBoost（类别提升）</li>
+<li>GradientBoosting（梯度提升）</li>
+<li>HistGradientBoosting（直方图梯度提升）</li>
+<li>AdaBoost（自适应提升）</li>
+<li>ExtraTrees（极端随机树）</li>
+<li>DecisionTree（决策树）</li>
+<li>Bagging（装袋法）</li>
+<li>LinearRegression（线性回归）</li>
+<li>Ridge（岭回归）</li>
+<li>RidgeCV（岭回归-交叉验证）</li>
+<li>Lasso（Lasso回归）</li>
+<li>LassoCV（Lasso回归-交叉验证）</li>
+<li>ElasticNet（弹性网络）</li>
+<li>ElasticNetCV（弹性网络-交叉验证）</li>
+<li>SGDRegressor（随机梯度下降回归器）</li>
+<li>PassiveAggressiveRegressor（被动攻击回归器）</li>
+<li>HuberRegressor（Huber回归）</li>
+<li>RANSACRegressor（RANSAC回归）</li>
+<li>TheilSenRegressor（Theil-Sen回归）</li>
+<li>SVR（支持向量回归）</li>
+<li>KNN（K近邻）</li>
+<li>MLP（多层感知机）</li>
+<li>GaussianProcess（高斯过程）</li>
+</ol>
+<h3 id="b-%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AF%B4%E6%98%8E">B. 快捷键说明</h3>
+<p>程序主要使用鼠标操作，暂不支持快捷键。</p>
+<h3 id="c-%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E">C. 文件结构说明</h3>
+<h4 id="%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84">输出文件结构</h4>
+<pre class="hljs"><code><div>shap_results/
+├── models/                    # 模型文件
+│   ├── RandomForest_20240101_120000/
+│   │   ├── model.pkl         # 模型文件
+│   │   ├── config.json       # 模型配置
+│   │   └── importance.xlsx   # 特征重要性
+│   └── ...
+├── shap_plots/                # SHAP图表
+│   ├── summary_plot.png
+│   ├── dependence_plot_feature1.png
+│   └── ...
+├── evaluation/                # 评估报告
+│   ├── evaluation_report.pdf
+│   ├── evaluation_RandomForest_20240101_120000.png
+│   ├── evaluation_RandomForest_20240101_120000.svg
+│   └── ...
+├── predictions/               # 预测结果
+│   └── predictions_20240101_120000.xlsx
+└── shap_values/               # SHAP值数据
+    └── shap_values_20240101_120000.xlsx
+</div></code></pre>
+<h3 id="d-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE">D. 性能优化建议</h3>
+<ol>
+<li>
+<p><strong>数据预处理</strong></p>
+<ul>
+<li>提前清理数据，减少缺失值</li>
+<li>移除无关特征</li>
+<li>对大数据集进行采样</li>
+</ul>
+</li>
+<li>
+<p><strong>模型选择</strong></p>
+<ul>
+<li>优先选择树模型（计算SHAP值快）</li>
+<li>避免使用计算慢的算法（如SVM、KNN）</li>
+</ul>
+</li>
+<li>
+<p><strong>SHAP计算</strong></p>
+<ul>
+<li>树模型使用100%样本（v5.3.0支持从全部样本选择）</li>
+<li>其他模型使用10-50%样本</li>
+<li>关闭不需要的交互值计算</li>
+</ul>
+</li>
+<li>
+<p><strong>内存管理</strong></p>
+<ul>
+<li>定期清理不需要的数据</li>
+<li>关闭不需要的可视化窗口</li>
+<li>分批处理大数据集</li>
+</ul>
+</li>
+</ol>
+<h3 id="e-%E9%94%99%E8%AF%AF%E4%BB%A3%E7%A0%81%E8%AF%B4%E6%98%8E">E. 错误代码说明</h3>
+<p>如果遇到错误，程序会显示详细的错误信息。常见错误：</p>
+<ul>
+<li><strong>&quot;请先训练模型&quot;</strong>：需要先训练模型才能进行SHAP分析</li>
+<li><strong>&quot;请选择模型&quot;</strong>：需要在模型选择下拉菜单中选择模型</li>
+<li><strong>&quot;数据加载失败&quot;</strong>：检查数据文件格式和编码</li>
+<li><strong>&quot;特征不匹配&quot;</strong>：预测数据需要包含训练时的所有特征</li>
+<li><strong>&quot;SHAP计算失败&quot;</strong>：可能是模型类型不支持或样本数量不足</li>
+<li><strong>&quot;JSON格式错误&quot;</strong>：自定义参数必须使用有效的JSON格式</li>
+</ul>
+<h3 id="f-%E8%81%94%E7%B3%BB%E4%B8%8E%E6%94%AF%E6%8C%81">F. 联系与支持</h3>
+<p>如有问题或建议，请通过以下方式联系：</p>
+<ul>
+<li><strong>开发者</strong>：@3S&amp;ML</li>
+<li><strong>版本</strong>：v5.3.0</li>
+<li><strong>更新日期</strong>：2024年</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%9D-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97">📝 更新日志</h2>
+<h3 id="v530%E5%BD%93%E5%89%8D%E7%89%88%E6%9C%AC">v5.3.0（当前版本）</h3>
+<p><strong>新增功能</strong>：</p>
+<ul>
+<li>✨ 依赖图统计信息显示功能</li>
+<li>✨ 评估图表多格式保存（PNG/SVG/PDF/EPS/TIFF）</li>
+<li>✨ 评估图表高级保存选项（DPI、透明背景等）</li>
+<li>✨ 自定义模型参数功能（步骤5.5）</li>
+<li>✨ 加载示例参数功能（30+算法）</li>
+<li>✨ SHAP样本选择优化（支持从全部样本选择）</li>
+<li>✨ 类别切换自动刷新功能</li>
+</ul>
+<p><strong>功能改进</strong>：</p>
+<ul>
+<li>🔄 界面布局优化（左右窗口比例3:7）</li>
+<li>🔄 依赖图统计信息显示优化</li>
+<li>🔄 多分类问题处理改进</li>
+</ul>
+<p><strong>问题修复</strong>：</p>
+<ul>
+<li>🐛 修复多个已知问题</li>
+</ul>
+<h3 id="v522">v5.2.2</h3>
+<ul>
+<li>✨ 改进的依赖图和交互图可视化</li>
+<li>✨ 支持置信区间显示</li>
+<li>✨ 改进的多分类问题处理</li>
+<li>✨ 优化的内存使用</li>
+<li>🐛 修复多个已知问题</li>
+</ul>
+<h3 id="v521">v5.2.1</h3>
+<ul>
+<li>✨ 新增交互依赖图功能</li>
+<li>✨ 支持拟合线和置信区间</li>
+<li>✨ 改进的用户界面</li>
+</ul>
+<h3 id="v520">v5.2.0</h3>
+<ul>
+<li>✨ 新增预测功能模块</li>
+<li>✨ 改进的模型导出功能</li>
+<li>✨ 优化的SHAP值计算</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%8E%AF-%E6%80%BB%E7%BB%93">🎯 总结</h2>
+<p>SHAP分析器 v5.3.0 是一款功能强大、易于使用的机器学习模型解释工具。通过本手册，您应该能够：</p>
+<ul>
+<li>✅ 理解程序的基本功能和使用方法</li>
+<li>✅ 完成从数据加载到结果导出的完整流程</li>
+<li>✅ 使用v5.3.0的新功能（统计信息显示、多格式保存、自定义参数等）</li>
+<li>✅ 解决常见问题</li>
+<li>✅ 优化使用体验</li>
+</ul>
+<p><strong>v5.3.0版本重点</strong>：</p>
+<ul>
+<li>📊 依赖图统计信息显示，让分析更专业</li>
+<li>💾 多格式图表保存，满足不同场景需求</li>
+<li>⚙️ 自定义模型参数，快速设置推荐配置</li>
+<li>🔄 类别切换自动刷新，提升多分类分析效率</li>
+</ul>
+<p><strong>祝您使用愉快！如有任何问题，请参考本手册或联系技术支持。</strong></p>
+<hr>
+<p><em>SHAP分析器 v5.3.0 - 让模型解释变得简单！</em></p>
+
+</body>
+</html>
