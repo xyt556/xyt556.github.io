@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>v5.5.5_vs_v5.5.3_功能更新_公众号发布.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="shap%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7-v555-%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0">SHAP分析工具 v5.5.5 功能更新</h1>
+<h2 id="%E7%9B%B8%E5%AF%B9%E4%BA%8E-v553-%E7%9A%84%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0">相对于 v5.5.3 的重大更新</h2>
+<hr>
+<h2 id="%E4%B8%80%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87%E5%A2%9E%E5%BC%BAv555-%E6%96%B0%E5%A2%9E">一、模型评估指标增强（v5.5.5 新增）</h2>
+<h3 id="1-roc-%E6%9B%B2%E7%BA%BFauc-95-%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4">1. ROC 曲线：AUC 95% 置信区间</h3>
+<ul>
+<li>所有 ROC 曲线图例中增加 <strong>AUC 95% 置信区间</strong> 显示</li>
+<li>使用 Bootstrap 方法（2000 次重采样）计算</li>
+<li>覆盖场景：多模型对比、训练集对比、外部验证、单模型评估</li>
+<li>图例示例：<code>AUC = 0.850 (95% CI: 0.782-0.918)</code></li>
+</ul>
+<h3 id="2-%E6%A0%A1%E5%87%86%E6%9B%B2%E7%BA%BFbrier-%E8%AF%84%E5%88%86-95-%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4">2. 校准曲线：Brier 评分 95% 置信区间</h3>
+<ul>
+<li>校准曲线图例中增加 <strong>Brier 评分及 95% 置信区间</strong></li>
+<li>使用 Bootstrap 方法（2000 次重采样）计算</li>
+<li>覆盖场景：单模型校准、多模型校准对比、训练集/外部验证校准</li>
+<li>图例示例：<code>ModelName (Brier=0.1234, 95% CI: 0.0987-0.1481)</code></li>
+</ul>
+<h3 id="3-roc-%E6%9B%B2%E7%BA%BF%E6%98%BE%E7%A4%BA%E4%BC%98%E5%8C%96">3. ROC 曲线显示优化</h3>
+<ul>
+<li>ROC 曲线坐标轴外扩（xlim/ylim 从 [-0.02, 1.02] 起），避免边线与曲线重叠，图表更清晰</li>
+</ul>
+<hr>
+<h2 id="%E4%BA%8Cshap-%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A2%9E%E5%BC%BAv555-%E6%96%B0%E5%A2%9E">二、SHAP 可视化增强（v5.5.5 新增）</h2>
+<h3 id="4-%E6%9D%A1%E5%BD%A2%E5%9B%BE-shap-%E5%80%BC%E6%A0%87%E6%B3%A8">4. 条形图 SHAP 值标注</h3>
+<ul>
+<li>在 SHAP 条形图（Mean |SHAP value|）上直接标注每个特征的具体数值</li>
+<li>数值显示在条形末端右侧，保留 4 位小数</li>
+<li>便于在论文或报告中直接引用具体 SHAP 值</li>
+</ul>
+<hr>
+<h2 id="%E4%B8%89v554-%E5%8A%9F%E8%83%BD%E5%BB%B6%E7%BB%AD">三、v5.5.4 功能延续</h2>
+<h3 id="5-%E4%BA%A4%E4%BA%92%E5%80%BC%E5%AF%BC%E5%87%BA">5. 交互值导出</h3>
+<ul>
+<li>新增 SHAP 交互值导出按钮（Excel/CSV），位于结果保存区域</li>
+<li>仅树模型（随机森林、XGBoost、LightGBM 等）可用</li>
+<li>Excel 导出包含：交互强度矩阵、交互均值矩阵、Top 交互对、元数据</li>
+<li>CSV 导出包含：Top 交互对（特征A、特征B、平均绝对交互值、平均交互值）</li>
+</ul>
+<h3 id="6-%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%B8%8E%E5%85%BC%E5%AE%B9%E6%80%A7%E4%BF%AE%E5%A4%8D">6. 稳定性与兼容性修复</h3>
+<ul>
+<li>修复部分模型无 AUC 时导致的 KeyError 等问题</li>
+<li>训练集模型对比中，AUC 在“任意模型可用”时展示，缺失模型显示为空白</li>
+<li>训练集总览与单指标图支持指标并集，缺失值不标注并给出无数据提示</li>
+</ul>
+<hr>
+<h2 id="%E5%9B%9B%E7%89%88%E6%9C%AC%E5%AF%B9%E6%AF%94%E4%B8%80%E8%A7%88">四、版本对比一览</h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>v5.5.3</th>
+<th>v5.5.5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROC 曲线 AUC 95% 置信区间</td>
+<td>❌</td>
+<td>✅ <strong>新增</strong></td>
+</tr>
+<tr>
+<td>校准曲线 Brier 95% 置信区间</td>
+<td>❌</td>
+<td>✅ <strong>新增</strong></td>
+</tr>
+<tr>
+<td>ROC 曲线显示优化</td>
+<td>❌</td>
+<td>✅ <strong>新增</strong></td>
+</tr>
+<tr>
+<td>条形图 SHAP 值标注</td>
+<td>❌</td>
+<td>✅ <strong>新增</strong></td>
+</tr>
+<tr>
+<td>交互值导出</td>
+<td>❌</td>
+<td>✅ <strong>v5.5.4 延续</strong></td>
+</tr>
+<tr>
+<td>部分模型 AUC 错误修复</td>
+<td>❌</td>
+<td>✅ <strong>v5.5.4 延续</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%E4%BA%94%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">五、适用场景</h2>
+<h3 id="%E7%A7%91%E7%A0%94%E4%B8%8E%E8%AE%BA%E6%96%87">科研与论文</h3>
+<ul>
+<li>使用 AUC 95% CI、Brier 95% CI 满足期刊对置信区间报告的要求</li>
+<li>条形图 SHAP 值标注便于在文中引用具体数值</li>
+<li>交互值导出便于深入分析与写作</li>
+</ul>
+<h3 id="%E5%8C%BB%E5%AD%A6%E4%B8%8E%E4%B8%B4%E5%BA%8A">医学与临床</h3>
+<ul>
+<li>Brier 评分及其置信区间有助于评估概率校准质量</li>
+<li>AUC 置信区间用于模型间差异的统计推断</li>
+</ul>
+<h3 id="%E4%B8%9A%E5%8A%A1%E4%B8%8E%E5%B7%A5%E7%A8%8B">业务与工程</h3>
+<ul>
+<li>更稳定的界面与错误处理，减少异常中断</li>
+<li>图表信息更丰富，便于汇报与归档</li>
+</ul>
+<hr>
+<h2 id="%E5%85%AD%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF">六、版本信息</h2>
+<ul>
+<li><strong>版本号</strong>：v5.5.5</li>
+<li><strong>更新日期</strong>：2026 年 2 月</li>
+<li><strong>兼容性</strong>：Windows 10/11</li>
+<li><strong>Python 版本</strong>：3.7+</li>
+</ul>
+<hr>
+<h2 id="%E4%B8%83%E5%8D%87%E7%BA%A7%E8%AF%B4%E6%98%8E">七、升级说明</h2>
+<p><strong>从 v5.5.3 升级到 v5.5.5</strong></p>
+<ul>
+<li>✅ 完全兼容：无需修改现有代码或配置</li>
+<li>✅ 数据兼容：支持 v5.5.3 导出的数据文件</li>
+<li>✅ 模型兼容：可加载 v5.5.3 训练的模型</li>
+<li>⚠️ 建议：首次使用建议备份现有数据和配置</li>
+</ul>
+<hr>
+<p><strong>让机器学习分析更专业、更科学！</strong></p>
+<p><em>SHAP分析工具 v5.5.5 - @3S&amp;ML</em></p>
+
+</body>
+</html>

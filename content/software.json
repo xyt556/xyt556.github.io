@@ -1,10 +1,10 @@
 {
   "items": [
     {
-      "name": "示例软件 A",
-      "version": "1.0.0",
-      "description": "这是一个示例条目。在后台编辑并保存后，此处会自动更新。",
-      "downloadUrl": "https://github.com/xyt556",
+      "name": "机器学习与SHAP分析工具",
+      "version": "5.5.6",
+      "description": "一款集成化的机器学习模型训练、评估与 SHAP 可解释性分析工具。采用图形界面，无需编程即可完成从数据导入到模型解释的流程。",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
       "downloadLabel": "下载 / 项目页",
       "extraUrl": "",
       "extraLabel": ""
