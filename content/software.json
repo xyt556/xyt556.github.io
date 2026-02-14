@@ -8,6 +8,15 @@
       "downloadLabel": "下载 / 项目页",
       "extraUrl": "",
       "extraLabel": ""
+    },
+    {
+      "name": "示例软件 B",
+      "version": "1.0.0",
+      "description": "这是一个示例条目。在后台编辑并保存后，此处会自动更新。",
+      "downloadUrl": "https://github.com/xyt556",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
     }
   ]
 }
