@@ -1,0 +1,263 @@
+/* 软件展示站 - 主样式 */
+:root {
+  --bg: #0f0f12;
+  --bg-card: #18181c;
+  --bg-card-hover: #1e1e24;
+  --text: #e4e4e7;
+  --text-muted: #a1a1aa;
+  --accent: #22c55e;
+  --accent-dim: #16a34a;
+  --border: #27272a;
+  --radius: 12px;
+  --font-sans: "Noto Sans SC", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* 导航 */
+.header {
+  background: linear-gradient(180deg, rgba(15,15,18,0.95) 0%, rgba(15,15,18,0.6) 100%);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text);
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
+/* 主视觉区 */
+.hero {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 3rem;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-desc {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin: 0;
+  max-width: 36em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 主内容区 */
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.section {
+  padding-top: 2.5rem;
+}
+
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem;
+  color: var(--text);
+}
+
+/* 软件卡片网格 */
+.software-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.software-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.software-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-dim);
+}
+
+.software-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.software-card .version {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.software-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+  line-height: 1.5;
+}
+
+.software-card .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.software-card .links a {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.software-card .btn-primary {
+  background: var(--accent);
+  color: #0f0f12;
+}
+
+.software-card .btn-primary:hover {
+  background: var(--accent-dim);
+  color: #0f0f12;
+}
+
+.software-card .btn-secondary {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.software-card .btn-secondary:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.loading {
+  color: var(--text-muted);
+  grid-column: 1 / -1;
+}
+
+/* 关于区块 */
+.section-about .about-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.section-about .about-content p {
+  margin: 0 0 0.75rem;
+}
+
+.section-about .about-content p:last-child {
+  margin-bottom: 0;
+}
+
+.section-about .about-content a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.section-about .about-content a:hover {
+  text-decoration: underline;
+}
+
+/* 页脚 */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.footer p + p {
+  margin-top: 0.5rem;
+}
+
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* 后台入口提示（仅在不影响首屏时显示） */
+.admin-hint {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.8rem;
+}
+
+.admin-hint a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.admin-hint a:hover {
+  color: var(--accent);
+}

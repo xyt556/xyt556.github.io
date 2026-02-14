@@ -1,0 +1,10 @@
+{
+  "siteName": "xyt556 软件站",
+  "siteTitle": "软件展示 | xyt556",
+  "heroTitle": "欢迎来到我的软件展示站",
+  "heroDesc": "这里汇集了我开发与维护的实用工具，可直接下载使用。",
+  "sectionSoftwareTitle": "软件列表",
+  "sectionAboutTitle": "关于本站",
+  "aboutHtml": "<p>本站用于展示个人开发的软件与工具，通过 <a href=\"/admin/\">后台</a> 可随时更新内容。</p>",
+  "footerText": "© 2025 xyt556 · 基于 GitHub Pages 与 Decap CMS 构建"
+}

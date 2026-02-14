@@ -1,0 +1,45 @@
+# Decap CMS 配置 - 请将 repo 改为你的 GitHub 用户名/仓库名
+backend:
+  name: github
+  repo: xyt556/xyt556.github.io
+  branch: main
+
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://xyt556.github.io
+display_url: https://xyt556.github.io
+logo_url: https://xyt556.github.io/
+
+locale: "zh"
+
+collections:
+  - name: site
+    label: 站点设置
+    file: content/site.json
+    fields:
+      - { label: 站点名称, name: siteName, widget: string }
+      - { label: 页面标题, name: siteTitle, widget: string }
+      - { label: 主标题, name: heroTitle, widget: string }
+      - { label: 主标题下方描述, name: heroDesc, widget: string }
+      - { label: 软件列表区块标题, name: sectionSoftwareTitle, widget: string }
+      - { label: 关于区块标题, name: sectionAboutTitle, widget: string }
+      - { label: 关于区块内容(HTML), name: aboutHtml, widget: text }
+      - { label: 页脚文字, name: footerText, widget: string }
+
+  - name: software
+    label: 软件列表
+    file: content/software.json
+    fields:
+      - label: 软件条目
+        name: items
+        widget: list
+        summary: "{{fields.name}}"
+        fields:
+          - { label: 名称, name: name, widget: string }
+          - { label: 版本号, name: version, widget: string, required: false }
+          - { label: 描述, name: description, widget: text, required: false }
+          - { label: 下载/项目链接, name: downloadUrl, widget: string, required: false }
+          - { label: 下载按钮文字, name: downloadLabel, widget: string, required: false }
+          - { label: 额外链接, name: extraUrl, widget: string, required: false }
+          - { label: 额外按钮文字, name: extraLabel, widget: string, required: false }

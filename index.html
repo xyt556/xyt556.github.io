@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="siteTitle">软件展示 | xyt556</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="#" class="logo" data-content="siteName">xyt556 软件站</a>
+      <a href="#software" class="nav-link">软件列表</a>
+      <a href="#about" class="nav-link">关于</a>
+    </nav>
+    <section class="hero">
+      <h1 class="hero-title" data-content="heroTitle">欢迎来到我的软件展示站</h1>
+      <p class="hero-desc" data-content="heroDesc">这里汇集了我开发与维护的实用工具，可直接下载使用。</p>
+    </section>
+  </header>
+
+  <main class="main">
+    <section id="software" class="section">
+      <h2 class="section-title" data-content="sectionSoftwareTitle">软件列表</h2>
+      <div id="software-list" class="software-grid">
+        <!-- 由 JS 根据 content/software.json 渲染 -->
+        <p class="loading">正在加载软件列表…</p>
+      </div>
+    </section>
+
+    <section id="about" class="section section-about">
+      <h2 class="section-title" data-content="sectionAboutTitle">关于本站</h2>
+      <div class="about-content" data-content-html="aboutHtml">
+        <p>本站用于展示个人开发的软件与工具，通过后台可随时更新内容。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p data-content="footerText">© 2025 xyt556 · 基于 GitHub Pages 与 Decap CMS 构建</p>
+    <p><a href="admin/">进入后台编辑</a></p>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
