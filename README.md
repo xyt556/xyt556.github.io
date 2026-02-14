@@ -36,17 +36,24 @@ python -m http.server 8080
   - **软件列表**：增删改软件条目，填写名称、版本、描述、下载链接等（对应 `content/software.json`）。
 - 点击「保存」后，Decap CMS 会直接向该 GitHub 仓库提交修改，GitHub Pages 会自动重新部署，几分钟内网站内容即可更新。
 
+### 后台「Login with GitHub」显示 Not Found 的说明
+
+Decap CMS 的「用 GitHub 登录」会跳转到 **Netlify** 的认证接口（`api.netlify.com/auth`）。你的站若**只部署在 GitHub Pages**，Netlify 上没有对应站点，就会返回 **Not Found**。
+
+**推荐做法：同一仓库再部署到 Netlify，用 Netlify 的地址进后台**
+
+1. 打开 [Netlify](https://app.netlify.com)，用 GitHub 登录。
+2. 点击 **Add new site → Import an existing project**，选 **GitHub**，授权后选择仓库 **xyt556/xyt556.github.io**。
+3. **Build settings** 保持默认即可（或 Build command 留空、Publish directory 填 `./`），点 **Deploy**。
+4. 部署完成后会得到一个地址，例如 `https://随机名.netlify.app`。
+5. **以后进后台请用 Netlify 的地址**：`https://随机名.netlify.app/admin/`，再点 **Login with GitHub**，即可正常登录。编辑保存后仍会提交到同一 GitHub 仓库，GitHub Pages（`https://xyt556.github.io`）也会自动更新。
+
+首页继续用 `https://xyt556.github.io` 访问即可；只有编辑时用 Netlify 的 `/admin/` 地址。
+
 ### 使用 GitHub 后台的前提
 
-Decap CMS 使用 GitHub 作为后端，需要满足：
-
-1. **仓库为公开仓库**，或你已配置好 GitHub OAuth App（见下）。
-2. 若网站是 **私有仓库**，或希望用「用 GitHub 登录」按钮登录后台，需要先申请一个 **GitHub OAuth App**，并在 Decap 中配置：
-   - 在 GitHub：**Settings → Developer settings → OAuth Apps** 中 New OAuth App。
-   - **Authorization callback URL** 填：`https://api.netlify.com/auth/dialog`（Decap 使用 Netlify 的认证代理）。
-   - 将生成的 **Client ID** 和 **Client Secret** 按 [Decap 文档](https://decapcms.org/docs/github-backend/) 配置到 `admin/config.yml` 的 `backend` 下（或使用环境变量）。
-
-若仓库是公开的，且你直接在该仓库的 Collaborators 里用 GitHub 登录，有时无需 OAuth 即可使用（视 Decap/Netlify 当前策略而定）。遇到登录问题可查阅 [Decap CMS - GitHub Backend](https://decapcms.org/docs/github-backend/)。
+- 仓库需对该 GitHub 账号有**写权限**（本人或 Collaborator）。
+- 若希望**只在 GitHub Pages 域名下**用「Login with GitHub」（不部署 Netlify），需自建或使用第三方 OAuth 代理，见 [Decap 外部 OAuth 客户端](https://decapcms.org/docs/external-oauth-clients/)。
 
 ### 修改后台使用的仓库/分支
 
