@@ -11,8 +11,6 @@ site_url: https://xyt556.github.io
 display_url: https://xyt556.github.io
 logo_url: https://xyt556.github.io/
 
-locale: "zh"
-
 collections:
   - name: site
     label: 站点设置

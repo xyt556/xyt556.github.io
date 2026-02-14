@@ -5,23 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>网站后台 | xyt556</title>
   <link href="/admin/config.yml" rel="cms-config-url">
-  <!-- 使用本站自托管脚本，避免 CDN 在国内无法加载 -->
-  <script src="/static/js/decap-cms.js"></script>
+  <style>
+    #admin-fallback { display: none; padding: 2rem; text-align: center; font-family: sans-serif; max-width: 28em; margin: 2rem auto; line-height: 1.6; }
+    #admin-fallback.show { display: block; }
+    #admin-fallback a { color: #22c55e; }
+  </style>
 </head>
 <body>
   <noscript>请启用 JavaScript 以使用后台编辑。</noscript>
-  <div id="cms-loading" style="padding:2rem;text-align:center;font-family:sans-serif;">
-    正在加载后台…
+  <div id="cms-loading" style="padding:2rem;text-align:center;font-family:sans-serif;">正在加载后台…</div>
+  <div id="admin-fallback">
+    <p><strong>后台未能加载</strong></p>
+    <p>请尝试：</p>
+    <ul style="text-align:left;">
+      <li>使用 VPN 或更换网络后 <a href="/admin/">刷新页面</a></li>
+      <li>按 F12 打开开发者工具，在「Console」里查看是否有红色报错，便于排查</li>
+    </ul>
+    <p><a href="/admin/">点击此处重试</a></p>
   </div>
+  <script src="/static/js/decap-cms.js" id="cms-script"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    (function () {
+      var loading = document.getElementById('cms-loading');
+      var fallback = document.getElementById('admin-fallback');
+      var scriptEl = document.getElementById('cms-script');
+
+      function showFallback() {
+        if (loading) loading.style.display = 'none';
+        if (fallback) fallback.classList.add('show');
+      }
+
+      scriptEl.addEventListener('error', function () {
+        showFallback();
+        if (fallback) fallback.insertAdjacentHTML('afterbegin', '<p>脚本加载失败，请检查网络。</p>');
+      });
+
       setTimeout(function () {
-        var el = document.getElementById('cms-loading');
-        if (el && !document.querySelector('[class^="nc-"]')) {
-          el.innerHTML = '若长时间空白，请检查网络或尝试使用 VPN 后刷新。';
+        var hasCms = document.getElementById('nc-root') || document.querySelector('[class^="nc-"]') || document.querySelector('.netlify-login');
+        if (!hasCms && loading && loading.offsetParent !== null) {
+          showFallback();
         }
-      }, 8000);
-    });
+      }, 12000);
+    })();
   </script>
 </body>
 </html>
