@@ -10,19 +10,19 @@
       "extraLabel": ""
     },
     {
-      "name": "示例软件 B",
-      "version": "1.0.0",
+      "name": "生存分析机器学习与SHAP解释系统",
+      "version": "1.0.4",
       "description": "这是一个示例条目。在后台编辑并保存后，此处会自动更新。",
-      "downloadUrl": "https://github.com/xyt556",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
       "downloadLabel": "下载 / 项目页",
       "extraUrl": "",
       "extraLabel": ""
     },
     {
-      "name": "示例软件 B",
-      "version": "1.0.0",
+      "name": "双重机器学习",
+      "version": "1.0.4",
       "description": "这是一个示例条目。在后台编辑并保存后，此处会自动更新。",
-      "downloadUrl": "https://github.com/xyt556",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
       "downloadLabel": "下载 / 项目页",
       "extraUrl": "",
       "extraLabel": ""
@@ -31,25 +31,133 @@
       "name": "GeoSHAP Pro",
       "version": "4.4.6",
       "description": "面向地理空间数据分析和模型可解释性的工具，集成机器学习、空间统计与可解释性分析。支持回归与分类，覆盖从数据预处理到模型解释的流程。",
-      "downloadUrl": "https://github.com/xyt556",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
       "downloadLabel": "下载 / 项目页",
       "extraUrl": "",
       "extraLabel": ""
     },
     {
-      "name": "示例软件 B",
+      "name": "GeoShapley_Explorer",
       "version": "1.0.0",
-      "description": "这是一个示例条目。在后台编辑并保存后，此处会自动更新。",
-      "downloadUrl": "https://github.com/xyt556",
+      "description": "一款面向空间数据的机器学习可解释性分析桌面应用。支持 CSV 数据上传或使用示例数据，可灵活配置目标变量、特征列和空间坐标列；提供 AutoML（FLAML）、随机森林和神经网络（MLP）三种模型，适用于回归与分类任务",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
       "downloadLabel": "下载 / 项目页",
       "extraUrl": "",
       "extraLabel": ""
     },
     {
-      "name": "示例软件 B",
+      "name": "GeoShapley_Studio",
       "version": "1.0.0",
-      "description": "这是一个示例条目。在后台编辑并保存后，此处会自动更新。",
-      "downloadUrl": "https://github.com/xyt556",
+      "description": "一款基于图形界面的空间可解释性分析工具，主要用于地理空间数据的机器学习分析与解释。",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "Geographical Detector Pro",
+      "version": "6.1.1",
+      "description": "一款地理探测器分析工具，基于地理探测器理论，提供因子探测、交互作用探测、风险探测和生态探测四大核心功能。",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "多元分层地理探测器",
+      "version": "1.0.0",
+      "description": "一款面向空间数据的机器学习可解释性分析桌面应用。支持 CSV 数据上传或使用示例数据，可灵活配置目标变量、特征列和空间坐标列；提供 AutoML（FLAML）、随机森林和神经网络（MLP）三种模型，适用于回归与分类任务",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "多尺度数据准备工具",
+      "version": "1.0.0",
+      "description": "一款基于图形界面的空间可解释性分析工具，主要用于地理空间数据的机器学习分析与解释。",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "Geographical Detector Pro",
+      "version": "6.1.1",
+      "description": "一款地理探测器分析工具，基于地理探测器理论，提供因子探测、交互作用探测、风险探测和生态探测四大核心功能。",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "多元分层地理探测器",
+      "version": "1.0.0",
+      "description": "一款面向空间数据的机器学习可解释性分析桌面应用。支持 CSV 数据上传或使用示例数据，可灵活配置目标变量、特征列和空间坐标列；提供 AutoML（FLAML）、随机森林和神经网络（MLP）三种模型，适用于回归与分类任务",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "多尺度数据准备工具",
+      "version": "1.0.0",
+      "description": "一款基于图形界面的空间可解释性分析工具，主要用于地理空间数据的机器学习分析与解释。",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "Geographical Detector Pro",
+      "version": "6.1.1",
+      "description": "一款地理探测器分析工具，基于地理探测器理论，提供因子探测、交互作用探测、风险探测和生态探测四大核心功能。",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "多元分层地理探测器",
+      "version": "1.0.0",
+      "description": "一款面向空间数据的机器学习可解释性分析桌面应用。支持 CSV 数据上传或使用示例数据，可灵活配置目标变量、特征列和空间坐标列；提供 AutoML（FLAML）、随机森林和神经网络（MLP）三种模型，适用于回归与分类任务",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "多尺度数据准备工具",
+      "version": "1.0.0",
+      "description": "一款基于图形界面的空间可解释性分析工具，主要用于地理空间数据的机器学习分析与解释。",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "Geographical Detector Pro",
+      "version": "6.1.1",
+      "description": "一款地理探测器分析工具，基于地理探测器理论，提供因子探测、交互作用探测、风险探测和生态探测四大核心功能。",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "多元分层地理探测器",
+      "version": "1.0.0",
+      "description": "一款面向空间数据的机器学习可解释性分析桌面应用。支持 CSV 数据上传或使用示例数据，可灵活配置目标变量、特征列和空间坐标列；提供 AutoML（FLAML）、随机森林和神经网络（MLP）三种模型，适用于回归与分类任务",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
+      "downloadLabel": "下载 / 项目页",
+      "extraUrl": "",
+      "extraLabel": ""
+    },
+    {
+      "name": "多尺度数据准备工具",
+      "version": "1.0.0",
+      "description": "一款基于图形界面的空间可解释性分析工具，主要用于地理空间数据的机器学习分析与解释。",
+      "downloadUrl": "https://xyt556.github.io/software/SHAP.html",
       "downloadLabel": "下载 / 项目页",
       "extraUrl": "",
       "extraLabel": ""
