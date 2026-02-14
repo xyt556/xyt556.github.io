@@ -4,9 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>网站后台 | xyt556</title>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <link href="/admin/config.yml" rel="cms-config-url">
+  <!-- 使用 jsDelivr CDN，国内访问更稳定 -->
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3/dist/decap-cms.js"></script>
 </head>
 <body>
-  <!-- Decap CMS 会接管此页面 -->
+  <noscript>请启用 JavaScript 以使用后台编辑。</noscript>
+  <div id="cms-loading" style="padding:2rem;text-align:center;font-family:sans-serif;">
+    正在加载后台…
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        var el = document.getElementById('cms-loading');
+        if (el && !document.querySelector('[class^="nc-"]')) {
+          el.innerHTML = '若长时间空白，请检查网络或尝试使用 VPN 后刷新。';
+        }
+      }, 8000);
+    });
+  </script>
 </body>
 </html>
