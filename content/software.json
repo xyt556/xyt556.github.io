@@ -28,9 +28,9 @@
       "extraLabel": ""
     },
     {
-      "name": "示例软件 A",
-      "version": "1.0.0",
-      "description": "这是一个示例条目。在后台编辑并保存后，此处会自动更新。",
+      "name": "GeoSHAP Pro",
+      "version": "4.4.6",
+      "description": "面向地理空间数据分析和模型可解释性的工具，集成机器学习、空间统计与可解释性分析。支持回归与分类，覆盖从数据预处理到模型解释的流程。",
       "downloadUrl": "https://github.com/xyt556",
       "downloadLabel": "下载 / 项目页",
       "extraUrl": "",
