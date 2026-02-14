@@ -14,8 +14,8 @@ collections:
   - name: site
     label: 站点设置
     files:
-    - label: 站点设置
-      name: site
+    - name: site
+      label: 站点设置
       file: content/site.json
       fields:
         - { label: 站点名称, name: siteName, widget: string }
@@ -30,8 +30,8 @@ collections:
   - name: software
     label: 软件列表
     files:
-    - label: 软件列表
-      name: software
+    - name: software
+      label: 软件列表
       file: content/software.json
       fields:
         - label: 软件条目
