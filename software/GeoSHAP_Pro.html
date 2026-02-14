@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GeoSHAP_用户手册.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="geoshap-v453pro-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C">GeoSHAP v4.5.3_Pro 用户手册</h1>
+<h2 id="%E7%9B%AE%E5%BD%95">目录</h2>
+<ol>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E7%AE%80%E4%BB%8B">软件简介</a></li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82%E4%B8%8E%E5%AE%89%E8%A3%85">系统要求与安装</a></li>
+<li><a href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">快速开始</a></li>
+<li><a href="#%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D">界面介绍</a></li>
+<li><a href="#%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E8%AF%A6%E8%A7%A3">功能模块详解</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B">使用流程</a></li>
+<li><a href="#%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD">高级功能</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a></li>
+<li><a href="#%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%82%E8%80%83">快捷键参考</a></li>
+<li><a href="#%E9%99%84%E5%BD%95">附录</a></li>
+</ol>
+<hr>
+<h2 id="%E8%BD%AF%E4%BB%B6%E7%AE%80%E4%BB%8B">软件简介</h2>
+<h3 id="11-%E8%BD%AF%E4%BB%B6%E6%A6%82%E8%BF%B0">1.1 软件概述</h3>
+<p>GeoSHAP v4.5.3_Pro 是一个专业的地理空间数据分析和SHAP值解释的综合性工具。该软件集成了机器学习、空间统计分析和模型可解释性分析等多种功能，支持回归和分类任务，提供完整的机器学习工作流程。</p>
+<h3 id="12-%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7">1.2 主要特性</h3>
+<ul>
+<li><strong>空间自相关分析</strong>：支持 Moran's I 和 LISA（局部空间自相关）分析</li>
+<li><strong>特征工程模块</strong>：多项式特征、交互特征、空间滞后等</li>
+<li><strong>模型集成</strong>：Stacking、Voting、Blending 等集成学习方法</li>
+<li><strong>空间交叉验证</strong>：考虑空间依赖性的交叉验证方法</li>
+<li><strong>不确定性量化</strong>：Bootstrap置信区间</li>
+<li><strong>批量预测与空间插值</strong>：支持栅格数据批量预测和空间插值</li>
+<li><strong>报告自动生成</strong>：HTML/PDF格式报告</li>
+<li><strong>项目保存/加载</strong>：完整的工作流程保存和恢复</li>
+<li><strong>多语言支持</strong>：中英文界面切换</li>
+<li><strong>暗色主题支持</strong>：多种主题可选</li>
+<li><strong>数据质量检查</strong>：自动数据质量评估</li>
+<li><strong>特征重要性对比分析</strong>：多模型特征重要性对比</li>
+<li><strong>模型解释性增强</strong>：SHAP、LIME支持</li>
+<li><strong>GPU加速支持</strong>：XGBoost GPU加速检测</li>
+<li><strong>内存优化</strong>：大数据处理优化</li>
+<li><strong>样本不平衡处理</strong>：SMOTE、ADASYN、过采样/欠采样、类别权重等</li>
+</ul>
+<h3 id="13-%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF">1.3 版本信息</h3>
+<ul>
+<li><strong>版本号</strong>：4.5.3_Pro</li>
+<li><strong>作者</strong>：@3S&amp;ML</li>
+<li><strong>开发语言</strong>：Python</li>
+<li><strong>GUI框架</strong>：Tkinter / ttkbootstrap</li>
+</ul>
+<hr>
+<h2 id="%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82%E4%B8%8E%E5%AE%89%E8%A3%85">系统要求与安装</h2>
+<h3 id="21-%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82">2.1 系统要求</h3>
+<h4 id="%E6%9C%80%E4%BD%8E%E9%85%8D%E7%BD%AE">最低配置</h4>
+<ul>
+<li><strong>操作系统</strong>：Windows 7/10/11, Linux, macOS</li>
+<li><strong>Python版本</strong>：Python 3.7 或更高版本</li>
+<li><strong>内存</strong>：4GB RAM（推荐 8GB 或更高）</li>
+<li><strong>硬盘空间</strong>：至少 2GB 可用空间</li>
+<li><strong>处理器</strong>：双核处理器（推荐四核或更高）</li>
+</ul>
+<h4 id="%E6%8E%A8%E8%8D%90%E9%85%8D%E7%BD%AE">推荐配置</h4>
+<ul>
+<li><strong>操作系统</strong>：Windows 10/11 或 Linux</li>
+<li><strong>Python版本</strong>：Python 3.8+</li>
+<li><strong>内存</strong>：16GB RAM 或更高</li>
+<li><strong>硬盘空间</strong>：10GB 或更多（用于存储数据和结果）</li>
+<li><strong>处理器</strong>：四核或更多核心</li>
+<li><strong>GPU</strong>：NVIDIA GPU（可选，用于XGBoost加速）</li>
+</ul>
+<h3 id="22-%E4%BE%9D%E8%B5%96%E5%BA%93%E5%AE%89%E8%A3%85">2.2 依赖库安装</h3>
+<h4 id="%E5%BF%85%E9%9C%80%E4%BE%9D%E8%B5%96">必需依赖</h4>
+<pre class="hljs"><code><div>pip install ttkbootstrap rasterio geopandas pandas numpy scikit-learn shap matplotlib joblib statsmodels xgboost lightgbm catboost scipy seaborn scikit-optimize pysal esda libpysal jinja2 weasyprint lime tqdm imbalanced-learn
+</div></code></pre>
+<h4 id="%E5%8F%AF%E9%80%89%E4%BE%9D%E8%B5%96">可选依赖</h4>
+<ul>
+<li><strong>GPU支持</strong>：需要安装 CUDA 和 cuDNN（用于XGBoost GPU加速）</li>
+<li><strong>PDF报告生成</strong>：需要 weasyprint（可能需要额外系统依赖）</li>
+</ul>
+<h4 id="%E5%AE%89%E8%A3%85%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">安装注意事项</h4>
+<ol>
+<li>
+<p><strong>Windows用户</strong>：</p>
+<ul>
+<li>建议使用 Anaconda 或 Miniconda 环境</li>
+<li>某些库（如 rasterio、geopandas）可能需要从 conda-forge 安装：<pre class="hljs"><code><div>conda install -c conda-forge rasterio geopandas
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Linux用户</strong>：</p>
+<ul>
+<li>可能需要安装系统级依赖：<pre class="hljs"><code><div>sudo apt-get install gdal-bin libgdal-dev python3-gdal
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>macOS用户</strong>：</p>
+<ul>
+<li>使用 Homebrew 安装 GDAL：<pre class="hljs"><code><div>brew install gdal
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>imbalanced-learn兼容性</strong>：</p>
+<ul>
+<li>如果使用 scikit-learn 1.4+ 版本，可能会遇到兼容性问题</li>
+<li>建议使用 scikit-learn 1.3.2：<pre class="hljs"><code><div>pip install scikit-learn==1.3.2
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="23-%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8">2.3 软件启动</h3>
+<h4 id="%E6%96%B9%E5%BC%8F%E4%B8%80%E7%9B%B4%E6%8E%A5%E8%BF%90%E8%A1%8Cpython%E8%84%9A%E6%9C%AC">方式一：直接运行Python脚本</h4>
+<pre class="hljs"><code><div>python GeoShapv4.5.3_Pro.py
+</div></code></pre>
+<h4 id="%E6%96%B9%E5%BC%8F%E4%BA%8C%E4%BD%BF%E7%94%A8%E6%89%93%E5%8C%85%E5%90%8E%E7%9A%84%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6">方式二：使用打包后的可执行文件</h4>
+<p>如果已打包为exe文件，直接双击运行即可。</p>
+<h4 id="%E9%A6%96%E6%AC%A1%E5%90%AF%E5%8A%A8">首次启动</h4>
+<p>首次启动时，软件会显示注册窗口。请按照提示完成注册。</p>
+<hr>
+<h2 id="%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">快速开始</h2>
+<h3 id="31-%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">3.1 基本工作流程</h3>
+<ol>
+<li>
+<p><strong>准备数据</strong></p>
+<ul>
+<li>准备栅格数据文件夹（包含所有特征栅格文件）</li>
+<li>准备样本点数据（Shapefile格式，包含目标变量）</li>
+</ul>
+</li>
+<li>
+<p><strong>加载数据</strong></p>
+<ul>
+<li>在&quot;Input Data&quot;标签页中指定数据路径</li>
+<li>选择目标列（要预测的变量）</li>
+</ul>
+</li>
+<li>
+<p><strong>配置选项</strong></p>
+<ul>
+<li>在&quot;Options&quot;标签页中选择模型和参数</li>
+<li>设置预处理选项</li>
+</ul>
+</li>
+<li>
+<p><strong>运行分析</strong></p>
+<ul>
+<li>点击&quot;Run Analysis&quot;按钮</li>
+<li>等待分析完成</li>
+</ul>
+</li>
+<li>
+<p><strong>查看结果</strong></p>
+<ul>
+<li>在&quot;Model Evaluation&quot;标签页查看模型评估结果</li>
+<li>在&quot;SHAP Analysis&quot;标签页查看特征重要性</li>
+<li>在&quot;Spatial Analysis&quot;标签页查看空间分析结果</li>
+<li>在&quot;Report&quot;标签页生成完整报告</li>
+</ul>
+</li>
+</ol>
+<h3 id="32-%E7%A4%BA%E4%BE%8B%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90">3.2 示例：回归分析</h3>
+<ol>
+<li>
+<p><strong>数据准备</strong></p>
+<ul>
+<li>栅格文件夹：包含多个环境变量栅格（如温度、降水、海拔等）</li>
+<li>样本点：包含观测值的点数据，目标列为&quot;target&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>设置问题类型</strong></p>
+<ul>
+<li>在&quot;Options&quot;标签页中，选择&quot;Problem Type&quot;为&quot;regression&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>选择模型</strong></p>
+<ul>
+<li>勾选要使用的模型（如XGBoost、Random Forest等）</li>
+</ul>
+</li>
+<li>
+<p><strong>运行分析</strong></p>
+<ul>
+<li>点击&quot;Run Analysis&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>查看结果</strong></p>
+<ul>
+<li>查看R²、RMSE等回归指标</li>
+<li>查看预测散点图和残差图</li>
+<li>查看SHAP特征重要性</li>
+</ul>
+</li>
+</ol>
+<h3 id="33-%E7%A4%BA%E4%BE%8B%E5%88%86%E7%B1%BB%E5%88%86%E6%9E%90">3.3 示例：分类分析</h3>
+<ol>
+<li>
+<p><strong>数据准备</strong></p>
+<ul>
+<li>与回归分析类似，但目标变量应为分类变量（整数类别）</li>
+</ul>
+</li>
+<li>
+<p><strong>设置问题类型</strong></p>
+<ul>
+<li>选择&quot;Problem Type&quot;为&quot;classification&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>处理样本不平衡</strong>（如需要）</p>
+<ul>
+<li>勾选&quot;Handle imbalanced data&quot;</li>
+<li>选择处理方法（如SMOTE）</li>
+</ul>
+</li>
+<li>
+<p><strong>运行分析</strong></p>
+<ul>
+<li>点击&quot;Run Analysis&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>查看结果</strong></p>
+<ul>
+<li>查看混淆矩阵、分类报告</li>
+<li>查看ROC曲线</li>
+<li>查看各类别的准确率、精确率、召回率等</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D">界面介绍</h2>
+<h3 id="41-%E4%B8%BB%E7%AA%97%E5%8F%A3%E5%B8%83%E5%B1%80">4.1 主窗口布局</h3>
+<p>主窗口采用标签页（Notebook）设计，包含以下8个主要标签页：</p>
+<ol>
+<li><strong>📁 Input Data</strong> - 输入数据</li>
+<li><strong>⚙️ Options</strong> - 选项配置</li>
+<li><strong>📈 Model Evaluation</strong> - 模型评估</li>
+<li><strong>📊 SHAP Analysis</strong> - SHAP分析</li>
+<li><strong>🗺️ Spatial Analysis</strong> - 空间分析</li>
+<li><strong>🌐 SHAP Spatial Autocorr</strong> - SHAP空间自相关</li>
+<li><strong>📄 Report</strong> - 报告生成</li>
+<li><strong>📋 Log</strong> - 日志查看</li>
+</ol>
+<h3 id="42-%E8%8F%9C%E5%8D%95%E6%A0%8F">4.2 菜单栏</h3>
+<h4 id="file%E6%96%87%E4%BB%B6%E8%8F%9C%E5%8D%95">File（文件）菜单</h4>
+<ul>
+<li><strong>New Project</strong> (Ctrl+N)：创建新项目</li>
+<li><strong>Open Project</strong> (Ctrl+O)：打开已有项目</li>
+<li><strong>Save Project</strong> (Ctrl+S)：保存当前项目</li>
+<li><strong>Save Project As...</strong>：另存为项目</li>
+<li><strong>Export Report</strong>：导出报告</li>
+<li><strong>Exit</strong>：退出程序</li>
+</ul>
+<h4 id="edit%E7%BC%96%E8%BE%91%E8%8F%9C%E5%8D%95">Edit（编辑）菜单</h4>
+<ul>
+<li><strong>Preferences</strong>：偏好设置（主题、语言等）</li>
+</ul>
+<h4 id="tools%E5%B7%A5%E5%85%B7%E8%8F%9C%E5%8D%95">Tools（工具）菜单</h4>
+<ul>
+<li><strong>Model Parameters</strong>：模型参数设置</li>
+<li><strong>Generate Sample Data</strong>：生成示例数据</li>
+<li><strong>Batch Prediction</strong>：批量预测</li>
+<li><strong>Spatial Interpolation</strong>：空间插值</li>
+<li><strong>SHAP Spatial Interpolation</strong>：SHAP值空间插值</li>
+<li><strong>Clear Cache</strong>：清除缓存</li>
+</ul>
+<h4 id="help%E5%B8%AE%E5%8A%A9%E8%8F%9C%E5%8D%95">Help（帮助）菜单</h4>
+<ul>
+<li><strong>User Guide</strong> (F1)：用户指南</li>
+<li><strong>Quick Start</strong>：快速开始</li>
+<li><strong>Features</strong>：功能说明</li>
+<li><strong>Keyboard Shortcuts</strong>：快捷键列表</li>
+<li><strong>Documentation</strong>：文档</li>
+<li><strong>About</strong>：关于</li>
+</ul>
+<h3 id="43-%E7%8A%B6%E6%80%81%E6%A0%8F">4.3 状态栏</h3>
+<p>窗口底部显示：</p>
+<ul>
+<li><strong>状态指示器</strong>：显示当前运行状态（Ready/Running/Completed/Error）</li>
+<li><strong>CPU模式指示</strong>：显示当前使用的计算模式</li>
+</ul>
+<hr>
+<h2 id="%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E8%AF%A6%E8%A7%A3">功能模块详解</h2>
+<h3 id="51-input-data%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE%E6%A0%87%E7%AD%BE%E9%A1%B5">5.1 Input Data（输入数据）标签页</h3>
+<h4 id="511-%E6%95%B0%E6%8D%AE%E6%BA%90%E8%AE%BE%E7%BD%AE">5.1.1 数据源设置</h4>
+<p><strong>栅格文件夹（Raster Folder）</strong></p>
+<ul>
+<li>功能：指定包含所有特征栅格文件的文件夹</li>
+<li>要求：
+<ul>
+<li>所有栅格文件应在同一文件夹中</li>
+<li>栅格文件应具有相同的空间范围和分辨率</li>
+<li>支持常见栅格格式（.tif, .tiff, .asc等）</li>
+</ul>
+</li>
+<li>操作：点击&quot;Browse&quot;按钮选择文件夹</li>
+</ul>
+<p><strong>样本点（Sample Points）</strong></p>
+<ul>
+<li>功能：指定包含观测值的点数据文件</li>
+<li>格式要求：Shapefile格式（.shp文件）</li>
+<li>必需字段：
+<ul>
+<li>几何信息（点坐标）</li>
+<li>目标变量列（要预测的变量）</li>
+</ul>
+</li>
+<li>操作：点击&quot;Browse&quot;按钮选择文件</li>
+</ul>
+<p><strong>目标列（Target Column）</strong></p>
+<ul>
+<li>功能：指定要预测的目标变量列名</li>
+<li>默认值：<code>target</code></li>
+<li>自动检测：点击&quot;🔍 Detect&quot;按钮可自动检测可能的目标列</li>
+</ul>
+<h4 id="512-%E8%BE%93%E5%87%BA%E8%AE%BE%E7%BD%AE">5.1.2 输出设置</h4>
+<p><strong>输出文件夹（Output Folder）</strong></p>
+<ul>
+<li>功能：指定分析结果的保存位置</li>
+<li>默认值：<code>./output</code></li>
+<li>包含内容：
+<ul>
+<li>训练好的模型文件</li>
+<li>评估图表</li>
+<li>SHAP分析结果</li>
+<li>空间分析结果</li>
+<li>报告文件</li>
+</ul>
+</li>
+</ul>
+<h4 id="513-%E7%A4%BA%E4%BE%8B%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90">5.1.3 示例数据生成</h4>
+<p><strong>功能说明</strong>：快速生成示例数据用于测试和学习</p>
+<p><strong>参数设置</strong>：</p>
+<ul>
+<li><strong>Samples</strong>：样本数量（100-5000）</li>
+<li><strong>Features</strong>：特征数量（3-20）</li>
+<li><strong>Problem Type</strong>：问题类型（regression/classification）</li>
+<li><strong>Add spatial pattern</strong>：是否添加空间模式</li>
+<li><strong>Classes</strong>：分类问题的类别数（2-10）</li>
+<li><strong>Balanced classes</strong>：是否平衡类别分布</li>
+</ul>
+<p><strong>使用方法</strong>：设置参数后点击&quot;🎲 Generate&quot;按钮</p>
+<h4 id="514-%E6%95%B0%E6%8D%AE%E9%A2%84%E8%A7%88">5.1.4 数据预览</h4>
+<p><strong>功能</strong>：预览加载的数据统计信息</p>
+<p><strong>显示内容</strong>：</p>
+<ul>
+<li>Column：列名</li>
+<li>Type：数据类型</li>
+<li>Non-Null：非空值数量</li>
+<li>Min：最小值</li>
+<li>Max：最大值</li>
+<li>Mean：平均值</li>
+</ul>
+<p><strong>刷新</strong>：点击&quot;🔄 Refresh Preview&quot;按钮更新预览</p>
+<h3 id="52-options%E9%80%89%E9%A1%B9%E6%A0%87%E7%AD%BE%E9%A1%B5">5.2 Options（选项）标签页</h3>
+<h4 id="521-%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9">5.2.1 模型选择</h4>
+<p><strong>功能</strong>：选择要训练的机器学习模型</p>
+<p><strong>可用模型</strong>：</p>
+<ul>
+<li><strong>XGBoost</strong>：梯度提升树（如果已安装）</li>
+<li><strong>LightGBM</strong>：轻量级梯度提升（如果已安装）</li>
+<li><strong>CatBoost</strong>：分类提升（如果已安装）</li>
+<li><strong>Random Forest</strong>：随机森林</li>
+<li><strong>Gradient Boosting</strong>：梯度提升</li>
+<li><strong>Extra Trees</strong>：极端随机树</li>
+<li><strong>Histogram Gradient Boosting</strong>：直方图梯度提升</li>
+</ul>
+<p><strong>快捷操作</strong>：</p>
+<ul>
+<li><strong>Select All</strong>：全选所有模型</li>
+<li><strong>Deselect All</strong>：取消全选</li>
+<li><strong>Select Boosting</strong>：仅选择提升类模型</li>
+<li><strong>Model Parameters</strong>：打开模型参数设置窗口</li>
+</ul>
+<h4 id="522-%E9%A2%84%E5%A4%84%E7%90%86%E9%80%89%E9%A1%B9">5.2.2 预处理选项</h4>
+<p><strong>特征标准化（Standardize features）</strong></p>
+<ul>
+<li>功能：对特征进行标准化处理</li>
+<li>方法选择：
+<ul>
+<li><strong>Standard (Z-score)</strong>：Z-score标准化</li>
+<li><strong>MinMax (0-1)</strong>：最小-最大归一化</li>
+<li><strong>Robust (IQR)</strong>：基于四分位数的鲁棒标准化</li>
+<li><strong>Normalizer (L2)</strong>：L2范数归一化</li>
+<li><strong>MaxAbs</strong>：最大绝对值缩放</li>
+</ul>
+</li>
+</ul>
+<p><strong>特征工程（Feature Engineering）</strong></p>
+<ul>
+<li>功能：自动创建新特征</li>
+<li>可选方法：
+<ul>
+<li><strong>Interaction</strong>：交互特征</li>
+<li><strong>Statistical</strong>：统计特征（均值、标准差等）</li>
+<li><strong>Ratio</strong>：比率特征</li>
+<li><strong>Log Transform</strong>：对数变换</li>
+<li><strong>Power</strong>：幂变换</li>
+<li><strong>Binning</strong>：分箱</li>
+<li><strong>Clustering</strong>：聚类特征</li>
+<li><strong>Polynomial</strong>：多项式特征</li>
+</ul>
+</li>
+</ul>
+<p><strong>相关性过滤（Correlation filter）</strong></p>
+<ul>
+<li>功能：移除高度相关的特征</li>
+<li>阈值设置：0.5-0.99（默认0.90）</li>
+<li>说明：如果两个特征的相关系数超过阈值，将移除其中一个</li>
+</ul>
+<p><strong>VIF过滤（VIF filter）</strong></p>
+<ul>
+<li>功能：移除多重共线性特征</li>
+<li>阈值设置：2.0-50.0（默认10.0）</li>
+<li>说明：方差膨胀因子（VIF）超过阈值的特征将被移除</li>
+</ul>
+<h4 id="523-%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0">5.2.3 训练参数</h4>
+<p><strong>问题类型（Problem Type）</strong></p>
+<ul>
+<li><strong>regression</strong>：回归问题（预测连续值）</li>
+<li><strong>classification</strong>：分类问题（预测类别）</li>
+</ul>
+<p><strong>测试集比例（Test size）</strong></p>
+<ul>
+<li>范围：0.1-0.4</li>
+<li>默认：0.2（20%作为测试集）</li>
+</ul>
+<p><strong>随机种子（Random state）</strong></p>
+<ul>
+<li>范围：0-999</li>
+<li>默认：42</li>
+<li>作用：确保结果可复现</li>
+</ul>
+<p><strong>交叉验证折数（CV Folds）</strong></p>
+<ul>
+<li>范围：2-10</li>
+<li>默认：5</li>
+<li>说明：K折交叉验证的折数</li>
+</ul>
+<p><strong>空间交叉验证（Use spatial cross-validation）</strong></p>
+<ul>
+<li>功能：考虑空间依赖性的交叉验证</li>
+<li>说明：使用空间聚类方法划分训练/测试集，避免空间自相关导致的过拟合</li>
+</ul>
+<h4 id="524-%E6%A0%B7%E6%9C%AC%E4%B8%8D%E5%B9%B3%E8%A1%A1%E5%A4%84%E7%90%86">5.2.4 样本不平衡处理</h4>
+<p><strong>注意</strong>：此功能仅适用于分类问题</p>
+<p><strong>启用处理（Handle imbalanced data）</strong></p>
+<ul>
+<li>功能：自动处理类别不平衡问题</li>
+</ul>
+<p><strong>处理方法（Method）</strong>：</p>
+<ul>
+<li><strong>auto</strong>：自动选择最佳方法</li>
+<li><strong>smote</strong>：SMOTE过采样</li>
+<li><strong>adasyn</strong>：ADASYN自适应过采样</li>
+<li><strong>random_oversample</strong>：随机过采样</li>
+<li><strong>random_undersample</strong>：随机欠采样</li>
+<li><strong>borderline_smote</strong>：边界SMOTE</li>
+<li><strong>svm_smote</strong>：SVM SMOTE</li>
+<li><strong>tomek_links</strong>：Tomek Links欠采样</li>
+<li><strong>edited_nn</strong>：编辑最近邻</li>
+<li><strong>smote_tomek</strong>：SMOTE + Tomek Links组合</li>
+<li><strong>smote_enn</strong>：SMOTE + ENN组合</li>
+<li><strong>class_weight</strong>：类别权重调整</li>
+</ul>
+<p><strong>同时使用类别权重（Also use class weights）</strong></p>
+<ul>
+<li>功能：在重采样基础上同时使用类别权重</li>
+<li>说明：可以与重采样方法结合使用</li>
+</ul>
+<h4 id="525-%E8%B6%85%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96">5.2.5 超参数优化</h4>
+<p><strong>启用优化（Enable hyperparameter optimization）</strong></p>
+<ul>
+<li>功能：自动搜索最佳超参数</li>
+</ul>
+<p><strong>优化方法（Method）</strong>：</p>
+<ul>
+<li><strong>grid</strong>：网格搜索（全面但耗时）</li>
+<li><strong>random</strong>：随机搜索（快速）</li>
+<li><strong>bayesian</strong>：贝叶斯优化（如果已安装scikit-optimize）</li>
+</ul>
+<p><strong>迭代次数（Iterations）</strong></p>
+<ul>
+<li>范围：5-100</li>
+<li>默认：20</li>
+<li>说明：仅用于random和bayesian方法</li>
+</ul>
+<h4 id="526-%E9%9B%86%E6%88%90%E6%96%B9%E6%B3%95">5.2.6 集成方法</h4>
+<p><strong>Stacking Ensemble</strong></p>
+<ul>
+<li>功能：堆叠集成学习</li>
+<li>说明：使用多个基模型，然后用元学习器组合预测</li>
+</ul>
+<p><strong>Voting Ensemble</strong></p>
+<ul>
+<li>功能：投票集成学习</li>
+<li>说明：多个模型的预测结果进行投票或平均</li>
+</ul>
+<h3 id="53-model-evaluation%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E6%A0%87%E7%AD%BE%E9%A1%B5">5.3 Model Evaluation（模型评估）标签页</h3>
+<h4 id="531-%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF">5.3.1 控制面板</h4>
+<p><strong>模型选择（Model）</strong></p>
+<ul>
+<li>功能：选择要查看的模型</li>
+<li>选项：<code>all</code>（所有模型）或具体模型名</li>
+</ul>
+<p><strong>图表类型（Plot Type）</strong></p>
+<p><strong>回归问题可用图表</strong>：</p>
+<ul>
+<li><strong>predictions_scatter</strong>：预测值vs真实值散点图</li>
+<li><strong>residuals</strong>：残差图</li>
+<li><strong>model_comparison</strong>：模型对比（R²、RMSE等）</li>
+<li><strong>residual_distribution</strong>：残差分布</li>
+<li><strong>cv_comparison</strong>：交叉验证结果对比</li>
+<li><strong>learning_curve</strong>：学习曲线</li>
+<li><strong>feature_importance_comparison</strong>：特征重要性对比</li>
+<li><strong>prediction_error</strong>：预测误差分析</li>
+</ul>
+<p><strong>分类问题可用图表</strong>：</p>
+<ul>
+<li><strong>confusion_matrix</strong>：混淆矩阵</li>
+<li><strong>classification_report</strong>：分类报告（热图）</li>
+<li><strong>roc_curve</strong>：ROC曲线</li>
+<li><strong>model_comparison</strong>：模型对比（准确率、F1等）</li>
+<li><strong>cv_comparison</strong>：交叉验证结果对比</li>
+<li><strong>feature_importance_comparison</strong>：特征重要性对比</li>
+</ul>
+<p><strong>更新图表</strong>：点击&quot;🔄 Update&quot;按钮刷新图表</p>
+<h4 id="532-%E6%8C%87%E6%A0%87%E8%A1%A8%E6%A0%BC">5.3.2 指标表格</h4>
+<p>显示所有模型的评估指标：</p>
+<p><strong>回归指标</strong>：</p>
+<ul>
+<li><strong>train_r2</strong>：训练集R²</li>
+<li><strong>val_r2</strong>：验证集R²</li>
+<li><strong>train_rmse</strong>：训练集RMSE</li>
+<li><strong>val_rmse</strong>：验证集RMSE</li>
+<li><strong>cv_mean</strong>：交叉验证平均R²</li>
+<li><strong>cv_std</strong>：交叉验证标准差</li>
+</ul>
+<p><strong>分类指标</strong>：</p>
+<ul>
+<li><strong>train_accuracy</strong>：训练集准确率</li>
+<li><strong>val_accuracy</strong>：验证集准确率</li>
+<li><strong>train_precision</strong>：训练集精确率</li>
+<li><strong>val_precision</strong>：验证集精确率</li>
+<li><strong>train_recall</strong>：训练集召回率</li>
+<li><strong>val_recall</strong>：验证集召回率</li>
+<li><strong>train_f1</strong>：训练集F1分数</li>
+<li><strong>val_f1</strong>：验证集F1分数</li>
+</ul>
+<h4 id="533-%E5%9B%BE%E8%A1%A8%E6%98%BE%E7%A4%BA%E5%8C%BA%E5%9F%9F">5.3.3 图表显示区域</h4>
+<ul>
+<li>显示选定的评估图表</li>
+<li>支持缩放、平移等交互操作</li>
+<li>工具栏提供保存、缩放等功能</li>
+</ul>
+<h4 id="534-%E4%BF%9D%E5%AD%98%E9%80%89%E9%A1%B9">5.3.4 保存选项</h4>
+<p><strong>格式（Format）</strong>：png, pdf, svg, jpg等
+<strong>保存当前图表</strong>：点击&quot;💾 Save&quot;按钮
+<strong>保存所有图表</strong>：点击&quot;📁 Save All&quot;按钮</p>
+<h3 id="54-shap-analysisshap%E5%88%86%E6%9E%90%E6%A0%87%E7%AD%BE%E9%A1%B5">5.4 SHAP Analysis（SHAP分析）标签页</h3>
+<h4 id="541-%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF---%E7%AC%AC%E4%B8%80%E8%A1%8C">5.4.1 控制面板 - 第一行</h4>
+<p><strong>模型选择（Model for SHAP）</strong></p>
+<ul>
+<li>功能：选择要分析SHAP值的模型</li>
+<li>说明：必须先训练模型才能计算SHAP值</li>
+</ul>
+<p><strong>样本百分比（Sample %）</strong></p>
+<ul>
+<li>范围：1%-100%</li>
+<li>默认：100%</li>
+<li>说明：用于计算SHAP值的样本比例，可减少计算时间</li>
+</ul>
+<p><strong>计算SHAP值</strong>：点击&quot;⚡ Compute SHAP&quot;按钮</p>
+<p><strong>图表类型（Plot）</strong>：</p>
+<ul>
+<li><strong>beeswarm</strong>：蜂群图（特征重要性）</li>
+<li><strong>bar</strong>：条形图</li>
+<li><strong>heatmap</strong>：热图</li>
+<li><strong>dependence</strong>：依赖图</li>
+<li><strong>interaction</strong>：交互图</li>
+<li><strong>waterfall</strong>：瀑布图</li>
+<li><strong>force</strong>：力图</li>
+<li><strong>violin</strong>：小提琴图</li>
+<li><strong>clustering</strong>：聚类图</li>
+</ul>
+<p><strong>LIME分析</strong>：点击&quot;🍋 LIME&quot;按钮（如果可用）</p>
+<h4 id="542-%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF---%E7%AC%AC%E4%BA%8C%E8%A1%8C%E4%BE%9D%E8%B5%96%E5%9B%BE%E9%80%89%E9%A1%B9">5.4.2 控制面板 - 第二行（依赖图选项）</h4>
+<p><strong>特征（Feature）</strong>：选择要查看依赖关系的特征
+<strong>交互（Interaction）</strong>：选择交互特征（auto/具体特征名/none）</p>
+<p><strong>显示选项</strong>：</p>
+<ul>
+<li><strong>Fit</strong>：显示拟合曲线</li>
+<li><strong>CI</strong>：显示置信区间</li>
+<li><strong>Stats</strong>：显示统计信息</li>
+<li><strong>Hist</strong>：显示直方图</li>
+</ul>
+<p><strong>样本索引（Sample）</strong>：选择要查看的样本（用于waterfall、force等图）</p>
+<p><strong>更新图表</strong>：点击&quot;🔄 Update Plot&quot;按钮</p>
+<h4 id="543-%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF---%E7%AC%AC%E4%B8%89%E8%A1%8C%E4%BF%9D%E5%AD%98%E9%80%89%E9%A1%B9">5.4.3 控制面板 - 第三行（保存选项）</h4>
+<p><strong>保存格式（Save format）</strong>：png, pdf, svg等
+<strong>DPI设置</strong>：72-600（默认150）</p>
+<p><strong>保存功能</strong>：</p>
+<ul>
+<li><strong>💾 Save Current</strong>：保存当前图表</li>
+<li><strong>📁 Save All Plots</strong>：保存所有SHAP图表</li>
+<li><strong>📊 Export Importance</strong>：导出特征重要性表格（CSV）</li>
+<li><strong>📈 Export SHAP Values</strong>：导出SHAP值矩阵（CSV）</li>
+<li><strong>🗺️ Export Spatial SHAP</strong>：导出带坐标的SHAP值（用于GIS分析）</li>
+</ul>
+<h4 id="544-%E7%89%B9%E5%BE%81%E9%87%8D%E8%A6%81%E6%80%A7%E8%A1%A8%E6%A0%BC">5.4.4 特征重要性表格</h4>
+<p>显示特征重要性排序：</p>
+<ul>
+<li><strong>Rank</strong>：排名</li>
+<li><strong>Feature</strong>：特征名</li>
+<li><strong>Mean|SHAP|</strong>：平均绝对SHAP值</li>
+<li><strong>Std</strong>：标准差</li>
+<li><strong>Direction</strong>：影响方向（正向/负向）</li>
+</ul>
+<h4 id="545-shap%E5%8F%AF%E8%A7%86%E5%8C%96%E5%8C%BA%E5%9F%9F">5.4.5 SHAP可视化区域</h4>
+<p>显示选定的SHAP图表，支持交互操作。</p>
+<h3 id="55-spatial-analysis%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E6%A0%87%E7%AD%BE%E9%A1%B5">5.5 Spatial Analysis（空间分析）标签页</h3>
+<h4 id="551-%E7%A9%BA%E9%97%B4%E8%87%AA%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90">5.5.1 空间自相关分析</h4>
+<p><strong>功能</strong>：分析变量的空间自相关性</p>
+<p><strong>Moran's I全局自相关</strong></p>
+<ul>
+<li>功能：计算全局Moran's I统计量</li>
+<li>参数：
+<ul>
+<li><strong>Weight Type</strong>：权重类型（knn/queen/distance）</li>
+<li><strong>K值</strong>：K近邻数量（用于knn权重）</li>
+</ul>
+</li>
+<li>结果：Moran's I值、p值、z值</li>
+</ul>
+<p><strong>LISA局部自相关</strong></p>
+<ul>
+<li>功能：计算局部空间自相关</li>
+<li>结果：每个样本点的局部Moran's I值</li>
+</ul>
+<p><strong>可视化</strong>：</p>
+<ul>
+<li>Moran's I散点图</li>
+<li>LISA聚类图（HH, HL, LH, LL）</li>
+</ul>
+<h4 id="552-%E7%A9%BA%E9%97%B4%E6%9D%83%E9%87%8D%E7%9F%A9%E9%98%B5">5.5.2 空间权重矩阵</h4>
+<p><strong>权重类型</strong>：</p>
+<ul>
+<li><strong>knn</strong>：K近邻权重</li>
+<li><strong>queen</strong>：Queen邻接权重</li>
+<li><strong>distance</strong>：距离权重</li>
+</ul>
+<p><strong>参数设置</strong>：</p>
+<ul>
+<li><strong>K值</strong>：K近邻数量</li>
+<li><strong>距离阈值</strong>：距离权重阈值</li>
+</ul>
+<h4 id="553-%E7%A9%BA%E9%97%B4%E7%89%B9%E5%BE%81">5.5.3 空间特征</h4>
+<p><strong>空间滞后（Spatial Lag）</strong></p>
+<ul>
+<li>功能：计算空间滞后变量</li>
+<li>说明：反映邻近区域的影响</li>
+</ul>
+<p><strong>空间特征创建</strong></p>
+<ul>
+<li>功能：自动创建空间相关特征</li>
+<li>包括：距离特征、方向特征等</li>
+</ul>
+<h3 id="56-shap-spatial-autocorrshap%E7%A9%BA%E9%97%B4%E8%87%AA%E7%9B%B8%E5%85%B3%E6%A0%87%E7%AD%BE%E9%A1%B5">5.6 SHAP Spatial Autocorr（SHAP空间自相关）标签页</h3>
+<h4 id="561-%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E">5.6.1 功能说明</h4>
+<p>分析SHAP值的空间自相关性，识别空间聚集模式。</p>
+<h4 id="562-%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4">5.6.2 操作步骤</h4>
+<ol>
+<li>选择模型</li>
+<li>选择特征</li>
+<li>设置权重参数</li>
+<li>点击&quot;Compute&quot;计算</li>
+<li>查看结果表格和图表</li>
+</ol>
+<h4 id="563-%E7%BB%93%E6%9E%9C%E8%A7%A3%E9%87%8A">5.6.3 结果解释</h4>
+<ul>
+<li><strong>Moran's I</strong>：SHAP值的空间自相关程度</li>
+<li><strong>p值</strong>：统计显著性</li>
+<li><strong>空间模式</strong>：识别SHAP值的空间聚集区域</li>
+</ul>
+<h3 id="57-report%E6%8A%A5%E5%91%8A%E6%A0%87%E7%AD%BE%E9%A1%B5">5.7 Report（报告）标签页</h3>
+<h4 id="571-%E6%8A%A5%E5%91%8A%E7%94%9F%E6%88%90">5.7.1 报告生成</h4>
+<p><strong>功能</strong>：生成完整的分析报告</p>
+<p><strong>报告内容</strong>：</p>
+<ul>
+<li>数据概览</li>
+<li>模型性能指标</li>
+<li>特征重要性</li>
+<li>评估图表</li>
+<li>SHAP分析结果</li>
+<li>空间分析结果</li>
+</ul>
+<p><strong>格式选择</strong>：</p>
+<ul>
+<li><strong>HTML</strong>：网页格式（推荐）</li>
+<li><strong>PDF</strong>：PDF格式（需要weasyprint）</li>
+</ul>
+<p><strong>生成报告</strong>：点击&quot;Generate Report&quot;按钮</p>
+<h4 id="572-%E6%8A%A5%E5%91%8A%E9%A2%84%E8%A7%88">5.7.2 报告预览</h4>
+<p>生成后可在浏览器中预览报告。</p>
+<h3 id="58-log%E6%97%A5%E5%BF%97%E6%A0%87%E7%AD%BE%E9%A1%B5">5.8 Log（日志）标签页</h3>
+<h4 id="581-%E6%97%A5%E5%BF%97%E6%9F%A5%E7%9C%8B">5.8.1 日志查看</h4>
+<p><strong>功能</strong>：查看分析过程的详细日志</p>
+<p><strong>日志内容</strong>：</p>
+<ul>
+<li>数据加载信息</li>
+<li>预处理步骤</li>
+<li>模型训练进度</li>
+<li>错误和警告信息</li>
+</ul>
+<p><strong>日志级别</strong>：</p>
+<ul>
+<li>INFO：一般信息</li>
+<li>WARNING：警告</li>
+<li>ERROR：错误</li>
+<li>DEBUG：调试信息</li>
+</ul>
+<h4 id="582-%E6%97%A5%E5%BF%97%E6%93%8D%E4%BD%9C">5.8.2 日志操作</h4>
+<ul>
+<li><strong>清空日志</strong>：清除当前日志</li>
+<li><strong>保存日志</strong>：将日志保存为文本文件</li>
+<li><strong>自动滚动</strong>：自动滚动到最新日志</li>
+</ul>
+<hr>
+<h2 id="%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B">使用流程</h2>
+<h3 id="61-%E5%AE%8C%E6%95%B4%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">6.1 完整工作流程</h3>
+<h4 id="%E6%AD%A5%E9%AA%A41%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE">步骤1：准备数据</h4>
+<ol>
+<li>准备栅格数据文件夹</li>
+<li>准备样本点Shapefile</li>
+<li>确保数据格式正确</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A42%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE">步骤2：加载数据</h4>
+<ol>
+<li>打开&quot;Input Data&quot;标签页</li>
+<li>选择栅格文件夹</li>
+<li>选择样本点文件</li>
+<li>指定目标列名</li>
+<li>点击&quot;🔍 Detect&quot;自动检测（可选）</li>
+<li>查看数据预览</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A43%E9%85%8D%E7%BD%AE%E9%80%89%E9%A1%B9">步骤3：配置选项</h4>
+<ol>
+<li>打开&quot;Options&quot;标签页</li>
+<li>选择问题类型（regression/classification）</li>
+<li>选择要训练的模型</li>
+<li>配置预处理选项</li>
+<li>设置训练参数</li>
+<li>配置样本不平衡处理（如需要）</li>
+<li>设置超参数优化（可选）</li>
+<li>选择集成方法（可选）</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A44%E8%BF%90%E8%A1%8C%E5%88%86%E6%9E%90">步骤4：运行分析</h4>
+<ol>
+<li>检查所有设置</li>
+<li>点击&quot;Run Analysis&quot;按钮</li>
+<li>等待分析完成</li>
+<li>查看状态栏和日志</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A45%E6%9F%A5%E7%9C%8B%E7%BB%93%E6%9E%9C">步骤5：查看结果</h4>
+<ol>
+<li>
+<p><strong>模型评估</strong>：</p>
+<ul>
+<li>打开&quot;Model Evaluation&quot;标签页</li>
+<li>选择模型和图表类型</li>
+<li>查看指标表格和图表</li>
+</ul>
+</li>
+<li>
+<p><strong>SHAP分析</strong>：</p>
+<ul>
+<li>打开&quot;SHAP Analysis&quot;标签页</li>
+<li>选择模型</li>
+<li>计算SHAP值</li>
+<li>查看各种SHAP图表</li>
+</ul>
+</li>
+<li>
+<p><strong>空间分析</strong>：</p>
+<ul>
+<li>打开&quot;Spatial Analysis&quot;标签页</li>
+<li>计算空间自相关</li>
+<li>查看空间模式</li>
+</ul>
+</li>
+<li>
+<p><strong>生成报告</strong>：</p>
+<ul>
+<li>打开&quot;Report&quot;标签页</li>
+<li>选择格式</li>
+<li>生成报告</li>
+</ul>
+</li>
+</ol>
+<h4 id="%E6%AD%A5%E9%AA%A46%E4%BF%9D%E5%AD%98%E7%BB%93%E6%9E%9C">步骤6：保存结果</h4>
+<ol>
+<li>保存项目（File &gt; Save Project）</li>
+<li>导出图表</li>
+<li>导出SHAP值</li>
+<li>生成报告</li>
+</ol>
+<h3 id="62-%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">6.2 典型应用场景</h3>
+<h4 id="%E5%9C%BA%E6%99%AF1%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%A2%84%E6%B5%8B">场景1：环境变量预测</h4>
+<p><strong>目标</strong>：预测某个环境变量（如温度、降水）</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>准备环境变量栅格（温度、降水、海拔等）</li>
+<li>准备观测点数据</li>
+<li>选择回归问题</li>
+<li>选择多个模型（XGBoost、Random Forest等）</li>
+<li>运行分析</li>
+<li>查看预测精度和特征重要性</li>
+<li>进行空间插值预测</li>
+</ol>
+<h4 id="%E5%9C%BA%E6%99%AF2%E5%9C%9F%E5%9C%B0%E8%A6%86%E7%9B%96%E5%88%86%E7%B1%BB">场景2：土地覆盖分类</h4>
+<p><strong>目标</strong>：分类土地覆盖类型</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>准备遥感影像特征</li>
+<li>准备训练样本点（带类别标签）</li>
+<li>选择分类问题</li>
+<li>处理样本不平衡（如需要）</li>
+<li>运行分析</li>
+<li>查看混淆矩阵和分类报告</li>
+<li>进行批量分类预测</li>
+</ol>
+<h4 id="%E5%9C%BA%E6%99%AF3%E7%A9%BA%E9%97%B4%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90">场景3：空间模式分析</h4>
+<p><strong>目标</strong>：分析变量的空间分布模式</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>加载数据并训练模型</li>
+<li>计算SHAP值</li>
+<li>分析SHAP值的空间自相关</li>
+<li>识别空间聚集区域</li>
+<li>解释空间模式</li>
+</ol>
+<hr>
+<h2 id="%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD">高级功能</h2>
+<h3 id="71-%E9%A1%B9%E7%9B%AE%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD">7.1 项目保存与加载</h3>
+<h4 id="%E4%BF%9D%E5%AD%98%E9%A1%B9%E7%9B%AE">保存项目</h4>
+<ol>
+<li>菜单：File &gt; Save Project (Ctrl+S)</li>
+<li>选择保存位置</li>
+<li>项目文件包含：
+<ul>
+<li>数据路径</li>
+<li>模型配置</li>
+<li>训练好的模型</li>
+<li>分析结果</li>
+</ul>
+</li>
+</ol>
+<h4 id="%E5%8A%A0%E8%BD%BD%E9%A1%B9%E7%9B%AE">加载项目</h4>
+<ol>
+<li>菜单：File &gt; Open Project (Ctrl+O)</li>
+<li>选择项目文件</li>
+<li>自动恢复所有设置和结果</li>
+</ol>
+<h3 id="72-%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E8%87%AA%E5%AE%9A%E4%B9%89">7.2 模型参数自定义</h3>
+<h4 id="%E6%89%93%E5%BC%80%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE">打开参数设置</h4>
+<ol>
+<li>菜单：Tools &gt; Model Parameters</li>
+<li>或点击&quot;Model Parameters&quot;按钮</li>
+</ol>
+<h4 id="%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0">设置参数</h4>
+<ol>
+<li>选择模型</li>
+<li>修改参数值</li>
+<li>保存设置</li>
+<li>参数将在下次训练时生效</li>
+</ol>
+<h4 id="%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA%E5%8F%82%E6%95%B0">导入/导出参数</h4>
+<ul>
+<li>可以保存参数配置为JSON文件</li>
+<li>可以加载已有的参数配置</li>
+</ul>
+<h3 id="73-%E6%89%B9%E9%87%8F%E9%A2%84%E6%B5%8B">7.3 批量预测</h3>
+<h4 id="%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E">功能说明</h4>
+<p>对大量栅格数据进行批量预测</p>
+<h4 id="%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4">操作步骤</h4>
+<ol>
+<li>菜单：Tools &gt; Batch Prediction</li>
+<li>选择训练好的模型</li>
+<li>选择输入栅格文件夹</li>
+<li>指定输出文件夹</li>
+<li>设置预测参数</li>
+<li>开始批量预测</li>
+</ol>
+<h3 id="74-%E7%A9%BA%E9%97%B4%E6%8F%92%E5%80%BC">7.4 空间插值</h3>
+<h4 id="%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E">功能说明</h4>
+<p>将点预测结果插值到整个研究区域</p>
+<h4 id="%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4">操作步骤</h4>
+<ol>
+<li>菜单：Tools &gt; Spatial Interpolation</li>
+<li>选择插值方法（Kriging、IDW等）</li>
+<li>设置插值参数</li>
+<li>生成插值栅格</li>
+</ol>
+<h3 id="75-shap%E5%80%BC%E7%A9%BA%E9%97%B4%E6%8F%92%E5%80%BC">7.5 SHAP值空间插值</h3>
+<h4 id="%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E">功能说明</h4>
+<p>对SHAP值进行空间插值，生成SHAP值分布图</p>
+<h4 id="%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4">操作步骤</h4>
+<ol>
+<li>菜单：Tools &gt; SHAP Spatial Interpolation</li>
+<li>选择模型和特征</li>
+<li>选择插值方法</li>
+<li>生成SHAP值插值图</li>
+</ol>
+<h3 id="76-%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E6%A3%80%E6%9F%A5">7.6 数据质量检查</h3>
+<h4 id="%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5">自动检查</h4>
+<p>软件会自动检查：</p>
+<ul>
+<li>缺失值</li>
+<li>异常值</li>
+<li>常数特征</li>
+<li>高度相关特征</li>
+<li>数据类型</li>
+</ul>
+<h4 id="%E6%9F%A5%E7%9C%8B%E6%8A%A5%E5%91%8A">查看报告</h4>
+<p>在日志中查看数据质量报告</p>
+<h3 id="77-%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E9%87%8F%E5%8C%96">7.7 不确定性量化</h3>
+<h4 id="bootstrap%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4">Bootstrap置信区间</h4>
+<ul>
+<li>功能：量化预测的不确定性</li>
+<li>方法：Bootstrap重采样</li>
+<li>结果：预测值的置信区间</li>
+</ul>
+<h3 id="78-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%E9%AB%98%E7%BA%A7%E9%80%89%E9%A1%B9">7.8 特征工程高级选项</h3>
+<h4 id="%E7%A9%BA%E9%97%B4%E6%BB%9E%E5%90%8E%E7%89%B9%E5%BE%81">空间滞后特征</h4>
+<ul>
+<li>功能：创建空间滞后变量</li>
+<li>说明：反映邻近区域的影响</li>
+</ul>
+<h4 id="%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%89%B9%E5%BE%81">多项式特征</h4>
+<ul>
+<li>功能：创建特征的多项式组合</li>
+<li>参数：多项式次数</li>
+</ul>
+<h4 id="%E4%BA%A4%E4%BA%92%E7%89%B9%E5%BE%81">交互特征</h4>
+<ul>
+<li>功能：创建特征间的交互项</li>
+<li>说明：捕捉特征间的相互作用</li>
+</ul>
+<hr>
+<h2 id="%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</h2>
+<h3 id="81-%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98">8.1 数据相关问题</h3>
+<p><strong>Q: 栅格数据格式要求是什么？</strong>
+A: 支持常见栅格格式（.tif, .tiff, .asc等），所有栅格应具有相同的空间范围和分辨率。</p>
+<p><strong>Q: 样本点数据格式要求是什么？</strong>
+A: 必须是Shapefile格式（.shp文件），包含点几何和目标变量列。</p>
+<p><strong>Q: 如何处理缺失值？</strong>
+A: 软件会自动处理缺失值，可以选择删除或填充。建议在加载数据前检查数据质量。</p>
+<p><strong>Q: 数据量很大，运行很慢怎么办？</strong>
+A:</p>
+<ul>
+<li>减少样本数量（在SHAP分析中使用样本百分比）</li>
+<li>减少特征数量（使用相关性过滤）</li>
+<li>减少模型数量</li>
+<li>关闭超参数优化</li>
+<li>使用更快的模型（如LightGBM）</li>
+</ul>
+<h3 id="82-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%97%AE%E9%A2%98">8.2 模型训练问题</h3>
+<p><strong>Q: 模型训练失败怎么办？</strong>
+A:</p>
+<ul>
+<li>检查数据格式是否正确</li>
+<li>检查目标列是否存在</li>
+<li>查看日志中的错误信息</li>
+<li>尝试减少特征数量</li>
+<li>检查样本数量是否足够</li>
+</ul>
+<p><strong>Q: 如何选择最佳模型？</strong>
+A:</p>
+<ul>
+<li>查看&quot;Model Evaluation&quot;标签页中的指标对比</li>
+<li>对于回归问题，关注R²和RMSE</li>
+<li>对于分类问题，关注准确率、F1分数等</li>
+<li>考虑交叉验证结果</li>
+</ul>
+<p><strong>Q: 如何提高模型性能？</strong>
+A:</p>
+<ul>
+<li>启用特征工程</li>
+<li>启用超参数优化</li>
+<li>使用集成方法</li>
+<li>处理样本不平衡（分类问题）</li>
+<li>增加训练数据</li>
+</ul>
+<h3 id="83-shap%E5%88%86%E6%9E%90%E9%97%AE%E9%A2%98">8.3 SHAP分析问题</h3>
+<p><strong>Q: SHAP值计算很慢怎么办？</strong>
+A:</p>
+<ul>
+<li>减少样本百分比（如使用50%或更少）</li>
+<li>使用TreeExplainer（对树模型更快）</li>
+<li>减少背景样本数量</li>
+</ul>
+<p><strong>Q: SHAP值计算失败怎么办？</strong>
+A:</p>
+<ul>
+<li>确保模型已训练完成</li>
+<li>检查模型类型是否支持SHAP</li>
+<li>查看日志中的错误信息</li>
+<li>尝试使用KernelExplainer（较慢但更通用）</li>
+</ul>
+<p><strong>Q: 如何解释SHAP值？</strong>
+A:</p>
+<ul>
+<li>正SHAP值表示特征对预测的正向贡献</li>
+<li>负SHAP值表示负向贡献</li>
+<li>绝对值越大，影响越大</li>
+<li>查看依赖图了解特征与SHAP值的关系</li>
+</ul>
+<h3 id="84-%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90%E9%97%AE%E9%A2%98">8.4 空间分析问题</h3>
+<p><strong>Q: 空间自相关分析失败怎么办？</strong>
+A:</p>
+<ul>
+<li>检查样本点是否有有效的几何信息</li>
+<li>确保样本点数量足够（建议&gt;30）</li>
+<li>调整权重参数（K值或距离阈值）</li>
+</ul>
+<p><strong>Q: 如何解释Moran's I值？</strong>
+A:</p>
+<ul>
+<li>值接近+1：强正空间自相关（相似值聚集）</li>
+<li>值接近-1：强负空间自相关（相异值聚集）</li>
+<li>值接近0：无空间自相关（随机分布）</li>
+<li>查看p值判断统计显著性</li>
+</ul>
+<h3 id="85-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98">8.5 性能优化问题</h3>
+<p><strong>Q: 如何加快分析速度？</strong>
+A:</p>
+<ul>
+<li>使用GPU加速（XGBoost）</li>
+<li>减少数据量</li>
+<li>减少模型数量</li>
+<li>关闭不必要的功能</li>
+<li>使用更快的模型</li>
+</ul>
+<p><strong>Q: 内存不足怎么办？</strong>
+A:</p>
+<ul>
+<li>减少样本数量</li>
+<li>减少特征数量</li>
+<li>分批处理数据</li>
+<li>关闭其他程序</li>
+<li>增加系统内存</li>
+</ul>
+<h3 id="86-%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98">8.6 其他问题</h3>
+<p><strong>Q: 软件崩溃怎么办？</strong>
+A:</p>
+<ul>
+<li>查看日志文件（在用户目录下的.geoshap_logs文件夹）</li>
+<li>检查数据格式</li>
+<li>尝试减少数据量</li>
+<li>重新启动软件</li>
+<li>联系技术支持</li>
+</ul>
+<p><strong>Q: 如何更新软件？</strong>
+A:</p>
+<ul>
+<li>下载新版本</li>
+<li>备份项目文件</li>
+<li>安装新版本</li>
+<li>恢复项目</li>
+</ul>
+<p><strong>Q: 如何切换语言？</strong>
+A:</p>
+<ul>
+<li>菜单：Edit &gt; Preferences</li>
+<li>选择语言（中文/英文）</li>
+<li>重启软件生效</li>
+</ul>
+<hr>
+<h2 id="%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%82%E8%80%83">快捷键参考</h2>
+<h3 id="91-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C">9.1 文件操作</h3>
+<ul>
+<li><strong>Ctrl+N</strong>：新建项目</li>
+<li><strong>Ctrl+O</strong>：打开项目</li>
+<li><strong>Ctrl+S</strong>：保存项目</li>
+</ul>
+<h3 id="92-%E5%88%86%E6%9E%90%E6%93%8D%E4%BD%9C">9.2 分析操作</h3>
+<ul>
+<li><strong>Ctrl+R</strong>：运行分析</li>
+</ul>
+<h3 id="93-%E5%B8%AE%E5%8A%A9">9.3 帮助</h3>
+<ul>
+<li><strong>F1</strong>：用户指南</li>
+<li><strong>Ctrl+H</strong>：用户指南</li>
+</ul>
+<h3 id="94-%E6%A0%87%E7%AD%BE%E9%A1%B5%E5%88%87%E6%8D%A2">9.4 标签页切换</h3>
+<ul>
+<li><strong>Ctrl+1</strong>：切换到Input Data标签页</li>
+<li><strong>Ctrl+2</strong>：切换到Options标签页</li>
+<li><strong>Ctrl+3</strong>：切换到Model Evaluation标签页</li>
+<li><strong>Ctrl+4</strong>：切换到SHAP Analysis标签页</li>
+<li><strong>Ctrl+5</strong>：切换到Spatial Analysis标签页</li>
+<li><strong>Ctrl+6</strong>：切换到SHAP Spatial Autocorr标签页</li>
+<li><strong>Ctrl+7</strong>：切换到Report标签页</li>
+<li><strong>Ctrl+8</strong>：切换到Log标签页</li>
+</ul>
+<hr>
+<h2 id="%E9%99%84%E5%BD%95">附录</h2>
+<h3 id="101-%E6%9C%AF%E8%AF%AD%E8%A1%A8">10.1 术语表</h3>
+<ul>
+<li><strong>SHAP值</strong>：SHapley Additive exPlanations，用于解释模型预测的特征贡献值</li>
+<li><strong>Moran's I</strong>：全局空间自相关统计量</li>
+<li><strong>LISA</strong>：Local Indicators of Spatial Association，局部空间自相关指标</li>
+<li><strong>空间滞后</strong>：邻近区域变量的加权平均</li>
+<li><strong>交叉验证</strong>：将数据分成多折，轮流作为训练集和测试集</li>
+<li><strong>空间交叉验证</strong>：考虑空间依赖性的交叉验证方法</li>
+<li><strong>集成学习</strong>：组合多个模型的预测结果</li>
+<li><strong>Stacking</strong>：堆叠集成，使用元学习器组合基模型</li>
+<li><strong>Voting</strong>：投票集成，多个模型投票决定最终预测</li>
+<li><strong>SMOTE</strong>：Synthetic Minority Oversampling Technique，合成少数类过采样技术</li>
+</ul>
+<h3 id="102-%E6%A8%A1%E5%9E%8B%E8%AF%B4%E6%98%8E">10.2 模型说明</h3>
+<h4 id="xgboost">XGBoost</h4>
+<ul>
+<li><strong>类型</strong>：梯度提升树</li>
+<li><strong>优点</strong>：性能优秀，支持GPU加速</li>
+<li><strong>适用</strong>：回归和分类</li>
+</ul>
+<h4 id="lightgbm">LightGBM</h4>
+<ul>
+<li><strong>类型</strong>：轻量级梯度提升</li>
+<li><strong>优点</strong>：训练速度快，内存占用小</li>
+<li><strong>适用</strong>：回归和分类</li>
+</ul>
+<h4 id="random-forest">Random Forest</h4>
+<ul>
+<li><strong>类型</strong>：随机森林</li>
+<li><strong>优点</strong>：稳定，不易过拟合</li>
+<li><strong>适用</strong>：回归和分类</li>
+</ul>
+<h4 id="gradient-boosting">Gradient Boosting</h4>
+<ul>
+<li><strong>类型</strong>：梯度提升</li>
+<li><strong>优点</strong>：性能好</li>
+<li><strong>适用</strong>：回归和分类</li>
+</ul>
+<h3 id="103-%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87%E8%AF%B4%E6%98%8E">10.3 评估指标说明</h3>
+<h4 id="%E5%9B%9E%E5%BD%92%E6%8C%87%E6%A0%87">回归指标</h4>
+<ul>
+<li><strong>R²（决定系数）</strong>：衡量模型解释的方差比例，越接近1越好</li>
+<li><strong>RMSE（均方根误差）</strong>：预测误差的度量，越小越好</li>
+<li><strong>MAE（平均绝对误差）</strong>：预测误差的平均值，越小越好</li>
+</ul>
+<h4 id="%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87">分类指标</h4>
+<ul>
+<li><strong>准确率（Accuracy）</strong>：正确预测的比例</li>
+<li><strong>精确率（Precision）</strong>：预测为正例中真正为正例的比例</li>
+<li><strong>召回率（Recall）</strong>：真正例中被正确预测的比例</li>
+<li><strong>F1分数</strong>：精确率和召回率的调和平均</li>
+</ul>
+<h3 id="104-%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E">10.4 文件结构说明</h3>
+<h4 id="%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84">输出文件夹结构</h4>
+<pre class="hljs"><code><div>output/
+├── models/              # 训练好的模型文件
+├── figures/            # 图表文件
+│   ├── eval/          # 评估图表
+│   ├── shap/          # SHAP图表
+│   └── spatial/        # 空间分析图表
+├── reports/            # 报告文件
+├── shap_values/        # SHAP值数据
+└── predictions/        # 预测结果
+</div></code></pre>
+<h3 id="105-%E6%8A%80%E6%9C%AF%E6%94%AF%E6%8C%81">10.5 技术支持</h3>
+<p>如有问题或建议，请联系：</p>
+<ul>
+<li><strong>作者</strong>：@3S&amp;ML</li>
+<li><strong>版本</strong>：4.5.3_Pro</li>
+</ul>
+<h3 id="106-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97">10.6 更新日志</h3>
+<h4 id="v453pro">v4.5.3_Pro</h4>
+<ul>
+<li>新增SHAP空间自相关分析</li>
+<li>改进样本不平衡处理</li>
+<li>优化内存使用</li>
+<li>修复多个bug</li>
+<li>改进用户界面</li>
+</ul>
+<hr>
+<h2 id="%E7%BB%93%E8%AF%AD">结语</h2>
+<p>感谢使用GeoSHAP v4.5.3_Pro！</p>
+<p>本手册涵盖了软件的主要功能和使用方法。如有任何问题或建议，欢迎反馈。</p>
+<p>祝您使用愉快！</p>
+<hr>
+<p><strong>文档版本</strong>：4.5.3<br>
+<strong>最后更新</strong>：2025年<br>
+<strong>适用软件版本</strong>：GeoSHAP v4.5.3_Pro</p>
+
+</body>
+</html>
