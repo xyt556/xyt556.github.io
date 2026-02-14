@@ -48,6 +48,17 @@ Decap CMS 的「用 GitHub 登录」会跳转到 **Netlify** 的认证接口（`
 4. 部署完成后会得到一个地址，例如 `https://随机名.netlify.app`。
 5. **以后进后台请用 Netlify 的地址**：`https://随机名.netlify.app/admin/`，再点 **Login with GitHub**，即可正常登录。编辑保存后仍会提交到同一 GitHub 仓库，GitHub Pages（`https://xyt556.github.io`）也会自动更新。
 
+**若在 Netlify 后台点击「Login with GitHub」仍出现 Not Found**，说明该 Netlify 站点尚未开启 Identity 与 GitHub 登录，需在 Netlify 里补做：
+
+1. 打开 [Netlify](https://app.netlify.com) → 进入你的站点（如 xyt556）→ **Site configuration**（或 **站点设置**）。
+2. 左侧选 **Identity**（身份）→ 若未启用，点 **Enable Identity**（启用身份）。
+3. 同一 **Identity** 页面下找到 **Authentication providers**（认证提供方）或 **External providers**，点 **Install provider**（或 **Settings and usage** → **OAuth**）。
+4. 选 **GitHub**，按提示填写：
+   - 先在 [GitHub → Developer settings → OAuth Apps](https://github.com/settings/developers) 里 **New OAuth App**，
+   - **Authorization callback URL** 填：`https://api.netlify.com/auth/done`
+   - 把生成的 **Client ID** 和 **Client secret** 填回 Netlify 的 GitHub 提供方并保存。
+5. 保存后回到 `https://你的站点.netlify.app/admin/` 再试 **Login with GitHub**。
+
 首页继续用 `https://xyt556.github.io` 访问即可；只有编辑时用 Netlify 的 `/admin/` 地址。
 
 ### 使用 GitHub 后台的前提
